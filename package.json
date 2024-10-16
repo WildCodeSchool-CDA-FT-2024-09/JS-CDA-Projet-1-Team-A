@@ -17,5 +17,8 @@
       "npm run lint --prefix client",
       "npm run format --prefix client"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
   }
 }
