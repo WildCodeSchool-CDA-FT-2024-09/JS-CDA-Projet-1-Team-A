@@ -1,4 +1,5 @@
-console.log("ça fonctionne");
+console.info("Node works");
 
-let testering: string = "hello you";
-console.log(testering);
+const testString: string = "Typescript works";
+console.info(testString);
+console.info("ESLint is satisfied");
