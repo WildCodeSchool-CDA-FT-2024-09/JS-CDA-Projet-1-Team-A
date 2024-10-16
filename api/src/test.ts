@@ -1,4 +1,4 @@
-console.log("ça fonctionne")
+console.log("ça fonctionne");
 
 let testering: string = "hello you";
-console.log(testering)
+console.log(testering);
