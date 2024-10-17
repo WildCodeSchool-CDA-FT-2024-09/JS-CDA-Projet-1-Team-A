@@ -4,7 +4,7 @@ import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
 @Entity()
-export class Test extends BaseEntity {
+export class God extends BaseEntity {
   @Field()
   @PrimaryColumn()
   id: number;

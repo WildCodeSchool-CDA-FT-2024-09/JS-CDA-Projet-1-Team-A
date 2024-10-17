@@ -1,14 +1,14 @@
+import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
-// import * as dotenv from "dotenv";
-import { Test } from "../test/test.entities";
+import { God } from "../god/god.entity";
 
-// dotenv.config();
-// const { BACKEND_FILE } = process.env;
+dotenv.config();
+const { DB_PATH } = process.env;
 
 export const appDataSource = new DataSource({
   type: "sqlite",
-  database: `./src/db/db.sqlite`,
-  entities: [Test],
+  database: `${DB_PATH}`,
+  entities: [God],
   synchronize: true,
   logging: false,
 });

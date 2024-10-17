@@ -4,7 +4,7 @@ import { buildSchema } from "type-graphql";
 import { appDataSource } from "./db/db-client";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import TestResolver from "./test/test.resolver";
+import GodResolver from "./god/god.resolver";
 
 dotenv.config();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
@@ -12,7 +12,7 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
 (async () => {
   await appDataSource.initialize();
   const schema = await buildSchema({
-    resolvers: [TestResolver],
+    resolvers: [GodResolver],
   });
 
   const server = new ApolloServer({
