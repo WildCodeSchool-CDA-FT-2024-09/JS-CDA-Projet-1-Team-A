@@ -21,12 +21,14 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <h1>I AM A HEADING</h1>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        There was an ESLint error here and now there is not.
+      <p className="bg-sky-700 px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3">
+        There was an ESLint error here and now there is not. This paragraph is
+        styled with Tailwind.
       </p>
     </>
   );
