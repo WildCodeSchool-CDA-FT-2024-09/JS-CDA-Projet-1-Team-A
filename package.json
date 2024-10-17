@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "prepare": "husky",
+    "lint": "lint-staged",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10"
+  },
+  "lint-staged": {
+    "api/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint --prefix api",
+      "npm run format --prefix api"
+    ],
+    "client/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint --prefix client",
+      "npm run format --prefix client"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}
