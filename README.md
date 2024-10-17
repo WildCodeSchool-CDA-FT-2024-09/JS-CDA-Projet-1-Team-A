@@ -16,7 +16,7 @@ GODS ARENA est un jeu en ligne qui plonge les joueurs dans un univers mythologiq
 
 #### 👨‍🦲 Création de personnage :
 
-Les joueurs peuvent créer un avatar unique en choisissant un pseudo, une apparence, et une ville d'origine.
+Les joueurs peuvent créer un combattant parmi une liste d'avatars
 Chaque avatar peut sélectionner un dieu mythologique qui offre des bonus spécifiques pour améliorer les performances en combat.
 
 #### 🎓 Choix de métier :
@@ -26,7 +26,7 @@ Les utilisateurs peuvent choisir un métier, ce qui leur confère des avantages 
 #### 🤺 Système de combat :
 
 Les joueurs affrontent des adversaires.
-Les combats se déroulent selon trois épreuves qui changent chaque jour, ajoutant une dimension dynamique et compétitive au jeu.
+Les combats se déroulent selon une épreuve qui changent chaque jour, ajoutant une dimension dynamique et compétitive au jeu.
 
 
 ## 💻 Technos utilisé
