@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 // import * as dotenv from "dotenv";
-import { Test } from "src/test/test.entities";
+import { Test } from "../test/test.entities";
 
 // dotenv.config();
 // const { BACKEND_FILE } = process.env;
@@ -10,5 +10,5 @@ export const appDataSource = new DataSource({
   database: `./src/db/db.sqlite`,
   entities: [Test],
   synchronize: true,
-  //  logging: true
+  logging: false,
 });
