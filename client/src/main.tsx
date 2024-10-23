@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { ApolloProvider } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage.tsx";
+import RulesPage from "./pages/RulesPage.tsx";
 
 import App from "./App.tsx";
 import "./index.css";
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/Rules",
+        element: <RulesPage />,
       },
     ],
   },

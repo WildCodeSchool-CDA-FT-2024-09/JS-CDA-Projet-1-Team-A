@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function HomePage() {
   return (
     <main className="mt-48 w-2/3 lg:mt-0">
@@ -9,7 +11,9 @@ function HomePage() {
           Prépare toi à combattre nos champions de la Grèce antique.
         </p>
         <div className="mb-4 flex w-full flex-col items-center gap-6 lg:flex-row lg:justify-center">
-          <button className="btn-primary min-w-[220px]">Règles</button>
+          <Link to="/Rules" className="btn-primary min-w-[220px]">
+            Règles
+          </Link>
           {/* <button className="btn-primary min-w-[220px]">Statistiques</button>
           <button className="btn-primary min-w-[220px]">A propos</button> */}
         </div>
