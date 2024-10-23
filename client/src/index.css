@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Dalek Pinpoint";
+    src: url("../fonts/DalekPinpointBold.ttf") format("truetype");
+  }
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+body {
+  @apply bg-blue-v font-jakarta min-h-screen text-stone-50;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-bt hover:text-yellow-p rounded-lg px-6 py-2 font-bold drop-shadow-xl transition-all hover:scale-105 hover:shadow-md hover:shadow-slate-600;
+  }
+}
