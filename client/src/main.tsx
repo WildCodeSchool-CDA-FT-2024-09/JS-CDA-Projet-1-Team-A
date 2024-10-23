@@ -7,12 +7,14 @@ import App from "./App.tsx";
 import "./index.css";
 
 import client from "./services/connexion.ts";
+import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
   },
+  { path: "/create", element: <CreateCharacterPage /> },
 ]);
 
 createRoot(document.getElementById("root")!).render(
