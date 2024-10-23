@@ -1,22 +1,24 @@
 function HomePage() {
   return (
-    <main className="w-3/4">
-      <div className="bg-blue-200">
-        <p className="mb-4">
-          HOME PAGE Dans la grèce Lorem ipsum dolor sit amet, consectetur
-          adipisicing elit. Explicabo tempora repellendus quae est laudantium
-          quisquam amet vero autem deserunt ullam corporis hic maiores, illum
-          quo. Iusto numquam veniam mollitia sint!
+    <main className="mt-48 w-2/3 lg:mt-0">
+      <div className="mb-4 rounded-xl bg-blue-fd bg-opacity-85 p-8">
+        <p className="mb-4 text-xl">
+          Dans la Grèce antique, les jeux étaient très populaires.
         </p>
-        <div className="mb-4 flex w-full flex-row justify-center gap-4">
-          <button>Règles</button>
-          <button>Statistiques</button>
-          <button>A propos</button>
+        <p className="mb-4 text-xl">
+          Prépare toi à combattre nos champions de la Grèce antique.
+        </p>
+        <div className="mb-4 flex w-full flex-col items-center gap-6 lg:flex-row lg:justify-center">
+          <button className="btn-primary min-w-[220px]">Règles</button>
+          {/* <button className="btn-primary min-w-[220px]">Statistiques</button>
+          <button className="btn-primary min-w-[220px]">A propos</button> */}
         </div>
       </div>
-      <div className="flex flex-col gap-4">
-        <button>Découvre ton épreuves</button>
-        <button>Crée ton champion</button>
+      <div className="flex w-full flex-col items-center gap-4">
+        {/* <button className="btn-primary min-w-[220px]">
+          Découvre ton épreuve
+        </button> */}
+        <button className="btn-primary min-w-[220px]">Crée ton champion</button>
       </div>
     </main>
   );
