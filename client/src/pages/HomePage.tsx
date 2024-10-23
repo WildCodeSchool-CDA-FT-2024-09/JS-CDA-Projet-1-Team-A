@@ -14,8 +14,10 @@ function HomePage() {
           <Link to="/Rules" className="btn-primary min-w-[220px]">
             Règles
           </Link>
-          {/* <button className="btn-primary min-w-[220px]">Statistiques</button>
-          <button className="btn-primary min-w-[220px]">A propos</button> */}
+          {/* <button className="btn-primary min-w-[220px]">Statistiques</button> */}
+          <Link to="/About" className="btn-primary min-w-[220px]">
+            A propos
+          </Link>
         </div>
       </div>
       <div className="flex w-full flex-col items-center gap-4">
