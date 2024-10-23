@@ -4,11 +4,12 @@ import {
   Entity,
   Column,
   PrimaryColumn,
-  OneToMany,
+  ManyToOne,
   JoinColumn,
 } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
-import { God } from "../god/god.entity";
+
+import { Modifer_assignement } from "../modifier_assignement/modifier_assignement.entity";
 
 @ObjectType()
 @Entity()
@@ -21,8 +22,8 @@ export class Modifier extends BaseEntity {
   @Column()
   label: string;
 
-  @Field(() => God)
-  @OneToMany(() => God, (id_modified_entity) => id_modified_entity.id)
+  @Field(() => Modifer_assignement)
+  @ManyToOne(() => Modifer_assignement, (id_modifier) => id_modifier.id)
   @JoinColumn()
-  id_modified_entity: God;
+  id_modifier: Modifier;
 }

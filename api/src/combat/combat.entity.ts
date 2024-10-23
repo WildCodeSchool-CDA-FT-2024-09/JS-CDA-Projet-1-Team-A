@@ -6,9 +6,12 @@ import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
 } from "typeorm";
+import { Competitor } from "../competitor/competitor.entity";
+import { Trial } from "../trial/trial.entity";
 //import { ResultStats } from "./combat.type";
 
 @ObjectType()
@@ -17,18 +20,6 @@ export class Combat extends BaseEntity {
   @Field()
   @PrimaryColumn()
   id: string;
-
-  @Field()
-  @Column()
-  player_id: string;
-
-  @Field()
-  @Column()
-  opponent_id: string;
-
-  @Field()
-  @Column()
-  trial_id: string;
 
   @Field()
   @Column()
@@ -48,7 +39,18 @@ export class Combat extends BaseEntity {
   @JoinColumn()
   opponent_god_id: God;
 
-  // @Field(() => GraphQLJSONObject)
-  // @Column()
-  // result_stats: ResultStats;
+  @Field(() => Competitor)
+  @OneToMany(() => Competitor, (player_id) => player_id.id)
+  @JoinColumn()
+  player_id: Competitor;
+
+  @Field(() => Competitor)
+  @OneToMany(() => Competitor, (opponent_id) => opponent_id.id)
+  @JoinColumn()
+  opponent_id: Competitor;
+
+  @Field(() => Trial)
+  @OneToMany(() => Trial, (trial_id) => trial_id.id)
+  @JoinColumn()
+  trial_id: Trial;
 }

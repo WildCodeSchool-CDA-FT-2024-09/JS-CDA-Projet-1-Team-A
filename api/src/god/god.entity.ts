@@ -3,7 +3,7 @@ import {
   BaseEntity,
   Entity,
   Column,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
   OneToOne,
@@ -17,7 +17,7 @@ import { Modifer_assignement } from "../modifier_assignement/modifier_assignemen
 @Entity()
 export class God extends BaseEntity {
   @Field()
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: number;
 
   @Field()
@@ -31,20 +31,20 @@ export class God extends BaseEntity {
   @Field(() => Image)
   @ManyToOne(() => Image, (image) => image.id)
   @JoinColumn()
-  image: Image;
+  image: Image[];
 
   @Field(() => Combat)
   @OneToOne(() => Combat, (player_god_id) => player_god_id.id)
-  player_god_id: Combat;
+  player_god_id: Combat[];
 
   @Field(() => Combat)
   @OneToOne(() => Combat, (opponent_god_id) => opponent_god_id.id)
-  opponent_god_id: Combat;
+  opponent_god_id: Combat[];
 
   @Field(() => Modifer_assignement)
   @ManyToOne(
     () => Modifer_assignement,
     (id_modified_entity) => id_modified_entity.id
   )
-  id_modified_entity: Image;
+  id_modified_entity: Modifer_assignement[];
 }
