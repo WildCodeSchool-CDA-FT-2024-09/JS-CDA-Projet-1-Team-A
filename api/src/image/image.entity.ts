@@ -33,17 +33,17 @@ export class Image extends BaseEntity {
 
   @Field(() => Competitor)
   @OneToMany(() => Competitor, (id_avatar_image) => id_avatar_image.id)
-  id_avatar_image: Competitor[];
+  idAvatarImage: Competitor[];
 
   @Field(() => Competitor)
   @OneToMany(() => Competitor, (id_battle_image) => id_battle_image.id)
-  id_battle_image: Competitor[];
+  idBattleImage: Competitor[];
 
   @Field(() => Profession)
-  @OneToMany(() => Profession, (id_image_profession) => id_image_profession.id)
-  id_image_profession: Profession[];
+  @OneToMany(() => Profession, (profession) => profession.id)
+  idImageProfession: Profession[];
 
   @Field(() => Trial)
-  @OneToMany(() => Trial, (id_image_trial) => id_image_trial.id)
-  id_image_trial: Trial[];
+  @OneToMany(() => Trial, (trial) => trial.id)
+  imageTrial: Trial;
 }

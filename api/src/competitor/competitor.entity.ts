@@ -5,6 +5,7 @@ import {
   Column,
   PrimaryColumn,
   ManyToOne,
+  OneToMany,
   JoinColumn,
 } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
@@ -58,11 +59,11 @@ export class Competitor extends BaseEntity {
   )
   id_modifier_entity: Modifer_assignement;
 
-  @Field(() => Combat)
-  @ManyToOne(() => Combat, (player_id) => player_id.id)
-  player_id: Combat;
+  @Field(() => [Combat])
+  @OneToMany(() => Combat, (combat) => combat.player)
+  playerCombats: Combat[];
 
-  @Field(() => Combat)
-  @ManyToOne(() => Combat, (opponent_id) => opponent_id.id)
-  opponent_id: Combat;
+  @Field(() => [Combat])
+  @OneToMany(() => Combat, (combat) => combat.opponent)
+  opponentCombats: Combat[];
 }

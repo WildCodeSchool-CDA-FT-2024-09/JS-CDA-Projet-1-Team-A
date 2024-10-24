@@ -4,6 +4,7 @@ import {
   Entity,
   Column,
   OneToMany,
+  ManyToOne,
   JoinColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -25,17 +26,17 @@ export class Modifer_assignement extends BaseEntity {
 
   @Field()
   @Column()
-  value_type: string;
+  valueType: string;
 
   @Field(() => God)
-  @OneToMany(() => God, (id_modified_entity) => id_modified_entity.id)
+  @ManyToOne(() => God, (god) => god.id)
   @JoinColumn()
-  id_modified_entity: God;
+  modifiedEntity: God;
 
   @Field(() => Modifier)
-  @OneToMany(() => Modifier, (id_modifier) => id_modifier.id)
+  @ManyToOne(() => Modifier, (modifier) => modifier)
   @JoinColumn()
-  id_modifier: Modifier;
+  modifier: Modifier;
 
   @Field(() => Competitor)
   @OneToMany(
@@ -43,5 +44,5 @@ export class Modifer_assignement extends BaseEntity {
     (id_modified_entity_competitor) => id_modified_entity_competitor.id
   )
   @JoinColumn()
-  d_modified_entity_competitor: Competitor;
+  ModifiedEntityCompetitor: Competitor;
 }
