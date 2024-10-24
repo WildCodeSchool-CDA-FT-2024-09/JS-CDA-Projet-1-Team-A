@@ -5,7 +5,7 @@ import { Competitor } from "../competitor/competitor.entity";
 import { Profession } from "../profession/profession.entity";
 import { Image } from "../image/image.entity";
 import { Trial } from "../trial/trial.entity";
-import { Modifer_assignement } from "../modifier_assignement/modifier_assignement.entity";
+import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
 import { Modifier } from "../modifier/modifier.entity";
 import { Combat } from "../combat/combat.entity";
 
@@ -21,7 +21,7 @@ export const appDataSource = new DataSource({
     Profession,
     Image,
     Trial,
-    Modifer_assignement,
+    ModifierAssignement,
     Combat,
     Modifier,
   ],

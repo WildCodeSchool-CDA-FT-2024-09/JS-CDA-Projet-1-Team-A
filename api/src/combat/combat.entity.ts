@@ -5,21 +5,19 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
-  OneToMany,
   ManyToOne,
-  PrimaryColumn,
+  JoinColumn,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
 import { Trial } from "../trial/trial.entity";
-import { Modifer_assignement } from "../modifier_assignement/modifier_assignement.entity";
-//import { ResultStats } from "./combat.type";
+import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
 
 @ObjectType()
 @Entity()
 export class Combat extends BaseEntity {
   @Field()
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Field()
@@ -31,32 +29,27 @@ export class Combat extends BaseEntity {
   resultLongText: string;
 
   @Field(() => God)
-  @ManyToOne(() => God, (player_god) => player_god.id)
-  @JoinColumn()
-  player_god: God;
+  @ManyToOne(() => God, (player) => player.id)
+  playerGod: God;
 
   @Field(() => God)
-  @ManyToOne(() => God, (opponent_god) => opponent_god.id)
-  @JoinColumn()
-  opponent_god: God;
+  @ManyToOne(() => God, (opponent) => opponent.id)
+  opponentGod: God;
 
   @Field(() => Competitor)
-  @ManyToOne(() => Competitor, (player_id) => player_id.id)
-  @JoinColumn()
+  @ManyToOne(() => Competitor, (player) => player.id)
   player: Competitor;
 
   @Field(() => Competitor)
-  @ManyToOne(() => Competitor, (opponent_id) => opponent_id)
-  @JoinColumn()
+  @ManyToOne(() => Competitor, (opponent) => opponent)
   opponent: Competitor;
 
   @Field(() => Trial)
-  @ManyToOne(() => Trial, (trial_id) => trial_id.id)
-  @JoinColumn()
+  @ManyToOne(() => Trial, (trial) => trial.id)
   trial: Trial;
 
-  @Field(() => [Modifer_assignement])
-  @OneToMany(() => Modifer_assignement, (stat) => stat.modifiedEntity)
-  @JoinColumn()
-  assignementStats: Modifer_assignement[];
+  @Field(() => [ModifierAssignement])
+  @ManyToOne(() => ModifierAssignement)
+  @JoinColumn({ name: "modifiedEntityId" })
+  modifiedEntity: ModifierAssignement[];
 }

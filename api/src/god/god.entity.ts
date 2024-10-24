@@ -4,21 +4,21 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  JoinColumn,
   OneToMany,
   ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
 import { Combat } from "../combat/combat.entity";
-import { Modifer_assignement } from "../modifier_assignement/modifier_assignement.entity";
+import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
 
 @ObjectType()
 @Entity()
 export class God extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
 
   @Field()
   @Column()
@@ -30,18 +30,18 @@ export class God extends BaseEntity {
 
   @Field(() => Image)
   @ManyToOne(() => Image, (image) => image.id)
-  @JoinColumn()
   image: Image[];
 
   @Field(() => [Combat])
-  @OneToMany(() => Combat, (combat) => combat.player_god)
+  @OneToMany(() => Combat, (combat) => combat.player)
   playerGodCombats: Combat[];
 
   @Field(() => [Combat])
-  @OneToMany(() => Combat, (combat) => combat.opponent_god)
+  @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentGodCombats: Combat[];
 
-  @Field(() => [Modifer_assignement])
-  @OneToMany(() => Modifer_assignement, (modifiedEntity) => modifiedEntity)
-  modifiedEntity: Modifer_assignement[];
+  @Field(() => [ModifierAssignement])
+  @ManyToOne(() => ModifierAssignement)
+  @JoinColumn({ name: "modifiedEntityId" })
+  modifiedEntity: ModifierAssignement[];
 }

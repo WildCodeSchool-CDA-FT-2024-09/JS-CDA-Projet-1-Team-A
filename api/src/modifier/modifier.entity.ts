@@ -1,15 +1,8 @@
 import "reflect-metadata";
-import {
-  BaseEntity,
-  Entity,
-  Column,
-  PrimaryColumn,
-  OneToMany,
-  JoinColumn,
-} from "typeorm";
+import { BaseEntity, Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
 
-import { Modifer_assignement } from "../modifier_assignement/modifier_assignement.entity";
+import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
 
 @ObjectType()
 @Entity()
@@ -22,8 +15,7 @@ export class Modifier extends BaseEntity {
   @Column()
   label: string;
 
-  @Field(() => [Modifer_assignement])
-  @OneToMany(() => Modifer_assignement, (modifier) => modifier)
-  @JoinColumn()
-  modifier: Modifer_assignement[];
+  @Field(() => [ModifierAssignement])
+  @OneToMany(() => ModifierAssignement, (modifier) => modifier)
+  modifier: ModifierAssignement[];
 }

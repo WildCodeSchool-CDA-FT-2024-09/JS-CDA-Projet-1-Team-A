@@ -16,7 +16,7 @@ import { Trial } from "../trial/trial.entity";
 @Entity()
 export class Image extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Field()
