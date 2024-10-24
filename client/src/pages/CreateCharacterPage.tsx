@@ -1,12 +1,10 @@
-import React from "react";
-import AvatarCarousel from "../components/AvatarCarousel";
+import AvatarCarouselWrapper from "../components/CarouselWrapper"; // Import du wrapper
 
 function CreateCharacterPage() {
   return (
     <>
-      <div>CreateCharacterPage</div>
       <div>
-        <AvatarCarousel />
+        <AvatarCarouselWrapper /> {/* Utilisation du wrapper */}
       </div>
     </>
   );
