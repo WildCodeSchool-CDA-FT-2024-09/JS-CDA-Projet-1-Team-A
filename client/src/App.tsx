@@ -4,10 +4,12 @@ import TitleBar from "./components/layout/TitleBar";
 
 function App() {
   return (
-    <div className="container mx-auto flex min-h-[100vh] flex-col items-center justify-between bg-[url('/img/gods-bg.jpg')] bg-cover bg-top py-2 pb-4 pt-6 xl:bg-top">
+    <div className="container mx-auto flex min-h-[100vh] flex-col items-center justify-between bg-[url('/img/gods-bg.jpg')] bg-cover bg-fixed bg-top px-1 pb-2 pt-6">
       <TitleBar />
       <Outlet />
-      <div>&copy; 2024 Reactaulos</div>
+      <footer className="text-xs">
+        &copy; {new Date().getFullYear()} Reactaulos
+      </footer>
     </div>
   );
 }
