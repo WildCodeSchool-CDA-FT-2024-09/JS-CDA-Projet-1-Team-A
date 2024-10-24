@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function RulesPage() {
   return (
     <main>
-      <div className="mt-30 mx-auto mb-8 w-2/3 rounded-xl bg-yellow-p bg-opacity-85 p-8 text-justify text-blue-v lg:w-1/3">
+      <div className="mt-30 fixed left-1/2 top-1/2 mx-auto mb-8 w-[70%] -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-yellow-p bg-opacity-85 p-8 text-justify text-blue-v md:w-[40%] lg:w-1/3">
         <h1 className="mb-4 text-center text-2xl font-bold">Règles du jeu</h1>
         {/* <h2 className="font-bold mb-4 text-center">Objectifs du jeu</h2> */}
         <p>
@@ -18,7 +18,10 @@ function RulesPage() {
           <br></br>
         Ils s'affrontent dans une épreuve qui change chaque jour pour prouver leur puissance et leur stratégie</p> */}
       </div>
-      <Link to="/" className="btn-primary min-w-[220px]">
+      <Link
+        to="/"
+        className="btn-primary fixed bottom-12 left-1/2 min-w-[220px] -translate-x-1/2 transform"
+      >
         Retour accueil
       </Link>
     </main>
