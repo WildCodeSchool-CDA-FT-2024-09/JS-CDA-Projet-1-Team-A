@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import TitleBar from "./components/layout/TitleBar";
-// import GodsList from "./components/GodsList";
 
 function App() {
   return (
