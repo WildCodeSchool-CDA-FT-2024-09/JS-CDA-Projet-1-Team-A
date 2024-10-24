@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   OneToMany,
+  ManyToOne,
 } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
@@ -28,7 +29,7 @@ export class God extends BaseEntity {
   description: string;
 
   @Field(() => Image)
-  @OneToMany(() => Image, (image) => image.id)
+  @ManyToOne(() => Image, (image) => image.id)
   @JoinColumn()
   image: Image[];
 

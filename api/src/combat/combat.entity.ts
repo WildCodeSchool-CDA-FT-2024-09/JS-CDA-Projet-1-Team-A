@@ -24,11 +24,11 @@ export class Combat extends BaseEntity {
 
   @Field()
   @Column()
-  result_short_text: string;
+  resultShortText: string;
 
   @Field()
   @Column()
-  result_long_text: string;
+  resultLongText: string;
 
   @Field(() => God)
   @ManyToOne(() => God, (player_god) => player_god.id)
