@@ -1,21 +1,15 @@
-import "./App.css";
-import GodsList from "./components/godsList";
+import { Outlet } from "react-router-dom";
+import TitleBar from "./components/layout/TitleBar";
 
 function App() {
   return (
-    <>
-      <h1 className="text-2xl font-bold">Gods Arena</h1>
-      <GodsList />
-      <footer className="mt-12">
-        <p>
-          (Icons 🙏{" "}
-          <a className="hover:underline" href="https://www.flaticon.com">
-            FlatIcon
-          </a>
-          )
-        </p>
+    <div className="container mx-auto flex min-h-[100vh] flex-col items-center justify-between bg-[url('/img/gods-bg.jpg')] bg-cover bg-fixed bg-top px-1 pb-2 pt-6">
+      <TitleBar />
+      <Outlet />
+      <footer className="text-xs">
+        &copy; {new Date().getFullYear()} Reactaulos
       </footer>
-    </>
+    </div>
   );
 }
 
