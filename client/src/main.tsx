@@ -19,9 +19,9 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
+      { path: "/create", element: <CreateCharacterPage /> },
     ],
   },
-  { path: "/create", element: <CreateCharacterPage /> },
 ]);
 
 createRoot(document.getElementById("root")!).render(
