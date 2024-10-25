@@ -3,10 +3,10 @@ import { useState } from "react";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 
 function CreateCharacterPage() {
-  const [prenom, setPrenom] = useState("");
+  const [name, setName] = useState("");
 
   const handleChange = (e) => {
-    setPrenom(e.target.value);
+    setName(e.target.value);
   };
 
   const [selectedCity, setSelectedCity] = useState("");
@@ -21,7 +21,7 @@ function CreateCharacterPage() {
   };
 
   return (
-    <div className="-mt-60 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-24">
+    <section className="-mt-60 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-24">
       <div className="flex flex-col items-center py-4">
         <div className="grid w-full grid-cols-2 gap-4 py-4">
           <div className="B flex flex-col items-center p-4">
@@ -29,7 +29,7 @@ function CreateCharacterPage() {
             <input
               type="text"
               placeholder="Entrez votre prénom"
-              value={prenom}
+              value={name}
               onChange={handleChange}
               className="w-full max-w-[200px] rounded border py-2 text-black sm:max-w-xs"
             />
@@ -63,7 +63,7 @@ function CreateCharacterPage() {
       </div>
 
       <StatsCharacter />
-    </div>
+    </section>
   );
 }
 

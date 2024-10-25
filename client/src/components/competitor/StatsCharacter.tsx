@@ -44,7 +44,7 @@ function StatsCharacter() {
       </section>
       <Link
         to="/"
-        aria-label="Start the game"
+        aria-label="Commencer le jeu"
         className="btn-primary min-w-[220px] max-w-[230px] md:mr-24"
       >
         Démarre l'épreuve!
