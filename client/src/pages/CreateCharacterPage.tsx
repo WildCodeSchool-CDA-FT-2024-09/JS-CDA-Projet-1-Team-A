@@ -31,13 +31,7 @@ function CreateCharacterPage() {
                 Quelle est ta ville ?
               </option>
               {cities.map((city) => (
-                <option
-                  key={city}
-                  onClick={() => handleCitySelect(city)}
-                  className="cursor-pointer p-2 text-black hover:bg-gray-100"
-                >
-                  {city}
-                </option>
+                <option key={city}>{city}</option>
               ))}
             </select>
           </div>
