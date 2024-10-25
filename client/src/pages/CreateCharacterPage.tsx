@@ -26,7 +26,7 @@ function CreateCharacterPage() {
             />
           </div>
           <div className="flex w-full max-w-xs items-center">
-            <select className="text-withe select w-full max-w-xs bg-transparent focus:bg-white focus:text-black">
+            <select className="select w-full max-w-xs bg-transparent focus:bg-white focus:text-black">
               <option disabled selected className="text-gray-500">
                 Quelle est ta ville ?
               </option>
