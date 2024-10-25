@@ -16,7 +16,7 @@ function RulesPage() {
       </div>
       <Link
         to="/"
-        aria-label="Return to home page"
+        aria-label="Retourner à la page d'accueil"
         className="btn-primary fixed bottom-20 left-1/2 min-w-[220px] -translate-x-1/2 transform"
       >
         Retour accueil

@@ -46,7 +46,7 @@ function AboutUsPage() {
 
         <a
           href="https://github.com/WildCodeSchool-CDA-FT-2024-09/JS-CDA-Projet-1-Team-A"
-          aria-label="Link to the github project"
+          aria-label="Accéder au projet sur Github"
           className="break-words font-medium text-blue-v underline"
           target="_blank"
           rel="noopener noreferrer"
@@ -56,7 +56,7 @@ function AboutUsPage() {
       </div>
       <Link
         to="/"
-        aria-label="Return to home page"
+        aria-label="Retourner à la page d'accueil"
         className="btn-primary fixed bottom-16 left-1/2 min-w-[220px] -translate-x-1/2 transform"
       >
         Retour accueil
