@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/Rules",
+        path: "/rules",
         element: <RulesPage />,
       },
     ],
