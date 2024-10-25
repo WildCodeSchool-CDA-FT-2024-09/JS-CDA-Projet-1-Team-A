@@ -24,8 +24,8 @@ function CreateCharacterPage() {
     <div className="-mt-60 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-24">
       <div className="flex flex-col items-center py-4">
         <div className="grid w-full grid-cols-2 gap-4 py-4">
-          <div className="B p-4">
-            <div className="p-2">Quel est ton nom ?</div>
+          <div className="B flex flex-col items-center p-4">
+            <label className="p-2">Quel est ton nom ?</label>
             <input
               type="text"
               placeholder="Entrez votre prénom"
@@ -34,12 +34,12 @@ function CreateCharacterPage() {
               className="w-full max-w-[200px] rounded border py-2 text-black sm:max-w-xs"
             />
           </div>
-          <div className="C max-w-[300px] p-4">
-            <div className="p-2">Quel est ta ville ?</div>
+          <div className="C flex max-w-[300px] flex-col items-center p-4">
+            <label className="p-2">Quel est ta ville ?</label>
             <div className="relative">
               <div
                 onClick={() => setDropdownVisible(!isDropdownVisible)}
-                className="cursor-pointer rounded-md border border-gray-300 bg-white py-2 text-black"
+                className="min-w-[200px] cursor-pointer rounded-md border border-gray-300 bg-white py-2 text-black"
               >
                 {selectedCity || "Sélectionnez une ville"}
               </div>
