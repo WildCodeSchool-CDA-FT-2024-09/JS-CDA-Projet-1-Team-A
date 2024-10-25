@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-// Exemple de mock de données d'API avec des URLs d'images temporaires
-const imageUrls = [
-  "/freepik-apollon1.png",
-  "/freepik-artemis1.png",
-  "/freepik-dionysos1.png",
-  "/freepik-gracefully1.png",
-  "/freepik-zeus1.png",
-  "/freepik-apollon1.png",
-  "/freepik-artemis1.png",
-  "/freepik-dionysos1.png",
-  "/freepik-gracefully1.png",
-  "/freepik-zeus1.png",
-];
+interface AvatarCarouselMobileProps {
+  imageUrls: { url: string }[]; // Assure-toi que la structure correspond à ton tableau d'images
+}
 
-const AvatarCarouselMobile: React.FC = () => {
+const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
+  imageUrls,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(2);
   const [startX, setStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -82,7 +74,7 @@ const AvatarCarouselMobile: React.FC = () => {
     <>
       <div>Choisi ton avatar</div>
       <div
-        className="flex h-96 w-full items-center justify-center overflow-hidden"
+        className="flex h-44 w-full items-center justify-center overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -107,7 +99,7 @@ const AvatarCarouselMobile: React.FC = () => {
                 }}
               >
                 <img
-                  src={url}
+                  src={url.url}
                   alt={`Image ${index + 1}`}
                   className="h-full w-full rounded-lg object-cover"
                 />

@@ -1,21 +1,12 @@
 import React, { useState } from "react";
 
-// Exemple de mock de données d'API avec des URLs d'images temporaires
-const imageUrls = [
-  "/freepik-apollon1.png",
-  "/freepik-artemis1.png",
-  "/freepik-dionysos1.png",
-  "/freepik-gracefully1.png",
-  "/freepik-zeus1.png",
-  "/freepik-apollon1.png",
-  "/freepik-artemis1.png",
-  "/freepik-dionysos1.png",
-  "/freepik-gracefully1.png",
-  "/freepik-zeus1.png",
-];
-
-const AvatarCarouselDesktop: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(2);
+interface AvatarCarouselDesktopProps {
+  imageUrls: { url: string }[]; // Assure-toi que la structure correspond à ton tableau d'images
+}
+const AvatarCarouselDesktop: React.FC<AvatarCarouselDesktopProps> = ({
+  imageUrls,
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(3);
   const [startX, setStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -142,7 +133,7 @@ const AvatarCarouselDesktop: React.FC = () => {
                 }}
               >
                 <img
-                  src={url}
+                  src={url.url}
                   alt={`Image ${index + 1}`}
                   className="h-full w-full rounded-lg object-cover"
                   style={{
