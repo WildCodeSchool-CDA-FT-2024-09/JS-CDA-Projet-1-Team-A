@@ -37,7 +37,7 @@ function StatsCharacter() {
           {stats.map((stat, index) => (
             <li key={index} className="flex justify-between">
               <span className="stat-name">{stat.statName}</span>
-              <span className="stat-value">{stat.value}</span>
+              <span className="texte-base">{stat.value}</span>
             </li>
           ))}
         </ul>

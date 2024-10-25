@@ -10,7 +10,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 import client from "./services/connexion.ts";
-import CreateCharacterPage from "./pages/CreatCharacterPage.tsx";
+import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
 
 const router = createBrowserRouter([
   {
