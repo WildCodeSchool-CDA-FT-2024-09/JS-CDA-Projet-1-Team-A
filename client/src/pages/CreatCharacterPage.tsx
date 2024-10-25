@@ -47,13 +47,13 @@ function CreateCharacterPage() {
               {isDropdownVisible && (
                 <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-300 bg-white shadow-lg">
                   {cities.map((city) => (
-                    <div
+                    <p
                       key={city}
                       onClick={() => handleCitySelect(city)}
                       className="cursor-pointer p-2 text-black hover:bg-gray-100"
                     >
                       {city}
-                    </div>
+                    </p>
                   ))}
                 </div>
               )}
