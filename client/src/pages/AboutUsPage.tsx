@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 function AboutUsPage() {
   return (
     <main>
-      <div className="mt-38 text-justif fixed left-1/2 top-1/2 mx-auto mb-8 max-h-[60vh] w-[70%] -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-xl bg-yellow-p bg-opacity-85 p-6 md:w-[40%] lg:w-1/3">
+      <div className="mt-38 text-justif fixed left-1/2 top-1/2 mx-auto mb-8 max-h-[55vh] w-[70%] -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-xl bg-yellow-p bg-opacity-85 p-6 md:w-[40%] lg:w-1/3">
         <h1 className="mb-4 text-center text-2xl font-bold text-blue-v">
           Nous connaitre
         </h1>
-        {/* <h2 className="font-bold mb-4 text-center">Objectifs du jeu</h2> */}
 
         <div className="text-blue-v">
           <div className="mb-4">
@@ -47,6 +46,7 @@ function AboutUsPage() {
 
         <a
           href="https://github.com/WildCodeSchool-CDA-FT-2024-09/JS-CDA-Projet-1-Team-A"
+          aria-label="Link to the github project"
           className="break-words font-medium text-blue-v underline"
           target="_blank"
           rel="noopener noreferrer"
@@ -56,7 +56,8 @@ function AboutUsPage() {
       </div>
       <Link
         to="/"
-        className="btn-primary fixed bottom-12 left-1/2 min-w-[220px] -translate-x-1/2 transform"
+        aria-label="Return to home page"
+        className="btn-primary fixed bottom-16 left-1/2 min-w-[220px] -translate-x-1/2 transform"
       >
         Retour accueil
       </Link>
