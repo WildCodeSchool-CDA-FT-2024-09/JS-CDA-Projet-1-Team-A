@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
-  JoinColumn,
 } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
@@ -30,14 +29,12 @@ export class Trial extends BaseEntity {
 
   @Field(() => [Image])
   @ManyToOne(() => Image, (image) => image.id)
-  images: Image[];
+  image: Image;
 
   @Field(() => Combat)
   @OneToMany(() => Combat, (trial_id) => trial_id.id)
   trialId: Combat;
 
-  @Field(() => [ModifierAssignement])
-  @ManyToOne(() => ModifierAssignement)
-  @JoinColumn({ name: "modifiedEntityId" })
-  modifiedEntity: ModifierAssignement[];
+  @Field(() => [ModifierAssignement], { nullable: true })
+  modifierAssignements?: ModifierAssignement[];
 }

@@ -28,10 +28,14 @@ export class ModifierAssignement extends BaseEntity {
   @Column("uuid")
   modifiedEntityId: string;
 
+  @Field()
+  @Column()
+  modifiedEntityType: string;
+
   @Field(() => Modifier)
   @ManyToOne(() => Modifier, (modifier) => modifier)
   modifier: Modifier;
 
   @Field(() => ID)
-  modifyEntity: string;
+  modifiedEntity: string;
 }

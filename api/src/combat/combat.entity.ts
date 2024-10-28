@@ -1,4 +1,3 @@
-//import { GraphQLJSONObject } from "graphql-scalars";
 import { God } from "../god/god.entity";
 import { Field, ObjectType } from "type-graphql";
 import {
@@ -6,7 +5,6 @@ import {
   Column,
   Entity,
   ManyToOne,
-  JoinColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
@@ -48,8 +46,6 @@ export class Combat extends BaseEntity {
   @ManyToOne(() => Trial, (trial) => trial.id)
   trial: Trial;
 
-  @Field(() => [ModifierAssignement])
-  @ManyToOne(() => ModifierAssignement)
-  @JoinColumn({ name: "modifiedEntityId" })
-  modifiedEntity: ModifierAssignement[];
+  @Field(() => [ModifierAssignement], { nullable: true })
+  modifierAssignements?: ModifierAssignement[];
 }

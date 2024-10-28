@@ -6,7 +6,6 @@ import {
   Entity,
   OneToMany,
   ManyToOne,
-  JoinColumn,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
@@ -34,10 +33,8 @@ export class Profession extends BaseEntity {
 
   @Field(() => [Image])
   @ManyToOne(() => Image, (image) => image.id)
-  Images: Image[];
+  image: Image;
 
-  @Field(() => [ModifierAssignement])
-  @ManyToOne(() => ModifierAssignement)
-  @JoinColumn({ name: "modifiedEntityId" })
-  modifiedEntity: ModifierAssignement[];
+  @Field(() => [ModifierAssignement], { nullable: true })
+  modifierAssignements?: ModifierAssignement[];
 }

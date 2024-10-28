@@ -5,8 +5,9 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-  JoinColumn,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
 import { Profession } from "../profession/profession.entity";
@@ -30,11 +31,11 @@ export class Competitor extends BaseEntity {
   status: string;
 
   @Field()
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
   @Field()
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @Field(() => Profession)
@@ -43,7 +44,7 @@ export class Competitor extends BaseEntity {
 
   @Field(() => Image)
   @ManyToOne(() => Image, (id_avatar_image) => id_avatar_image.id)
-  id_avatar_image: Image;
+  avatarImage: Image;
 
   @Field(() => Image)
   @ManyToOne(() => Image, (image) => image.id)
@@ -57,8 +58,6 @@ export class Competitor extends BaseEntity {
   @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentCombats: Combat[];
 
-  @Field(() => [ModifierAssignement])
-  @ManyToOne(() => ModifierAssignement)
-  @JoinColumn({ name: "modifiedEntityId" })
-  modifiedEntity: ModifierAssignement[];
+  @Field(() => [ModifierAssignement], { nullable: true })
+  modifierAssignements?: ModifierAssignement[];
 }
