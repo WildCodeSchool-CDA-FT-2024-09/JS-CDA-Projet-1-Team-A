@@ -11,7 +11,7 @@ import { Modifier } from "../modifier/modifier.entity";
 
 @ObjectType()
 @Entity()
-export class ModifierAssignement extends BaseEntity {
+export class ModifierAssignment extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;

@@ -10,7 +10,7 @@ import {
 import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
 import { Combat } from "../combat/combat.entity";
-import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
+import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 
 @ObjectType()
 @Entity()
@@ -35,6 +35,6 @@ export class Trial extends BaseEntity {
   @OneToMany(() => Combat, (trial_id) => trial_id.id)
   trialId: Combat;
 
-  @Field(() => [ModifierAssignement], { nullable: true })
-  modifierAssignements?: ModifierAssignement[];
+  @Field(() => [ModifierAssignment], { nullable: true })
+  modifierAssignments?: ModifierAssignment[];
 }

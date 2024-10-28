@@ -12,7 +12,7 @@ import {
 import { Field, ObjectType } from "type-graphql";
 import { Profession } from "../profession/profession.entity";
 import { Image } from "../image/image.entity";
-import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
+import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 import { Combat } from "../combat/combat.entity";
 
 @ObjectType()
@@ -58,6 +58,6 @@ export class Competitor extends BaseEntity {
   @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentCombats: Combat[];
 
-  @Field(() => [ModifierAssignement], { nullable: true })
-  modifierAssignements?: ModifierAssignement[];
+  @Field(() => [ModifierAssignment], { nullable: true })
+  modifierAssignments?: ModifierAssignment[];
 }

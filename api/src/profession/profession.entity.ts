@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
-import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
+import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 import { Image } from "../image/image.entity";
 
 @ObjectType()
@@ -35,6 +35,6 @@ export class Profession extends BaseEntity {
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 
-  @Field(() => [ModifierAssignement], { nullable: true })
-  modifierAssignements?: ModifierAssignement[];
+  @Field(() => [ModifierAssignment], { nullable: true })
+  modifierAssignments?: ModifierAssignment[];
 }

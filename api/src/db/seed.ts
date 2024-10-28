@@ -12,11 +12,11 @@ import professionData from "./seed-data/profession.json";
 import { Trial } from "../trial/trial.entity";
 import trialData from "./seed-data/trial.json";
 import { Image } from "../image/image.entity";
-import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
+import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 import imageData from "./seed-data/image.json";
 import {
   makePlayerStatModifierAssigments,
-  mapAndSaveNamedEntityModifierAssignements,
+  mapAndSaveNamedEntityModifierAssignments,
 } from "./seed.utils";
 
 (async () => {
@@ -31,15 +31,15 @@ import {
     await queryRunner.query("DELETE FROM combat");
     await queryRunner.query("DELETE FROM competitor");
     await queryRunner.query("DELETE FROM god");
-    await queryRunner.query("DELETE FROM modifier_assignement");
+    await queryRunner.query("DELETE FROM modifier_assignment");
     await queryRunner.query("DELETE FROM profession");
     await queryRunner.query("DELETE FROM trial");
-    await queryRunner.query("DELETE FROM modifier");
     await queryRunner.query("DELETE FROM image");
+    await queryRunner.query("DELETE FROM modifier");
 
     // -- DELETE SEQUENCES --
     await queryRunner.query(
-      "DELETE FROM sqlite_sequence WHERE name = 'modifier_assignement' OR name = 'image'"
+      "DELETE FROM sqlite_sequence WHERE name = 'modifier_assignment' OR name = 'image'"
     );
 
     // -- SEED BASE ENTITY DATA --
@@ -133,21 +133,17 @@ import {
     // This has to be done as a second step so that we have the UUIDs of the newly created entities available
 
     const savedGodModifierAssignments =
-      await mapAndSaveNamedEntityModifierAssignements(
-        godData,
-        savedGods,
-        "god"
-      );
+      await mapAndSaveNamedEntityModifierAssignments(godData, savedGods, "god");
 
     const savedProfessionModifierAssignments =
-      await mapAndSaveNamedEntityModifierAssignements(
+      await mapAndSaveNamedEntityModifierAssignments(
         professionData,
         savedProfessions,
         "profession"
       );
 
     const savedTrialModifierAssignments =
-      await mapAndSaveNamedEntityModifierAssignements(
+      await mapAndSaveNamedEntityModifierAssignments(
         trialData,
         savedTrials,
         "trial"
@@ -171,7 +167,7 @@ import {
     );
 
     const savedCompetitorModifierAssignments =
-      await mapAndSaveNamedEntityModifierAssignements(
+      await mapAndSaveNamedEntityModifierAssignments(
         competitorsWithModifierAssignments,
         savedCompetitors,
         "competitor"
@@ -207,7 +203,7 @@ import {
     const savedCombatModifierAssignments = await Promise.all(
       savedCombats.flatMap((combat) =>
         modifiers.map(async (modifier) => {
-          const newModifierAssignment = new ModifierAssignement();
+          const newModifierAssignment = new ModifierAssignment();
           newModifierAssignment.modifier = modifier;
           // Value should be a random value between 70 and 130 inclusive
           newModifierAssignment.value = Math.ceil(Math.random() * 60) + 70;

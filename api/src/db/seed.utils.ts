@@ -1,11 +1,11 @@
 import { Modifier } from "../modifier/modifier.entity";
-import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
+import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 
 // MODIFIER ASSIGNMENTS - UTILITY TYPES & FUNCTION - GODS, TRIALS, PROFESSIONS
 type EntityTypes = "god" | "profession" | "trial" | "competitor" | "combat";
 
-// Modifier Assignement is the TypeORM entity with full realtions and IDs.
-// Here in the raw data manipulation we need a type for modifier assignement without IDs, to apply to the return of the stat generation function.
+// Modifier Assignment is the TypeORM entity with full realtions and IDs.
+// Here in the raw data manipulation we need a type for modifier assignment without IDs, to apply to the return of the stat generation function.
 type BaseModifierAssignment = {
   modifier: {
     label: string;
@@ -34,11 +34,11 @@ type NamedEntityWithIds = {
  * @param entityType
  * @returns An array of modifier assignments for the given entity type, with the correct entity IDs assigned.
  */
-export async function mapAndSaveNamedEntityModifierAssignements(
+export async function mapAndSaveNamedEntityModifierAssignments(
   entityData: NamedEntityWithModifierAssignments[],
   entityDataWithIds: NamedEntityWithIds[],
   entityType: EntityTypes
-): Promise<ModifierAssignement[]> {
+): Promise<ModifierAssignment[]> {
   const modifiers = await Modifier.find();
   return Promise.all(
     entityData.flatMap((entity) =>
@@ -51,7 +51,7 @@ export async function mapAndSaveNamedEntityModifierAssignements(
             `Modifier with label ${assignment.modifier.label} not found`
           );
         }
-        const newModifierAssignment = new ModifierAssignement();
+        const newModifierAssignment = new ModifierAssignment();
         newModifierAssignment.modifier = modifier;
         newModifierAssignment.value = assignment.value;
         newModifierAssignment.valueType = assignment.valueType;
@@ -65,7 +65,7 @@ export async function mapAndSaveNamedEntityModifierAssignements(
   );
 }
 
-// MODIFIER ASSIGNEMENT GENERATION - COMPETITORS
+// MODIFIER ASSIgnment GENERATION - COMPETITORS
 /**
  * Creates stat modifier assignments for a player. The rather simple distribution algorithm tends towards a spread of high and low stats.
  * @param possiblePlayerModifiers An array of those modifiers that can be assigned to a player.

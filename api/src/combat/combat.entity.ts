@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
 import { Trial } from "../trial/trial.entity";
-import { ModifierAssignement } from "../modifier_assignement/modifierAssignement.entity";
+import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 
 @ObjectType()
 @Entity()
@@ -46,6 +46,6 @@ export class Combat extends BaseEntity {
   @ManyToOne(() => Trial, (trial) => trial.id)
   trial: Trial;
 
-  @Field(() => [ModifierAssignement], { nullable: true })
-  modifierAssignements?: ModifierAssignement[];
+  @Field(() => [ModifierAssignment], { nullable: true })
+  modifierAssignments?: ModifierAssignment[];
 }
