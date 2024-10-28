@@ -1,0 +1,200 @@
+[
+  {
+    "type": "god",
+    "target_entity": "Aphrodite",
+    "path": "/img/gods/aphrodite.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Apollon",
+    "path": "/img/gods/apollon.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Arès",
+    "path": "/img/gods/ares.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Artémis",
+    "path": "/img/gods/artemis.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Athena",
+    "path": "/img/gods/athena.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Demeter",
+    "path": "/img/gods/demeter.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Dionysos",
+    "path": "/img/gods/dionysos.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Hadès",
+    "path": "/img/gods/hades.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Héra",
+    "path": "/img/gods/hera.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Hermès",
+    "path": "/img/gods/hermes.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Hestia",
+    "path": "/img/gods/hestia.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Héphaïstos",
+    "path": "/img/gods/hephaistos.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Poseidon",
+    "path": "/img/gods/poseidon.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Perséphone",
+    "path": "/img/gods/persephone.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Zeus",
+    "path": "/img/gods/zeus.png",
+    "id": 0
+  },
+  {
+    "type": "god",
+    "target_entity": "Éros",
+    "path": "/img/gods/eros.png",
+    "id": 0
+  },
+  {
+    "type": "competitor_avatar",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/avatars/1.png",
+    "id": 0
+  },
+  {
+    "type": "competitor_battle",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/battle/1.png",
+    "id": 0
+  },
+  {
+    "type": "competitor_avatar",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/avatars/2.png",
+    "id": 0
+  },
+  {
+    "type": "competitor_battle",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/battle/2.png",
+    "id": 0
+  },
+  {
+    "type": "competitor_avatar",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/avatars/3.png",
+    "id": 0
+  },
+  {
+    "type": "competitor_battle",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/battle/3.png",
+    "id": 0
+  },
+  {
+    "type": "profession",
+    "target_entity": "Forgeron",
+    "path": "/img/professions/forgeron.png",
+    "id": 0
+  },
+  {
+    "type": "profession",
+    "target_entity": "Matelot",
+    "path": "/img/professions/matelot.png",
+    "id": 0
+  },
+  {
+    "type": "profession",
+    "target_entity": "Philosophe",
+    "path": "/img/professions/philosophe.png",
+    "id": 0
+  },
+  {
+    "type": "profession",
+    "target_entity": "Architecte",
+    "path": "/img/professions/architecte.png",
+    "id": 0
+  },
+  {
+    "type": "profession",
+    "target_entity": "Marchand",
+    "path": "/img/professions/marchand.png",
+    "id": 0
+  },
+  {
+    "type": "profession",
+    "target_entity": "Alchimiste",
+    "path": "/img/professions/alchimiste.png",
+    "id": 0
+  },
+  {
+    "type": "trial",
+    "target_entity": "Javelot",
+    "path": "/img/trials/javelot.png",
+    "id": 0
+  },
+  {
+    "type": "trial",
+    "target_entity": "Lutte",
+    "path": "/img/trials/lutte.png",
+    "id": 0
+  },
+  {
+    "type": "trial",
+    "target_entity": "Course à pied",
+    "path": "/img/trials/course-a-pied.png",
+    "id": 0
+  },
+  {
+    "type": "trial",
+    "target_entity": "Boxe",
+    "path": "/img/trials/boxe.png",
+    "id": 0
+  },
+  {
+    "type": "trial",
+    "target_entity": "Lancer de disque",
+    "path": "/img/trials/lancer-de-disque.png",
+    "id": 0
+  }
+]

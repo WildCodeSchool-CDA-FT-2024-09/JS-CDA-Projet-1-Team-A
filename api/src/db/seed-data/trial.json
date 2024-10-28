@@ -1,0 +1,172 @@
+[
+  {
+    "name": "Javelot",
+    "description": "Le javelot est une discipline sportive qui consiste à lancer un javelot le plus loin possible. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 10,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 40,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Vitesse"
+        },
+        "value": 20,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 30,
+        "valueType": "coef"
+      }
+    ]
+  },
+  {
+    "name": "Lutte",
+    "description": "La lutte est un sport de combat qui oppose deux adversaires qui cherchent à se déséquilibrer, à se projeter au sol ou à les immobiliser. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 10,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 60,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 20,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 10,
+        "valueType": "coef"
+      }
+    ]
+  },
+  {
+    "name": "Course à pied",
+    "description": "La course à pied est une activité sportive qui consiste à courir sur une certaine distance le plus rapidement possible. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 10,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Vitesse"
+        },
+        "value": 40,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 40,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 10,
+        "valueType": "coef"
+      }
+    ]
+  },
+  {
+    "name": "Boxe",
+    "description": "La boxe est un sport de combat qui oppose deux adversaires qui cherchent à se toucher avec les poings. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 10,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 30,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 30,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 30,
+        "valueType": "coef"
+      }
+    ]
+  },
+  {
+    "name": "Lancer de disque",
+    "description": "Le lancer de disque est une discipline sportive qui consiste à lancer un disque le plus loin possible. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 30,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 30,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 10,
+        "valueType": "coef"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 30,
+        "valueType": "coef"
+      }
+    ]
+  }
+]
