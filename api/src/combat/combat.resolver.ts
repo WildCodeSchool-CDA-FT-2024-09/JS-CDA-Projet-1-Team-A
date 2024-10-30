@@ -5,7 +5,16 @@ import { Combat } from "./combat.entity";
 export default class CombatResolver {
   @Query(() => [Combat])
   async getCombat() {
-    const combat = await Combat.find();
+    const combat = Combat.find({
+      relations: [
+        "player",
+        "opponent",
+        "trial",
+        "playerGod",
+        "opponentGod",
+        "modifierAssignments",
+      ],
+    });
     return combat;
   }
 }

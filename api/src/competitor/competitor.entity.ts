@@ -30,14 +30,6 @@ export class Competitor extends BaseEntity {
   @Column()
   status: string;
 
-  @Field()
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @Field()
-  @UpdateDateColumn()
-  updatedAt: Date;
-
   @Field(() => Profession)
   @ManyToOne(() => Profession, (profession) => profession)
   profession: Profession;
@@ -60,4 +52,12 @@ export class Competitor extends BaseEntity {
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];
+
+  @Field()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
