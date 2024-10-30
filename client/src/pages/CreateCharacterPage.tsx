@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CharacterContext } from "../contexts/CharacterContext";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
@@ -59,13 +59,7 @@ const stats = [
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 
 function CreateCharacterPage() {
-  const [name, setName] = useState("");
-  const { setCharacter } = useContext(CharacterContext);
-
-  const handleChange = (e) => {
-    setName(e.target.value);
-    setCharacter(e.target.value);
-  };
+  const { character, setCharacter } = useContext(CharacterContext);
 
   return (
     <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
@@ -76,8 +70,8 @@ function CreateCharacterPage() {
             <input
               type="text"
               placeholder="Entrez votre prénom"
-              value={name}
-              onChange={handleChange}
+              value={character}
+              onChange={(e) => setCharacter(e.target.value)}
               className="w-full max-w-[200px] rounded border py-2 text-black sm:max-w-xs"
             />
           </div>

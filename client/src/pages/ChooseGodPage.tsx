@@ -11,20 +11,20 @@ function ChooseGodPage() {
       path: "/img/course_de_de_char.png",
       name: "La course de char",
       description:
-        "Seras tu plus rapide que ton adversaire. Tu auras besoin de vitesse face à l'adversitée",
+        "Seras-tu plus rapide que ton adversaire ? Tu auras besoin de vitesse face à l'adversité.",
     },
   ];
 
   return (
     <div className="inset-0 flex h-screen w-full flex-col bg-black/50 backdrop-blur-sm">
-      <h2 className="mt-5 text-xl font-bold">Champion {character}</h2>
+      <h1 className="mt-5 text-xl font-bold">Champion {character}</h1>
 
       <section className="m-6 rounded-lg bg-blue-fd bg-opacity-85 p-2 shadow-md">
         <ul>
           <h2 className="mb-4 text-xl font-bold">Voici ton épreuve</h2>
           {trial.map((item) => (
             <li key={item.id} className="mb-4">
-              <h2 className="m-4 text-lg font-semibold">{item.name}</h2>
+              <h3 className="m-4 text-lg font-semibold">{item.name}</h3>
               <section className="flex flex-row items-center gap-2">
                 <img
                   src={item.path}
@@ -37,6 +37,7 @@ function ChooseGodPage() {
           ))}
         </ul>
       </section>
+
       <Link
         to="/"
         aria-label="Commencer le jeu"
