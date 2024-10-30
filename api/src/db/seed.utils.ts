@@ -65,7 +65,7 @@ export async function mapAndSaveNamedEntityModifierAssignments(
   );
 }
 
-// MODIFIER ASSIgnment GENERATION - COMPETITORS
+// MODIFIER ASSIGNMENT GENERATION - COMPETITORS
 /**
  * Creates stat modifier assignments for a player. The rather simple distribution algorithm tends towards a spread of high and low stats.
  * @param possiblePlayerModifiers An array of those modifiers that can be assigned to a player.

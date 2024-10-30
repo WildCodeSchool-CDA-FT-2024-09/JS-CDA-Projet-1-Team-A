@@ -46,7 +46,7 @@ import {
     // SEED IMAGES
     // Map image targets to image entities for later use with unique named entities (gods, professions, trials)
     // Map image paths to image entities for later use with competitors
-    const imageIdMap = new Map<string, Image>();
+    const imageEntityMap = new Map<string, Image>();
     const imagePathMap = new Map<string, Image>();
     const savedImages = await Promise.all(
       imageData.map(async (image) => {
@@ -54,7 +54,7 @@ import {
         newImage.type = image.type;
         newImage.path = image.path;
         const newImageSaved = await newImage.save();
-        imageIdMap.set(image.target_entity, newImageSaved);
+        imageEntityMap.set(image.target_entity, newImageSaved);
         imagePathMap.set(image.path, newImageSaved);
         return newImageSaved;
       })
@@ -68,7 +68,7 @@ import {
         const newGod = new God();
         newGod.name = god.name;
         newGod.description = god.description;
-        newGod.image = imageIdMap.get(god.name) as Image;
+        newGod.image = imageEntityMap.get(god.name) as Image;
         return await newGod.save();
       })
     );
@@ -79,7 +79,7 @@ import {
         const newProfession = new Profession();
         newProfession.name = profession.name;
         newProfession.description = profession.description;
-        newProfession.image = imageIdMap.get(profession.name) as Image;
+        newProfession.image = imageEntityMap.get(profession.name) as Image;
         return await newProfession.save();
       })
     );
@@ -90,7 +90,7 @@ import {
         const newTrial = new Trial();
         newTrial.name = trial.name;
         newTrial.description = trial.description;
-        newTrial.image = imageIdMap.get(trial.name) as Image;
+        newTrial.image = imageEntityMap.get(trial.name) as Image;
         return await newTrial.save();
       })
     );

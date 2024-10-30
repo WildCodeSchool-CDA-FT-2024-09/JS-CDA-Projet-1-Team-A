@@ -32,11 +32,11 @@ export class Image extends BaseEntity {
   god: God[];
 
   @Field(() => Competitor)
-  @OneToMany(() => Competitor, (id_avatar_image) => id_avatar_image.id)
+  @OneToMany(() => Competitor, (avatarImage) => avatarImage.id)
   idAvatarImage: Competitor[];
 
   @Field(() => Competitor)
-  @OneToMany(() => Competitor, (id_battle_image) => id_battle_image.id)
+  @OneToMany(() => Competitor, (battleImage) => battleImage.id)
   idBattleImage: Competitor[];
 
   @Field(() => Profession)

@@ -1,26 +1,26 @@
 [
   {
     "name": "Achilles",
-    "status": "created"
+    "status": "opponent"
   },
   {
     "name": "Hector",
-    "status": "created"
+    "status": "opponent"
   },
   {
     "name": "Paris",
-    "status": "created"
+    "status": "opponent"
   },
   {
     "name": "Helen",
-    "status": "created"
+    "status": "opponent"
   },
   {
     "name": "Eurydice",
-    "status": "created"
+    "status": "opponent"
   },
   {
     "name": "Clytemnestra",
-    "status": "created"
+    "status": "opponent"
   }
 ]

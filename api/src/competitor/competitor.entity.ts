@@ -43,7 +43,7 @@ export class Competitor extends BaseEntity {
   profession: Profession;
 
   @Field(() => Image)
-  @ManyToOne(() => Image, (id_avatar_image) => id_avatar_image.id)
+  @ManyToOne(() => Image, (image) => image.id)
   avatarImage: Image;
 
   @Field(() => Image)
