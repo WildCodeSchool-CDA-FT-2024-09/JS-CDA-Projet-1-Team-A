@@ -1,0 +1,329 @@
+[
+  {
+    "name": "Zeus",
+    "description": "Zeus est puissant et son statut de roi des dieux lui confère une certaine chance en bataille.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Héra",
+    "description": "Déesse du mariage, de la famille, des femmes, de la royauté et de la protection des naissances.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Poseidon",
+    "description": " Dieu de la mer, des océans, des tremblements de terre, des tempêtes, et des chevaux.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Chance"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Demeter",
+    "description": "Déesse de l'agriculture, des moissons, de la fertilité, de la terre nourricière et du cycle des saisons.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Athena",
+    "description": "Déesse de la sagesse, de la stratégie militaire, de la justice, des arts, de l'artisanat et de la protection des cités.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Apollon",
+    "description": "Dieu de la musique, des arts, de la connaissance, de la guérison, de la peste, de la prophétie, de la poésie, de la beauté masculine et du tir à l'arc.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 1,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Arès",
+    "description": "Dieu de la guerre, de la destruction, de la fureur, du courage, de la violence et des batailles.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vitesse"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Aphrodite",
+    "description": "Déesse de l'amour, de la beauté, du désir, de la séduction, de la fertilité et de la passion.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Chance"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Artémis",
+    "description": "Déesse de la chasse, de la lune, de la nature sauvage, des jeunes filles, de la chasteté et des accouchements.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Vitesse"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Héphaïstos",
+    "description": "Dieu du feu, de la forge, de la métallurgie, des volcans, de l'ingéniosité et de l'artisanat.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Dionysos",
+    "description": "Dieu du vin, de la fête, du théâtre, de l'extase, de la folie divine, et de la fertilité.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Hermès",
+    "description": "Dieu des voyageurs, des messagers, du commerce, des voleurs, de l'éloquence, de l'astuce et des frontières.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Vitesse"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Hadès",
+    "description": "Dieu des Enfers et des Morts, Hadès règne sur le monde souterrain. Il est sage, redoutable et puissant, mais aussi juste et équilibré.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Hestia",
+    "description": "Déesse du foyer, du feu sacré et de la famille, Hestia est douce, accueillante et incarne la paix et la stabilité domestique.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Endurance"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Éros",
+    "description": "Dieu de l'amour et de la passion, Éros incarne le désir et l'attraction. Il est impulsif, mais aussi charmeur et astucieux.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Chance"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Adresse"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Perséphone",
+    "description": "Déesse du printemps et reine des Enfers, Perséphone incarne la dualité entre la vie et la mort, entre la lumière et les ténèbres.",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Intelligence"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Chance"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  }
+]
