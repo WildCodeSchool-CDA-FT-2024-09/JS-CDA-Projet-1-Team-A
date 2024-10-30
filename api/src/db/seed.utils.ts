@@ -92,7 +92,7 @@ export function makePlayerStatModifierAssigments(
     parts: number,
     maxValue: number
   ): number[] {
-    const values = [];
+    const values: number[] = [];
     let remaining = sum;
 
     for (let i = 0; i < parts; i++) {
@@ -124,14 +124,14 @@ export function makePlayerStatModifierAssigments(
     maxStatBonus
   );
 
-  const modifierAssignments = [];
-  for (let i = 0; i < possiblePlayerModifiers.length; i++) {
-    modifierAssignments.push({
-      modifier: possiblePlayerModifiers[i],
-      value: minStatValue + statDistribution[i],
+  const modifierAssignments: BaseModifierAssignment[] =
+    possiblePlayerModifiers.map((modifier, index) => ({
+      modifier: {
+        label: modifier.label,
+      },
+      value: minStatValue + statDistribution[index],
       valueType: "stat",
-    });
-  }
+    }));
 
   return modifierAssignments;
 }
