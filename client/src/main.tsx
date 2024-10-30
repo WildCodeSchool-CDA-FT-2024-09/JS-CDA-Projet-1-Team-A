@@ -10,6 +10,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 import client from "./services/connexion.ts";
+import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
+      { path: "/character-creation", element: <CreateCharacterPage /> },
       {
         path: "/rules",
         element: <RulesPage />,
