@@ -43,7 +43,7 @@ function StatsCharacter() {
         </ul>
       </section>
       <Link
-        to="/"
+        to="/choose-god"
         aria-label="Commencer le jeu"
         className="btn-primary min-w-[220px] max-w-[230px] md:mr-24"
       >
