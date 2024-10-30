@@ -14,7 +14,7 @@ import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.en
 
 @ObjectType()
 @Entity()
-export class God extends BaseEntity {
+export class Trial extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -27,17 +27,13 @@ export class God extends BaseEntity {
   @Column()
   description: string;
 
-  @Field(() => Image)
+  @Field(() => [Image])
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 
-  @Field(() => [Combat])
-  @OneToMany(() => Combat, (combat) => combat.player)
-  playerGodCombats: Combat[];
-
-  @Field(() => [Combat])
-  @OneToMany(() => Combat, (combat) => combat.opponent)
-  opponentGodCombats: Combat[];
+  @Field(() => Combat)
+  @OneToMany(() => Combat, (combat) => combat.id)
+  combats: Combat[];
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];
