@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 // Statistiques provisoires en attendant le back-end
 const stats = [
@@ -45,7 +44,7 @@ function StatsCharacter() {
       <Link
         to="/choose-god"
         aria-label="Commencer le jeu"
-        className="btn-primary min-w-[220px] max-w-[230px] md:mr-24"
+        className="btn-primary min-w-[220px] max-w-[230px]"
       >
         Démarre l'épreuve!
       </Link>

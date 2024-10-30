@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CharacterContext } from "../contexts/CharacterContext";
 
 import StatsCharacter from "../components/competitor/StatsCharacter";
 
@@ -6,9 +7,11 @@ const cities = ["Paris", "Lyon", "Marseille", "Toulouse"]; // Fausse donnée en 
 
 function CreateCharacterPage() {
   const [name, setName] = useState("");
+  const { setCharacter } = useContext(CharacterContext);
 
   const handleChange = (e) => {
     setName(e.target.value);
+    setCharacter(e.target.value);
   };
 
   return (
