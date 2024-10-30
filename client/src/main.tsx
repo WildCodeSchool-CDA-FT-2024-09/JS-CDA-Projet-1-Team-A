@@ -3,12 +3,14 @@ import { createRoot } from "react-dom/client";
 import { ApolloProvider } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage.tsx";
+import RulesPage from "./pages/RulesPage.tsx";
+import AboutUsPage from "./pages/AboutUsPage.tsx";
 
 import App from "./App.tsx";
 import "./index.css";
 
 import client from "./services/connexion.ts";
-import CreateCharacterPage from "./pages/CreatCharacterPage.tsx";
+import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,15 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
-      { path: "/create", element: <CreateCharacterPage /> },
+      { path: "/character-creation", element: <CreateCharacterPage /> },
+      {
+        path: "/rules",
+        element: <RulesPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutUsPage />,
+      },
     ],
   },
 ]);

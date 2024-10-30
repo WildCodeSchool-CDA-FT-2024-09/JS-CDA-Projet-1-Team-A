@@ -1,8 +1,10 @@
 import { useState } from "react";
+
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
 
+// Fausse donnée en attendant le back end
 const profession = [
   {
     professionName: "Philosopher",
@@ -68,69 +70,44 @@ const imageUrls = [
   { url: "/img/freepik-gracefully1.png" },
   { url: "/img/freepik-zeus1.png" },
 ];
+const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 function CreateCharacterPage() {
-  const [prenom, setPrenom] = useState("");
+  const [name, setName] = useState("");
 
   const handleChange = (e) => {
-    setPrenom(e.target.value);
-  };
-
-  const [selectedCity, setSelectedCity] = useState("");
-
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
-
-  const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
-
-  const handleCitySelect = (city) => {
-    setSelectedCity(city);
-    setDropdownVisible(false);
+    setName(e.target.value);
   };
 
   return (
-    <div className="-mt-14 h-full w-full p-2 backdrop-blur md:-mt-20 md:p-8 lg:-mt-20">
+    <section className="-mt-60 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-24">
       <div className="flex flex-col items-center py-4">
-        <div className="grid w-full grid-cols-2 gap-4 py-4">
-          <div className="B flex flex-col items-center p-4">
+        <form className="grid w-full grid-cols-2 gap-4 py-4">
+          <div className="flex flex-col items-center p-4">
             <label className="p-2">Quel est ton nom ?</label>
             <input
               type="text"
               placeholder="Entrez votre prénom"
-              value={prenom}
+              value={name}
               onChange={handleChange}
               className="w-full max-w-[200px] rounded border py-2 text-black sm:max-w-xs"
             />
           </div>
-          <div className="C flex max-w-[300px] flex-col items-center p-4">
-            <label className="p-2">Quel est ta ville ?</label>
-            <div className="relative">
-              <div
-                onClick={() => setDropdownVisible(!isDropdownVisible)}
-                className="min-w-[200px] cursor-pointer rounded-md border border-gray-300 bg-white py-2 text-black"
-              >
-                {selectedCity || "Sélectionnez une ville"}
-              </div>
-
-              {isDropdownVisible && (
-                <div className="absolute z-30 mt-1 w-full rounded-md border border-gray-300 bg-white shadow-lg">
-                  {cities.map((city) => (
-                    <div
-                      key={city}
-                      onClick={() => handleCitySelect(city)}
-                      className="cursor-pointer p-2 text-black hover:bg-gray-100"
-                    >
-                      {city}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+          <div className="flex w-full max-w-xs items-center">
+            <select className="select w-full max-w-xs bg-transparent focus:bg-white focus:text-black">
+              <option disabled selected className="text-gray-500">
+                Quelle est ta ville ?
+              </option>
+              {cities.map((city) => (
+                <option key={city}>{city}</option>
+              ))}
+            </select>
           </div>
-        </div>
+        </form>
       </div>
       <AvatarCarouselWrapper imageUrls={imageUrls} />
       <CarouselProfession profession={profession} />
       <StatsCharacter stats={stats} />
-    </div>
+    </section>
   );
 }
 
