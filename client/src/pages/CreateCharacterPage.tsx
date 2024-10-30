@@ -1,10 +1,5 @@
-
 import { useContext, useState } from "react";
 import { CharacterContext } from "../contexts/CharacterContext";
-
-
-
-
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
 // Fausse donnée en attendant le back end
