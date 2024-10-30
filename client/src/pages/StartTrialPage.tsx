@@ -1,6 +1,12 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
 
+// en attente du recupérer les information du résulta d'épreuve
+const resultTrial: { status: string }[] = [
+  { status: "Victoire" },
+  { status: "Défaite" },
+];
+
 function StartTrialPage() {
   const [result, setResult] = useState(true);
 
@@ -11,7 +17,7 @@ function StartTrialPage() {
         <h1 className="text-4xl text-white">Votre Contenu</h1>
       </div>
       {/* modale qui change en fonction du resulta pas encore fonctionnel */}
-      <ModaleResultTrial result={result} />
+      <ModaleResultTrial result={result} resultTrial={resultTrial[1]} />,
       {/* bouton pour afficher le resulta de l'épreuve */}
       <button
         className="btn-primary fixed bottom-[100px] left-1/2 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform"

@@ -1,8 +1,12 @@
 interface ModaleResultTrialProps {
   result: boolean;
+  resultTrial: { status: string };
 }
 
-export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
+export default function ModaleResultTrial({
+  result,
+  resultTrial,
+}: ModaleResultTrialProps) {
   return (
     <div className="flex w-full flex-col items-center">
       <section
@@ -13,7 +17,7 @@ export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
         }
       >
         {/*affiche la modale quand le state result passe a true*/}
-        <h2>ici le resulta du combat</h2>
+        <h2>ici le resulta du combat {resultTrial.status}</h2>
       </section>
     </div>
   );
