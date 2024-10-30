@@ -33,7 +33,7 @@ function CarouselProfession({ profession }) {
             className="mb-4 h-32 w-32 object-cover md:h-48 md:w-48 lg:h-60 lg:w-60"
           />
         </figure>
-        <div>
+        <article>
           <h2 className="text-xl font-bold text-gray-700">
             {profession[currentIndex].professionName}
           </h2>
@@ -44,7 +44,7 @@ function CarouselProfession({ profession }) {
             {profession[currentIndex].statsName}{" "}
             {profession[currentIndex].value}
           </p>
-        </div>
+        </article>
       </article>
       <button
         onClick={handleNext}
