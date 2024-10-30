@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CharacterContext } from "../contexts/CharacterContext";
 
-function ChooseGoodPage() {
+function ChooseGodPage() {
   const { character } = useContext(CharacterContext);
   // Statistiques provisoires en attendant le back-end
   const trial = [
@@ -17,18 +17,18 @@ function ChooseGoodPage() {
 
   return (
     <div className="inset-0 flex h-screen w-full flex-col bg-black/50 backdrop-blur-sm">
-      <h1 className="mt-5 text-xl font-bold">Champion {character}</h1>
+      <h2 className="mt-5 text-xl font-bold">Champion {character}</h2>
 
       <section className="m-6 rounded-lg bg-blue-fd bg-opacity-85 p-2 shadow-md">
         <ul>
-          <h1 className="mb-4 text-xl font-bold">Voici ton épreuve</h1>
+          <h2 className="mb-4 text-xl font-bold">Voici ton épreuve</h2>
           {trial.map((item) => (
             <li key={item.id} className="mb-4">
               <h2 className="m-4 text-lg font-semibold">{item.name}</h2>
               <section className="flex flex-row items-center gap-2">
                 <img
                   src={item.path}
-                  alt="course de char"
+                  alt={item.name}
                   className="h-50 w-50 rounded-md object-cover"
                 />
                 <p>{item.description}</p>
@@ -48,4 +48,4 @@ function ChooseGoodPage() {
   );
 }
 
-export default ChooseGoodPage;
+export default ChooseGodPage;

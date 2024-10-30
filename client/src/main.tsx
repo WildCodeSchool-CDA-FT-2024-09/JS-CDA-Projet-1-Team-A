@@ -11,7 +11,7 @@ import "./index.css";
 
 import client from "./services/connexion.ts";
 import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
-import ChooseGoodPage from "./pages/ChooseGoodPage.tsx";
+import ChooseGodPage from "./pages/ChooseGodPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       { path: "/character-creation", element: <CreateCharacterPage /> },
-      { path: "/choose-god", element: <ChooseGoodPage /> },
+      { path: "/choose-god", element: <ChooseGodPage /> },
       {
         path: "/rules",
         element: <RulesPage />,
