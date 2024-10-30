@@ -11,6 +11,7 @@ import "./index.css";
 
 import client from "./services/connexion.ts";
 import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
+import StatisticsPage from "./pages/StatisticsPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUsPage />,
+      },
+      {
+        path: "/statistics",
+        element: <StatisticsPage />,
       },
     ],
   },
