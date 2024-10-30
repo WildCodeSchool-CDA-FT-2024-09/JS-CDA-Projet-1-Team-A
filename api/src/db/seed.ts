@@ -217,9 +217,23 @@ import {
 
     // COMMIT!
     await queryRunner.commitTransaction();
-    console.info(
-      `Database seeded with ${savedGods.length} gods, ${savedProfessions.length} professions, ${savedModifiers.length} modifiers, ${savedGodModifierAssignments.length} god modifier assignments, ${savedProfessionModifierAssignments.length} profession modifier assignments, ${savedTrials.length} trials, ${savedCompetitors.length} competitors, ${savedImages.length} images, ${savedTrialModifierAssignments.length} trial modifier assignments, ${savedCompetitorModifierAssignments.length} competitor modifier assignments, ${savedCombats.length} combats, ${savedCombatModifierAssignments.length} combat modifier assignments`
-    );
+    console.info(`
+      Database seeded with:
+      -- BASE ENTITIES -- 
+      ⚡ ${savedGods.length} gods 
+      🛠  ${savedProfessions.length} professions 
+      ⚙  ${savedModifiers.length} modifiers 
+      💪 ${savedTrials.length} trials 
+      🏅 ${savedCompetitors.length} competitors 
+      🖼  ${savedImages.length} images 
+      ⚔  ${savedCombats.length} combats
+      -- MODIFIER ASSIGNMENTS -- 
+      📈 ${savedGodModifierAssignments.length} god modifier assignments 
+      📉 ${savedProfessionModifierAssignments.length} profession modifier assignments 
+      📈 ${savedTrialModifierAssignments.length} trial modifier assignments 
+      📉 ${savedCompetitorModifierAssignments.length} competitor modifier assignments 
+      📈 ${savedCombatModifierAssignments.length} combat modifier assignments
+    `);
   } catch (error) {
     console.info("Error seeding DB", error);
     await queryRunner.rollbackTransaction();
