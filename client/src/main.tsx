@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
-      { path: "/create", element: <CreateCharacterPage /> },
+      { path: "/character-creation", element: <CreateCharacterPage /> },
       {
         path: "/rules",
         element: <RulesPage />,
