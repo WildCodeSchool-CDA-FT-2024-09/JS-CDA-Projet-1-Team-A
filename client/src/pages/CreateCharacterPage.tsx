@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
 // Fausse donnée en attendant le back end
@@ -56,7 +55,6 @@ const stats = [
   },
   { statName: "Chance", value: 50 },
 ];
-
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 
 function CreateCharacterPage() {
