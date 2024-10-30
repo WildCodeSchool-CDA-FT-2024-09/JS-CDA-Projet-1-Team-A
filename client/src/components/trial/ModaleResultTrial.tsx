@@ -8,7 +8,7 @@ export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
       <section
         className={
           result
-            ? "flex h-[80vw] max-h-[80vw] w-[80vw] min-w-[280px] flex-col items-center justify-center rounded-xl bg-blue-fd bg-opacity-85 md:justify-evenly"
+            ? "mt-[4rem] flex h-[80vw] max-h-[700px] w-[65vw] min-w-[280px] max-w-[700px] flex-col items-center justify-center rounded-xl bg-blue-fd bg-opacity-85 md:justify-evenly"
             : "hidden"
         }
       >

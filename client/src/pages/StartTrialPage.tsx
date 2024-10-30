@@ -10,8 +10,9 @@ function StartTrialPage() {
       <div className="relative mt-24 p-8">
         <h1 className="text-4xl text-white">Votre Contenu</h1>
       </div>
-      {/* bouton pour afficher le resulta de l'épreuve */}
+      {/* modale qui change en fonction du resulta pas encore fonctionnel */}
       <ModaleResultTrial result={result} />
+      {/* bouton pour afficher le resulta de l'épreuve */}
       <button
         className="btn-primary fixed bottom-[100px] left-1/2 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform"
         onClick={() => setResult(!result)}
