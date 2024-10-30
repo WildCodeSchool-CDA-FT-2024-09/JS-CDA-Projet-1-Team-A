@@ -85,67 +85,70 @@ const AvatarCarouselDesktop: React.FC<AvatarCarouselDesktopProps> = ({
 
   return (
     <>
-      <div>Choisis ton avatar</div>
-      <div
-        className="flex h-96 w-full items-center justify-center overflow-hidden"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onMouseDown={handleMouseDown}
-        onMouseMove={isDragging ? handleMouseMove : undefined}
-        onMouseUp={handleMouseUp}
-      >
-        <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
-          {imageUrls.map((url, index) => {
-            const offset = Math.abs(index - currentIndex);
-            const zIndex = index === currentIndex ? 10 : offset === 1 ? 5 : 0; // Gestion du z-index
+      <section aria-labelledby="title-avatar">
+        <p id="title-avatar">Choisis ton avatar</p>
+        <div
+          className="flex h-96 w-full items-center justify-center overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseMove={isDragging ? handleMouseMove : undefined}
+          onMouseUp={handleMouseUp}
+        >
+          <div className="relative flex h-[700px] w-full items-center justify-center overflow-hidden">
+            {imageUrls.map((url, index) => {
+              const offset = Math.abs(index - currentIndex);
+              const zIndex = index === currentIndex ? 10 : offset === 1 ? 5 : 0;
 
-            return (
-              <div
-                key={index}
-                className={`transition-transform duration-300 ease-in-out ${getImageClass(index)}`}
-                style={{
-                  transform: `translateX(${(index - currentIndex) * 100 + (index > currentIndex ? +25 : 0) + (index < currentIndex ? +25 : 0)}%)`,
-                  position: "absolute",
-                  left: "35%",
-                  top:
-                    index === currentIndex
-                      ? "30%"
-                      : offset === 1
-                        ? "32%"
-                        : "35%", // Ajustement de la position de l'image centrale
-                  transformOrigin: "center center",
-                  marginTop: index === currentIndex ? "-30px" : "0", // Augmente le débordement en haut pour l'image centrale
-                  marginBottom: index === currentIndex ? "-30px" : "0", // Débordement en bas pour l'image centrale
-                  width:
-                    index === currentIndex
-                      ? "300px"
-                      : offset === 1
-                        ? "210px"
-                        : "190px",
-                  height:
-                    index === currentIndex
-                      ? "395px"
-                      : offset === 1
-                        ? "250px"
-                        : "210px",
-                  zIndex: zIndex,
-                }}
-              >
-                <img
-                  src={url.url}
-                  alt={`Image ${index + 1}`}
-                  className="h-full w-full rounded-lg object-cover"
+              return (
+                <figure
+                  key={index}
+                  className={`transition-transform duration-300 ease-in-out ${getImageClass(index)}`}
                   style={{
-                    maxHeight: index === currentIndex ? "395px" : "270px",
-                    maxWidth: index === currentIndex ? "300px" : "210px",
+                    transform: `translateX(${(index - currentIndex) * 100 + (index > currentIndex ? +25 : 0) + (index < currentIndex ? +25 : 0)}%)`,
+                    position: "absolute",
+                    left: "35%",
+                    top:
+                      index === currentIndex
+                        ? "30%"
+                        : offset === 1
+                          ? "32%"
+                          : "35%",
+                    transformOrigin: "center center",
+                    marginTop: index === currentIndex ? "-30px" : "0",
+                    marginBottom: index === currentIndex ? "-30px" : "0",
+                    width:
+                      index === currentIndex
+                        ? "300px"
+                        : offset === 1
+                          ? "210px"
+                          : "190px",
+                    height:
+                      index === currentIndex
+                        ? "395px"
+                        : offset === 1
+                          ? "250px"
+                          : "210px",
+                    zIndex: zIndex,
                   }}
-                />
-              </div>
-            );
-          })}
+                >
+                  <img
+                    src={url.url}
+                    alt={`Avatar ${index + 1}`}
+                    className="h-full w-full rounded-lg object-cover"
+                    style={{
+                      maxHeight: index === currentIndex ? "395px" : "270px",
+                      maxWidth: index === currentIndex ? "300px" : "210px",
+                    }}
+                  />
+                  <figcaption className="sr-only">{`Avatar ${index + 1}`}</figcaption>
+                </figure>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

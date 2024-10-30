@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 interface AvatarCarouselMobileProps {
-  imageUrls: { url: string }[]; // Assure-toi que la structure correspond à ton tableau d'images
+  imageUrls: { url: string }[];
 }
 
 const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
@@ -72,42 +72,45 @@ const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
 
   return (
     <>
-      <div>Choisi ton avatar</div>
-      <div
-        className="flex h-44 w-full items-center justify-center overflow-hidden"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
-          {imageUrls.map((url, index) => {
-            const offset = Math.abs(index - currentIndex);
-            const zIndex = index === currentIndex ? 10 : offset === 1 ? 5 : 0; // Gestion du z-index
-            const leftPosition = windowWidth > 500 ? "40%" : "33%";
-            return (
-              <div
-                key={index}
-                className={`transition-transform duration-300 ease-in-out ${getImageClass(index)}`}
-                style={{
-                  transform: `translateX(${(index - currentIndex) * 100 + (index > currentIndex ? +30 : 0) + (index < currentIndex ? +8 : 0)}%)`, // Ajustement de la position des images adjacentes
-                  position: "absolute",
-                  left: leftPosition,
-                  top: index === currentIndex ? "10%" : "11%", // Ajustement de la position top
-                  marginTop: index === currentIndex ? "-10px" : "0",
-                  marginBottom: index === currentIndex ? "-10px" : "0",
-                  zIndex: zIndex,
-                }}
-              >
-                <img
-                  src={url.url}
-                  alt={`Image ${index + 1}`}
-                  className="h-full w-full rounded-lg object-cover"
-                />
-              </div>
-            );
-          })}
+      <section aria-labelledby="title-avatar">
+        <p id="title-avatar">Choisi ton avatar</p>
+        <div
+          className="flex h-44 w-full items-center justify-center overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+            {imageUrls.map((url, index) => {
+              const offset = Math.abs(index - currentIndex);
+              const zIndex = index === currentIndex ? 10 : offset === 1 ? 5 : 0;
+              const leftPosition = windowWidth > 500 ? "40%" : "33%";
+              return (
+                <figure
+                  key={index}
+                  className={`transition-transform duration-300 ease-in-out ${getImageClass(index)}`}
+                  style={{
+                    transform: `translateX(${(index - currentIndex) * 100 + (index > currentIndex ? +30 : 0) + (index < currentIndex ? +8 : 0)}%)`,
+                    position: "absolute",
+                    left: leftPosition,
+                    top: index === currentIndex ? "10%" : "11%",
+                    marginTop: index === currentIndex ? "-10px" : "0",
+                    marginBottom: index === currentIndex ? "-10px" : "0",
+                    zIndex: zIndex,
+                  }}
+                >
+                  <img
+                    src={url.url}
+                    alt={`Avatar ${index + 1}`}
+                    className="h-full w-full rounded-lg object-cover"
+                  />
+                  <figcaption className="sr-only">{`Avatar ${index + 1}`}</figcaption>
+                </figure>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

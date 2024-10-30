@@ -11,7 +11,7 @@ function CarouselProfession({ profession }) {
   };
 
   return (
-    <section className="flex items-center justify-center space-x-4">
+    <section className="mt-4 flex items-center justify-center space-x-4">
       <button
         onClick={() => handleNav(-1)}
         className="h-8 w-8 rounded bg-[url('/img/arrowL.png')] bg-cover bg-center transition hover:opacity-80 md:h-12 md:w-12"
