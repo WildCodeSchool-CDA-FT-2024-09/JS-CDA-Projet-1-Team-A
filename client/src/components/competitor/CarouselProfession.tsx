@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function CarouselProfession({ profession }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,15 +16,15 @@ function CarouselProfession({ profession }) {
   };
 
   return (
-    <div className="flex items-center justify-center space-x-4">
+    <section className="flex items-center justify-center space-x-4">
       <button
         onClick={handlePrev}
         className="h-8 w-8 rounded bg-[url('/img/arrowL.png')] bg-cover bg-center transition hover:opacity-80 md:h-12 md:w-12"
         aria-label="Précédent"
-      ></button>
+      />
       <article
         className="flex flex-row items-center space-x-4 rounded-lg border bg-blue-fd bg-opacity-85 p-4"
-        aria-labelledby="profession-title"
+        aria-labelledby="titre-profession"
       >
         <figure>
           <img
@@ -50,8 +50,8 @@ function CarouselProfession({ profession }) {
         onClick={handleNext}
         className="h-8 w-8 rounded bg-[url('/img/arrowR.png')] bg-cover bg-center transition hover:opacity-80 md:h-12 md:w-12"
         aria-label="Suivant"
-      ></button>
-    </div>
+      />
+    </section>
   );
 }
 
