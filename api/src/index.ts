@@ -19,7 +19,6 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
       GodResolver,
       CompetitorResolver,
       ProfessionResolver,
-
       CombatResolver,
     ],
   });
