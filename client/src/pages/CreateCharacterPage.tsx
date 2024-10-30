@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
@@ -7,27 +6,28 @@ import CarouselProfession from "../components/competitor/CarouselProfession";
 // Fausse donnée en attendant le back end
 const profession = [
   {
-    professionName: "Philosopher",
+    professionName: "Philosophe",
     statsName: "Intelligence",
     value: 87,
     description:
-      "Wow, it's an amazing job! You are an incredibly muscular philosopher!",
+      "Wow, c'est un métier incroyable ! Vous êtes un philosophe incroyablement musclé !",
     link: "/img/dallePhilosopher1.png",
   },
   {
-    professionName: "Blacksmith",
+    professionName: "Forgeron",
     statsName: "Force",
     value: 72,
     description:
-      "Wow, it's an amazing job! You are an incredibly muscular blackSmith!",
+      "Wow, c'est un métier incroyable ! Vous êtes un forgeron incroyablement musclé !",
     link: "/img/dalleForge1.png",
   },
   {
-    professionName: "Sailor",
+    professionName: "Marin",
     statsName: "Agilité",
     value: 70,
     description:
-      "Wow, it's an amazing job! You are an incredibly muscular sailor!",
+      "Wow, c'est un métier incroyable ! Vous êtes un marin incroyablement musclé !",
+
     link: "/img/dalleSailor1.png",
   },
 ];
@@ -79,7 +79,7 @@ function CreateCharacterPage() {
   };
 
   return (
-    <section className="-mt-60 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-24">
+    <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
       <div className="flex flex-col items-center py-4">
         <form className="grid w-full grid-cols-2 gap-4 py-4">
           <div className="flex flex-col items-center p-4">

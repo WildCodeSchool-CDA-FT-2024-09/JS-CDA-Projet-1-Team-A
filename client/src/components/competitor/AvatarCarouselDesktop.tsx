@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 interface AvatarCarouselDesktopProps {
-  imageUrls: { url: string }[]; // Assure-toi que la structure correspond à ton tableau d'images
+  imageUrls: { url: string }[];
 }
 const AvatarCarouselDesktop: React.FC<AvatarCarouselDesktopProps> = ({
   imageUrls,

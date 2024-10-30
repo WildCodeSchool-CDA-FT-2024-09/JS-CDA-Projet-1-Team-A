@@ -1,37 +1,34 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function CarouselProfession({ profession }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? profession.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === profession.length - 1 ? 0 : prevIndex + 1
+  const handleNav = (direction) => {
+    setCurrentIndex(
+      (prevIndex) =>
+        (prevIndex + direction + profession.length) % profession.length
     );
   };
 
   return (
-    <div className="mt-4 flex items-center justify-center space-x-4">
+    <section className="flex items-center justify-center space-x-4">
       <button
-        onClick={handlePrev}
+        onClick={() => handleNav(-1)}
         className="h-8 w-8 rounded bg-[url('/img/arrowL.png')] bg-cover bg-center transition hover:opacity-80 md:h-12 md:w-12"
         aria-label="Précédent"
-      ></button>
-
-      <div className="flex flex-row items-center space-x-4 rounded-lg border bg-blue-fd bg-opacity-85 p-4">
-        <div>
+      />
+      <article
+        className="flex flex-row items-center space-x-4 rounded-lg border bg-blue-fd bg-opacity-85 p-4"
+        aria-labelledby="titre-profession"
+      >
+        <figure>
           <img
             src={profession[currentIndex].link}
             alt={profession[currentIndex].professionName}
             className="mb-4 h-32 w-32 object-cover md:h-48 md:w-48 lg:h-60 lg:w-60"
           />
-        </div>
-        <section>
+        </figure>
+        <div>
           <h2 className="text-xl font-bold text-gray-700">
             {profession[currentIndex].professionName}
           </h2>
@@ -39,18 +36,17 @@ function CarouselProfession({ profession }) {
             {profession[currentIndex].description}
           </p>
           <p className="pt-4 text-gray-700">
-            {profession[currentIndex].statsName} +{" "}
+            {profession[currentIndex].statsName}{" "}
             {profession[currentIndex].value}
           </p>
-        </section>
-      </div>
-
+        </div>
+      </article>
       <button
-        onClick={handleNext}
+        onClick={() => handleNav(1)}
         className="h-8 w-8 rounded bg-[url('/img/arrowR.png')] bg-cover bg-center transition hover:opacity-80 md:h-12 md:w-12"
         aria-label="Suivant"
-      ></button>
-    </div>
+      />
+    </section>
   );
 }
 
