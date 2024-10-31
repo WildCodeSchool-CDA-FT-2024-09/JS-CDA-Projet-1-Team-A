@@ -23,8 +23,8 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
-      { path: "/creation", element: <CreateCharacterPage /> },
-      { path: "/choix", element: <ChooseGodPage /> },
+      { path: "/creation-du-personnage", element: <CreateCharacterPage /> },
+      { path: "/choix-du-dieu", element: <ChooseGodPage /> },
       {
         path: "/regles",
         element: <RulesPage />,
@@ -40,9 +40,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <CharacterProvider>
-    <ApolloProvider client={client}>
-      <RouterProvider router={router} />
-    </ApolloProvider>
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
     </CharacterProvider>
   </StrictMode>
 );
