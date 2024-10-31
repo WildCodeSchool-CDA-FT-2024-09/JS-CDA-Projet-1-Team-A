@@ -1,12 +1,19 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
+import ModaleResultDetail from "../components/trial/ModaleResultDetail";
 
+type ModaleResultDetailProps = React.ComponentProps<typeof ModaleResultDetail>;
 // en attente du recupérer les information du résulta d'épreuve
 const resultTrial: { [key: string]: { status: string } } = {
   victoire: { status: "VICTOIRE" },
   defaite: { status: "DEFAITE" },
 };
 
+type DataKey = "ModaleResultDetail" | "ModaleResultTrial"; // Spécifiez toutes les clés possibles
+type DataType = {
+  component: React.FC<ModaleResultDetailProps>; // Utilise les props extraites
+  result: string;
+};
 // en attente de réccupérer les données du joueur / opposant
 const trial = {
   name: "la cours de char",
@@ -19,11 +26,31 @@ const trial = {
 function StartTrialPage() {
   const [result, setResult] = useState("");
 
+  const data: Record<DataKey, DataType> = {
+    ModaleResultTrial: {
+      component: ModaleResultTrial,
+      result: result,
+    },
+    ModaleResultDetail: {
+      component: ModaleResultDetail,
+      result: result,
+    },
+  };
+
+  const [component, setComponent] = useState<keyof typeof data | null>(null);
+  const ComponentToRender = component ? data[component].component : null;
   const checkResulta = () => {
     if (resultTrial.victoire.status === "VICTOIRE") {
       setResult("VICTOIRE");
     } else if (resultTrial.defaite.status === "DEFAITE") {
       setResult("DEFAITE");
+    }
+    if (component === null) {
+      setComponent("ModaleResultTrial");
+    } else if (component === "ModaleResultTrial") {
+      setComponent("ModaleResultDetail");
+    } else {
+      setComponent(null);
     }
   };
 
@@ -73,8 +100,11 @@ function StartTrialPage() {
           className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result !== "VICTOIRE" ? "" : "saturate-0"}`}
         />
       </div>
-      {/* modale qui change en fonction du resulta pas encore fonctionnel */}
-      <ModaleResultTrial result={result} />
+      {/*n'affiche pas de modale puis la modale reslta puis la modale detail*/}
+      {ComponentToRender && (
+        <ComponentToRender result={data[component!].result} />
+      )}
+      {/* <ModaleResultTrial result={result} /> */}
       {/* bouton pour afficher le resulta de l'épreuve */}
       <button
         className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
