@@ -18,7 +18,6 @@ function ChooseGodPage() {
   return (
     <div className="inset-0 flex h-screen w-full flex-col bg-black/50 backdrop-blur-sm">
       <h1 className="mt-5 text-xl font-bold">Champion {character}</h1>
-
       <section className="m-6 rounded-lg bg-blue-fd bg-opacity-85 p-2 shadow-md">
         <ul>
           <h2 className="mb-4 text-xl font-bold">Voici ton épreuve</h2>
@@ -37,7 +36,6 @@ function ChooseGodPage() {
           ))}
         </ul>
       </section>
-
       <Link
         to="/epreuve"
         aria-label="Commencer le jeu"

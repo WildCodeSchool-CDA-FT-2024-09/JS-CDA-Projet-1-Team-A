@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       { path: "/creation", element: <CreateCharacterPage /> },
-      { path: "/choisir", element: <ChooseGodPage /> },
+      { path: "/choix", element: <ChooseGodPage /> },
       {
         path: "/regles",
         element: <RulesPage />,

@@ -15,7 +15,7 @@ function StatsCharacter({ stats }) {
         </ul>
       </section>
       <Link
-        to="/choisir"
+        to="/choix"
         aria-label="Commencer le jeu"
         className="btn-primary min-w-[220px] max-w-[230px]"
       >
