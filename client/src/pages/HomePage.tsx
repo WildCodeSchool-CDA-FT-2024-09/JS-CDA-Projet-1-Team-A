@@ -12,7 +12,7 @@ function HomePage() {
           Crée ton Champion
         </Link>
         <Link
-          to="/statistics"
+          to="/statistiques"
           aria-label="Accéder à la page des statistiques"
           className="btn-primary min-w-[220px]"
         >

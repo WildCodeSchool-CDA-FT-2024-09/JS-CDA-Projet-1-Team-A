@@ -18,16 +18,16 @@ function StatisticsPage() {
   return (
     <main>
       <div className="mt-38 text-justif fixed left-1/2 top-1/2 mx-auto mb-8 max-h-[55vh] w-[70%] -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-xl bg-yellow-p bg-opacity-85 p-6 md:w-[40%] lg:w-1/3">
-        <h1 className="mb-4 text-center text-2xl font-bold text-blue-v">
+        <h2 className="mb-4 text-center text-2xl font-bold text-blue-v">
           L'histoire des combats
-        </h1>
+        </h2>
         <section>
           <ul>
             {combats.map((combat) => (
               <li key={combat.id} className="mb-4 text-blue-v">
-                <h2 className="mb-1 font-bold text-stone-50">
+                <h3 className="mb-1 font-bold text-stone-50">
                   {`${combat.player?.name} (${combat.playerGod.name})  vs. ${combat.opponent?.name} (${combat.opponentGod.name})`}
-                </h2>
+                </h3>
                 <p>Le {formatCombatDate(combat.createdAt)}</p>
                 <p>Épreuve de {combat.trial.name}</p>
               </li>
