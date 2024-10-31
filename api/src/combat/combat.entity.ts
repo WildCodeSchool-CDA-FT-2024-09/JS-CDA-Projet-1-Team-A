@@ -6,10 +6,15 @@ import {
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
+  ViewEntity,
+  ViewColumn,
+  OneToMany,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
 import { Trial } from "../trial/trial.entity";
-import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 
 @ObjectType()
 @Entity()
@@ -46,6 +51,45 @@ export class Combat extends BaseEntity {
   @ManyToOne(() => Trial, (trial) => trial.id)
   trial: Trial;
 
-  @Field(() => [ModifierAssignment], { nullable: true })
-  modifierAssignments?: ModifierAssignment[];
+  @Field(() => [CombatModifiers], { nullable: true })
+  @OneToMany(() => CombatModifiers, (combatModifier) => combatModifier.id)
+  @JoinColumn({ name: "id" })
+  modifierAssignments?: CombatModifiers[];
+
+  @Field()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  updatedAt: Date;
+}
+
+@ObjectType()
+@ViewEntity({
+  expression: `
+    SELECT "c"."id", "m"."label" AS "modifierLabel","ma"."valueType", "ma"."value", "ma"."modifiedEntityId"
+    FROM "combat" "c"
+    LEFT JOIN "modifier_assignment" "ma" ON "ma"."modifiedEntityId" = "c"."id"
+    LEFT JOIN "modifier" "m" ON "m"."id" = "ma"."modifierId"
+  `,
+})
+export class CombatModifiers {
+  @Field()
+  @ViewColumn()
+  @ManyToOne(() => Combat, (combat) => combat.id)
+  @JoinColumn({ name: "id" })
+  id: string;
+
+  @Field()
+  @ViewColumn()
+  value: number;
+
+  @Field()
+  @ViewColumn()
+  valueType: string;
+
+  @Field()
+  @ViewColumn()
+  modifierLabel: string;
 }
