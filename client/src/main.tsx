@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         element: <AboutUsPage />,
       },
       {
-        path: "/statistics",
+        path: "/statistiques",
         element: <StatisticsPage />,
       },
     ],
