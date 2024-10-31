@@ -4,9 +4,7 @@ interface AvatarCarouselMobileProps {
   imageUrls: { url: string }[];
 }
 
-const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
-  imageUrls,
-}) => {
+const AvatarCarouselMobile = ({ imageUrls }: AvatarCarouselMobileProps) => {
   const [currentIndex, setCurrentIndex] = useState(2);
   const [startX, setStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);

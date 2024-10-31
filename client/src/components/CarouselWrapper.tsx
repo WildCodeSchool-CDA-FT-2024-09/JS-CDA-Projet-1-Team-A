@@ -5,10 +5,11 @@ import AvatarCarouselMobile from "./competitor/AvatarCarouselMobile";
 interface CarouselWrapperProps {
   imageUrls: { url: string }[];
 }
-const AvatarCarouselWrapper: React.FC<CarouselWrapperProps> = ({
-  imageUrls,
-}) => {
+const AvatarCarouselWrapper = ({ imageUrls }: CarouselWrapperProps) => {
   const [isMobile, setIsMobile] = useState(false);
+  // const [currentIndex, setCurrentIndex] = useState(3);
+  // const [startX, setStartX] = useState<number | null>(null);
+  // const [isDragging, setIsDragging] = useState(false);
 
   const handleResize = () => {
     setIsMobile(window.innerWidth < 768);

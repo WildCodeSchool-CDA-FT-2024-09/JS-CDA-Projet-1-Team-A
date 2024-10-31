@@ -3,13 +3,26 @@ import React, { useState } from "react";
 interface AvatarCarouselDesktopProps {
   imageUrls: { url: string }[];
 }
-const AvatarCarouselDesktop: React.FC<AvatarCarouselDesktopProps> = ({
-  imageUrls,
-}) => {
+const AvatarCarouselDesktop = ({ imageUrls }: AvatarCarouselDesktopProps) => {
   const [currentIndex, setCurrentIndex] = useState(3);
   const [startX, setStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const totalImages = imageUrls.length;
+
+  const handleDragMove = (diff: number) => {
+    if (diff > 50) {
+      handleNav(1);
+      resetDrag();
+    } else if (diff < -50) {
+      handleNav(-1);
+      resetDrag();
+    }
+  };
+
+  const resetDrag = () => {
+    setStartX(null);
+    setIsDragging(false);
+  };
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setStartX(e.touches[0].clientX);
@@ -24,44 +37,17 @@ const AvatarCarouselDesktop: React.FC<AvatarCarouselDesktopProps> = ({
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || startX === null) return;
     const touchEndX = e.touches[0].clientX;
-    const diff = startX - touchEndX;
-
-    if (diff > 50) {
-      handleNav(1);
-      setStartX(null);
-      setIsDragging(false);
-    } else if (diff < -50) {
-      handleNav(-1);
-      setStartX(null);
-      setIsDragging(false);
-    }
+    handleDragMove(startX - touchEndX);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || startX === null) return;
     const mouseEndX = e.clientX;
-    const diff = startX - mouseEndX;
-
-    if (diff > 50) {
-      handleNav(1);
-      setStartX(null);
-      setIsDragging(false);
-    } else if (diff < -50) {
-      handleNav(-1);
-      setStartX(null);
-      setIsDragging(false);
-    }
+    handleDragMove(startX - mouseEndX);
   };
 
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    setStartX(null);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    setStartX(null);
-  };
+  const handleTouchEnd = resetDrag;
+  const handleMouseUp = resetDrag;
 
   const handleNav = (direction: number) => {
     setCurrentIndex(
