@@ -79,7 +79,7 @@ function CreateCharacterPage() {
   };
 
   return (
-    <section className="-mt-20 h-full w-full p-8 backdrop-blur">
+    <section className="-mt-20 h-full w-full p-4 pt-8 backdrop-blur md:p-8">
       <div className="flex flex-col items-center py-4">
         <form className="grid w-full grid-cols-2 gap-4 py-4">
           <div className="flex flex-col items-center p-4">
