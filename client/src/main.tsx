@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ApolloProvider } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CharacterProvider } from "./contexts/CharacterContext";
 import HomePage from "./pages/HomePage.tsx";
 import RulesPage from "./pages/RulesPage.tsx";
 import AboutUsPage from "./pages/AboutUsPage.tsx";
@@ -11,6 +12,7 @@ import "./index.css";
 
 import client from "./services/connexion.ts";
 import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
+import ChooseGodPage from "./pages/ChooseGodPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,13 +23,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />,
       },
-      { path: "/character-creation", element: <CreateCharacterPage /> },
+      { path: "/creation-du-personnage", element: <CreateCharacterPage /> },
+      { path: "/choix-du-dieu", element: <ChooseGodPage /> },
       {
-        path: "/rules",
+        path: "/regles",
         element: <RulesPage />,
       },
       {
-        path: "/about",
+        path: "/a-propos",
         element: <AboutUsPage />,
       },
     ],
@@ -37,7 +40,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ApolloProvider client={client}>
-      <RouterProvider router={router} />
+      <CharacterProvider>
+        <RouterProvider router={router} />
+      </CharacterProvider>
     </ApolloProvider>
   </StrictMode>
 );
