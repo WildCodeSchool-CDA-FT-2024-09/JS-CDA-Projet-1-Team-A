@@ -73,7 +73,8 @@ const AvatarCarouselDesktop: React.FC<AvatarCarouselDesktopProps> = ({
     const offset = Math.abs(index - currentIndex);
     if (offset === 0) return "w-[300px] h-[395px]"; // Image centrale
     if (offset === 1) return "w-[210px] h-[250px]"; // Images adjacentes
-    return "w-[190px] h-[210px]"; // Images adjacentes +1
+    if (offset === 2) return "w-[190px] h-[210px]"; // Images adjacentes +1
+    return "hidden";
   };
 
   return (
