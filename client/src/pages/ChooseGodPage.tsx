@@ -39,7 +39,7 @@ function ChooseGodPage() {
       </section>
 
       <Link
-        to="/"
+        to="/epreuve"
         aria-label="Commencer le jeu"
         className="btn-primary mx-40 mt-60 min-w-[220px] md:mr-24"
       >
