@@ -36,7 +36,7 @@ function CarouselProfession({ profession }) {
             {profession[currentIndex].description}
           </p>
           <p className="pt-4 text-yellow-p">
-            {profession[currentIndex].statsName}{" "}
+            {profession[currentIndex].statsName}: +
             {profession[currentIndex].value}
           </p>
         </div>
