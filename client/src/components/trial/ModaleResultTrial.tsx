@@ -1,14 +1,10 @@
 interface ModaleResultTrialProps {
-  result: boolean;
-  resultTrial: { status: string };
+  result: string;
 }
 
-export default function ModaleResultTrial({
-  result,
-  resultTrial,
-}: ModaleResultTrialProps) {
+export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
   return (
-    <div className="flex w-full flex-col items-center">
+    <div className="fixed inset-0 top-[170px] flex w-full flex-col items-center">
       <section
         className={
           result
@@ -19,26 +15,26 @@ export default function ModaleResultTrial({
         <img
           src="./img/competitors/avatars/avatar.png"
           alt="avatar du joueur"
-          className={`w-44 rounded-xl ${resultTrial.status === "VICTOIRE" ? "" : "saturate-0"}`}
+          className={`w-44 rounded-xl ${result === "VICTOIRE" ? "" : "saturate-0"}`}
         />
 
         {/*affiche la modale quand le state result passe a true*/}
-        {resultTrial.status === "VICTOIRE" ? (
-          <>
-            <img
-              src="/img/item/cup.png"
-              alt="coupe de la victoire"
-              className="absolute mt-36 w-48"
-            />
+        {result === "VICTOIRE" ? (
+          <section className="absolute flex h-[100%] justify-center align-baseline">
             <img
               src="/img/item/confetti.png"
               alt="confettis de la victoire"
-              className="absolute mt-0 w-fit"
+              className="h-2/6 flex-initial md:h-3/6"
             />
-          </>
+            <img
+              src="/img/item/cup.png"
+              alt="coupe de la victoire"
+              className="xl:top-1/5 md:w-46 absolute bottom-1/3 w-60 xl:w-60"
+            />
+          </section>
         ) : null}
 
-        <h2 className="mb-28 text-3xl font-bold">{resultTrial.status}</h2>
+        <h2 className="mb-20 text-3xl font-bold">{result}</h2>
       </section>
     </div>
   );
