@@ -10,6 +10,8 @@ import {
   ViewColumn,
   OneToMany,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
 import { Trial } from "../trial/trial.entity";
@@ -53,6 +55,14 @@ export class Combat extends BaseEntity {
   @OneToMany(() => CombatModifiers, (combatModifier) => combatModifier.id)
   @JoinColumn({ name: "id" })
   modifierAssignments?: CombatModifiers[];
+
+  @Field()
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @Field()
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
 
 @ObjectType()

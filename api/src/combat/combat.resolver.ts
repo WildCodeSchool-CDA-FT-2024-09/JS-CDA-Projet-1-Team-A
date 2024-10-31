@@ -4,7 +4,7 @@ import { Combat } from "./combat.entity";
 @Resolver(Combat)
 export default class CombatResolver {
   @Query(() => [Combat])
-  async getCombat() {
+  async combats() {
     const combat = Combat.find({
       relations: [
         "player",
@@ -14,6 +14,7 @@ export default class CombatResolver {
         "opponentGod",
         "modifierAssignments",
       ],
+      order: { createdAt: "DESC" },
     });
     return combat;
   }
