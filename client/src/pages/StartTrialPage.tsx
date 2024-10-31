@@ -1,12 +1,6 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
 
-// en attente du recupérer les information du résulta d'épreuve
-const resultTrial: { [key: string]: { status: string } } = {
-  victoire: { status: "VICTOIRE" },
-  defaite: { status: "DEFAITE" },
-};
-
 // en attente de réccupérer les données du joueur / opposant
 const trial = {
   name: "la cours de char",
@@ -18,13 +12,11 @@ const trial = {
 
 function StartTrialPage() {
   const [result, setResult] = useState("");
+  const resultTrial = ["DEFAITE", "VICTOIRE"];
 
   const checkResulta = () => {
-    if (resultTrial.victoire.status === "VICTOIRE") {
-      setResult("VICTOIRE");
-    } else if (resultTrial.defaite.status === "DEFAITE") {
-      setResult("DEFAITE");
-    }
+    // en attente du recupérer les information du résulta d'épreuve
+    setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
   };
 
   return (
