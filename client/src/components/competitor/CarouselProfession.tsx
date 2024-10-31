@@ -29,13 +29,13 @@ function CarouselProfession({ profession }) {
           />
         </figure>
         <div>
-          <h2 className="text-xl font-bold text-gray-700">
+          <h2 className="text-xl font-bold text-white">
             {profession[currentIndex].professionName}
           </h2>
-          <p className="max-w-[300px] break-words text-gray-700">
+          <p className="max-w-[300px] break-words text-white">
             {profession[currentIndex].description}
           </p>
-          <p className="pt-4 text-gray-700">
+          <p className="pt-4 text-yellow-p">
             {profession[currentIndex].statsName}{" "}
             {profession[currentIndex].value}
           </p>
