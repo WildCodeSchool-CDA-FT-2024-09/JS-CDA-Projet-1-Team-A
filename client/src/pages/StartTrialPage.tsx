@@ -7,19 +7,44 @@ const resultTrial: { [key: string]: { status: string } } = {
   defaite: { status: "DEFAITE" },
 };
 
+// en attente de réccupérer les données du joueur / opposant
+const trial = {
+  name: "la cours de char",
+  playerName: "Julius",
+  opponentName: "Tomastrius",
+  playerBonus: 8,
+  opponentBonus: 9,
+};
+
 function StartTrialPage() {
   const [result, setResult] = useState("");
 
   const checkResulta = () => {
     if (resultTrial.victoire.status === "VICTOIRE") {
-      setResult("VICTOIRE"); // Si le statut est "VICTOIRE", on met à jour le résultat
+      setResult("VICTOIRE");
     } else if (resultTrial.defaite.status === "DEFAITE") {
-      setResult("DEFAITE"); // Si le statut est "DEFAITE", on met à jour le résultat
+      setResult("DEFAITE");
     }
   };
 
   return (
-    <section className="fixed inset-0 h-screen w-full bg-blue-v/80 backdrop-blur-sm">
+    <section className="fixed inset-0 h-screen w-full items-center justify-center bg-blue-v/80 backdrop-blur-sm">
+      <p className="center absolute mt-32 w-full text-center text-xl font-medium">
+        {trial.playerName} vs {trial.opponentName}
+      </p>
+      <article className="h-82 z-1 absolute z-10 mt-80 flex w-full flex-col items-center justify-center">
+        <div className="flex h-[35%] w-[50%] flex-col items-center justify-around gap-y-3 rounded-xl bg-blue-fd bg-opacity-85 p-6 md:w-[30%]">
+          <p>{trial.name}</p>
+          <img
+            src="/img/competitors/trial/char.png"
+            className="w-80 object-contain md:w-48"
+            alt={trial.name}
+          />
+          <p className="text-yellow-p">
+            Chance {trial.playerBonus} vs {trial.opponentBonus}
+          </p>
+        </div>
+      </article>
       {/* Div contenant les dieux en tant qu'images d'arrière-plan et visible uniquement à partir de md  */}
       <div className="absolute inset-0 mt-24 hidden h-[50vh] justify-between md:flex">
         <img
@@ -52,7 +77,7 @@ function StartTrialPage() {
       <ModaleResultTrial result={result} />
       {/* bouton pour afficher le resulta de l'épreuve */}
       <button
-        className={`btn-primary fixed left-1/2 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform ${
+        className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
           result === "" ? "bottom-[100px]" : "bottom-[200px]"
         }`}
         onClick={checkResulta}

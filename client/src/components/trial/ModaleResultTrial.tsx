@@ -4,7 +4,7 @@ interface ModaleResultTrialProps {
 
 export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
   return (
-    <div className="fixed inset-0 top-[170px] flex w-full flex-col items-center">
+    <div className="fixed inset-0 top-[170px] z-10 flex w-full flex-col items-center">
       <section
         className={
           result
