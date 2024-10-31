@@ -25,7 +25,7 @@ function CarouselProfession({ profession }) {
           <img
             src={profession[currentIndex].link}
             alt={profession[currentIndex].professionName}
-            className="mb-4 h-32 w-32 object-cover md:h-48 md:w-48 lg:h-60 lg:w-60"
+            className="h-32 w-32 object-cover md:h-48 md:w-48 lg:h-60 lg:w-60"
           />
         </figure>
         <div>

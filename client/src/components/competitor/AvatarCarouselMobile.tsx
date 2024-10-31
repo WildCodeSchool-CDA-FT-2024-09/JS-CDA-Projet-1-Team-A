@@ -11,7 +11,6 @@ const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
   const [startX, setStartX] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
   const totalImages = imageUrls.length;
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -23,9 +22,7 @@ const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -33,16 +30,15 @@ const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || startX === null) return;
-
     const touchEndX = e.touches[0].clientX;
     const diff = startX - touchEndX;
 
     if (diff > 25) {
-      nextImage();
+      handleNav(1);
       setStartX(null);
       setIsDragging(false);
     } else if (diff < -25) {
-      prevImage();
+      handleNav(-1);
       setStartX(null);
       setIsDragging(false);
     }
@@ -53,13 +49,9 @@ const AvatarCarouselMobile: React.FC<AvatarCarouselMobileProps> = ({
     setStartX(null);
   };
 
-  const nextImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalImages);
-  };
-
-  const prevImage = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? totalImages - 1 : prevIndex - 1
+  const handleNav = (direction: number) => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex + direction + totalImages) % totalImages
     );
   };
 

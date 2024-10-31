@@ -3,10 +3,8 @@ import AvatarCarouselDesktop from "./competitor/AvatarCarouselDesktop";
 import AvatarCarouselMobile from "./competitor/AvatarCarouselMobile";
 
 interface CarouselWrapperProps {
-  imageUrls: { url: string }[]; // Type de l'image
+  imageUrls: { url: string }[];
 }
-
-// Correction ici : utiliser React.FC<CarouselWrapperProps>
 const AvatarCarouselWrapper: React.FC<CarouselWrapperProps> = ({
   imageUrls,
 }) => {
