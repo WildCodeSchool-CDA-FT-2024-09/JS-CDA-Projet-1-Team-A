@@ -2,18 +2,6 @@ import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
 import ModaleResultDetail from "../components/trial/ModaleResultDetail";
 
-type ModaleResultDetailProps = React.ComponentProps<typeof ModaleResultDetail>;
-// en attente du recupérer les information du résulta d'épreuve
-const resultTrial: { [key: string]: { status: string } } = {
-  victoire: { status: "VICTOIRE" },
-  defaite: { status: "DEFAITE" },
-};
-
-type DataKey = "ModaleResultDetail" | "ModaleResultTrial"; // Spécifiez toutes les clés possibles
-type DataType = {
-  component: React.FC<ModaleResultDetailProps>; // Utilise les props extraites
-  result: string;
-};
 // en attente de réccupérer les données du joueur / opposant
 const trial = {
   name: "la cours de char",
@@ -23,33 +11,39 @@ const trial = {
   opponentBonus: 9,
 };
 
+type DataKey = "ModaleResultTrial" | "ModaleResultDetail";
+type DataType = {
+  component: React.FC<{ result: string }>;
+  result: string;
+};
+
 function StartTrialPage() {
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState<string | null>(null);
+  const resultTrial = ["DEFAITE", "VICTOIRE", null];
 
   const data: Record<DataKey, DataType> = {
     ModaleResultTrial: {
       component: ModaleResultTrial,
-      result: result,
+      result: result || "", // Fournir une chaîne vide si `result` est `null`
     },
     ModaleResultDetail: {
       component: ModaleResultDetail,
-      result: result,
+      result: result || "", // Idem
     },
   };
 
   const [component, setComponent] = useState<keyof typeof data | null>(null);
   const ComponentToRender = component ? data[component].component : null;
-  const checkResulta = () => {
-    if (resultTrial.victoire.status === "VICTOIRE") {
-      setResult("VICTOIRE");
-    } else if (resultTrial.defaite.status === "DEFAITE") {
-      setResult("DEFAITE");
-    }
+
+  const checkResult = () => {
+    // en attente du recupérer les information du résulta d'épreuve
     if (component === null) {
+      setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
       setComponent("ModaleResultTrial");
     } else if (component === "ModaleResultTrial") {
       setComponent("ModaleResultDetail");
     } else {
+      setResult(null);
       setComponent(null);
     }
   };
@@ -110,7 +104,8 @@ function StartTrialPage() {
         className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
           result === "" ? "bottom-[100px]" : "bottom-[200px]"
         }`}
-        onClick={checkResulta}
+        type="button"
+        onClick={checkResult}
       >
         Démarrer l'épreuve
       </button>
