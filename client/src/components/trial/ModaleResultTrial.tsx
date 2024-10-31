@@ -17,7 +17,6 @@ export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
           alt="avatar du joueur"
           className={`w-44 rounded-xl ${result === "VICTOIRE" ? "" : "saturate-0"}`}
         />
-
         {/*affiche la modale quand le state result passe a true*/}
         {result === "VICTOIRE" ? (
           <section className="absolute flex h-[100%] justify-center align-baseline">
@@ -33,7 +32,6 @@ export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
             />
           </section>
         ) : null}
-
         <h2 className="mb-20 text-3xl font-bold">{result}</h2>
       </section>
     </div>
