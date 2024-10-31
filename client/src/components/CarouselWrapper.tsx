@@ -15,10 +15,10 @@ const AvatarCarouselWrapper: React.FC<CarouselWrapperProps> = ({
   };
 
   useEffect(() => {
-    handleResize(); // Vérifier la taille initiale lors du montage
-    window.addEventListener("resize", handleResize); // Écouter les changements de taille
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize); // Nettoyer l'écouteur
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -32,4 +32,4 @@ const AvatarCarouselWrapper: React.FC<CarouselWrapperProps> = ({
   );
 };
 
-export default AvatarCarouselWrapper; // N'oublie pas d'exporter le composant
+export default AvatarCarouselWrapper;
