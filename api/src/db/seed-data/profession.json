@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Forgeron",
+    "description": "Le forgeron est un artisan qui travaille le métal pour en faire des objets utilitaires ou décoratifs. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Matelot",
+    "description": "Le matelot est un marin qui travaille sur un navire. Il peut être un membre de l'équipage, un officier ou un capitaine. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Philosophe",
+    "description": "Le philosophe est un penseur qui réfléchit sur les grandes questions de la vie, de l'existence, de la morale, de la politique, de la religion, de la science, etc. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Architecte",
+    "description": "L'architecte est un professionnel qui conçoit et réalise des bâtiments, des espaces publics, des infrastructures, des aménagements urbains, etc. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Marchand",
+    "description": "Le marchand est un commerçant qui achète et vend des biens ou des services. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  },
+  {
+    "name": "Alchimiste",
+    "description": "L'alchimiste est un chercheur qui étudie les propriétés et les transformations de la matière. ",
+    "modifierAssignments": [
+      {
+        "modifier": {
+          "label": "Force"
+        },
+        "value": 3,
+        "valueType": "bonus"
+      },
+      {
+        "modifier": {
+          "label": "Vie"
+        },
+        "value": 2,
+        "valueType": "bonus"
+      }
+    ]
+  }
+]

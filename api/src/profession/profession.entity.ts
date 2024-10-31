@@ -1,20 +1,20 @@
 import "reflect-metadata";
+import { Field, ObjectType } from "type-graphql";
 import {
   BaseEntity,
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
+  Entity,
   OneToMany,
   ManyToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
-import { Field, ObjectType } from "type-graphql";
-import { Image } from "../image/image.entity";
-import { Combat } from "../combat/combat.entity";
+import { Competitor } from "../competitor/competitor.entity";
 import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
+import { Image } from "../image/image.entity";
 
 @ObjectType()
 @Entity()
-export class God extends BaseEntity {
+export class Profession extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -27,17 +27,13 @@ export class God extends BaseEntity {
   @Column()
   description: string;
 
-  @Field(() => Image)
+  @Field(() => Competitor)
+  @OneToMany(() => Competitor, (profession) => profession)
+  profession: Competitor;
+
+  @Field(() => [Image])
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
-
-  @Field(() => [Combat])
-  @OneToMany(() => Combat, (combat) => combat.player)
-  playerGodCombats: Combat[];
-
-  @Field(() => [Combat])
-  @OneToMany(() => Combat, (combat) => combat.opponent)
-  opponentGodCombats: Combat[];
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];
