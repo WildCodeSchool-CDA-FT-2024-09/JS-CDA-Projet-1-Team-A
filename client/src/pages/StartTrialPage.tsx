@@ -14,7 +14,7 @@ function StartTrialPage() {
   const [result, setResult] = useState("");
   const resultTrial = ["DEFAITE", "VICTOIRE"];
 
-  const checkResulta = () => {
+  const checkResult = () => {
     // en attente du recupérer les information du résulta d'épreuve
     setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
   };
