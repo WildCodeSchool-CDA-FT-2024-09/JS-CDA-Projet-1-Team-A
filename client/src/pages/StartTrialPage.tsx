@@ -72,6 +72,7 @@ function StartTrialPage() {
         className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
           result === "" ? "bottom-[100px]" : "bottom-[200px]"
         }`}
+        type="button"
         onClick={checkResulta}
       >
         Démarrer l'épreuve
