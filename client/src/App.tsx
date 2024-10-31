@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import TitleBar from "./components/layout/TitleBar";
-import { CharacterProvider } from "./contexts/CharacterContext";
+//import { CharacterProvider } from "./contexts/CharacterContext";
 
 function App() {
   return (
-    <CharacterProvider>
+    
       <div className="container mx-auto flex min-h-[100vh] flex-col items-center justify-between bg-[url('/img/gods-bg.jpg')] bg-cover bg-fixed bg-top px-1 pb-2 pt-6">
         <TitleBar />
         <Outlet />
@@ -12,7 +12,7 @@ function App() {
           &copy; {new Date().getFullYear()} Reactaulos
         </footer>
       </div>
-    </CharacterProvider>
+    
   );
 }
 

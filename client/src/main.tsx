@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ApolloProvider } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CharacterProvider } from "./contexts/CharacterContext";
 import HomePage from "./pages/HomePage.tsx";
 import RulesPage from "./pages/RulesPage.tsx";
 import AboutUsPage from "./pages/AboutUsPage.tsx";
@@ -38,8 +39,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <CharacterProvider>
     <ApolloProvider client={client}>
       <RouterProvider router={router} />
     </ApolloProvider>
+    </CharacterProvider>
   </StrictMode>
 );
