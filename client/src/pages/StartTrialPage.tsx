@@ -2,9 +2,9 @@ import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
 import ModaleResultDetail from "../components/trial/ModaleResultDetail";
 
-// en attente de réccupérer les données du joueur / opposant
+// en attente de récupérer les données du joueur / opposant
 const trial = {
-  name: "la cours de char",
+  name: "la course de char",
   playerName: "Julius",
   opponentName: "Tomastrius",
   playerBonus: 8,
@@ -36,7 +36,7 @@ function StartTrialPage() {
   const ComponentToRender = component ? data[component].component : null;
 
   const checkResult = () => {
-    // en attente du recupérer les information du résulta d'épreuve
+    // en attente du recupérer les informations du résulta d'épreuve
     if (component === null) {
       setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
       setComponent("ModaleResultTrial");
@@ -94,12 +94,12 @@ function StartTrialPage() {
           className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result !== "VICTOIRE" ? "" : "saturate-0"}`}
         />
       </div>
-      {/*n'affiche pas de modale puis la modale reslta puis la modale detail*/}
+      {/*n'affiche pas de modale puis la modale resultat puis la modale detail*/}
       {ComponentToRender && (
         <ComponentToRender result={data[component!].result} />
       )}
       {/* <ModaleResultTrial result={result} /> */}
-      {/* bouton pour afficher le resulta de l'épreuve */}
+      {/* bouton pour afficher le resultat de l'épreuve */}
       <button
         className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
           result === "" ? "bottom-[100px]" : "bottom-[200px]"
