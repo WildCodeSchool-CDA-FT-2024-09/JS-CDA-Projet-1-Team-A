@@ -1,9 +1,9 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
 
-// en attente de réccupérer les données du joueur / opposant
+// en attente de récupérer les données du joueur / opposant
 const trial = {
-  name: "la cours de char",
+  name: "la course de char",
   playerName: "Julius",
   opponentName: "Tomastrius",
   playerBonus: 8,
@@ -14,8 +14,8 @@ function StartTrialPage() {
   const [result, setResult] = useState("");
   const resultTrial = ["DEFAITE", "VICTOIRE"];
 
-  const checkResulta = () => {
-    // en attente du recupérer les information du résulta d'épreuve
+  const checkResult = () => {
+    // en attente du récupérer les informations du résulta d'épreuve
     setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
   };
 
@@ -65,14 +65,14 @@ function StartTrialPage() {
           className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result !== "VICTOIRE" ? "" : "saturate-0"}`}
         />
       </div>
-      {/* modale qui change en fonction du resulta pas encore fonctionnel */}
+      {/* modale qui change en fonctions du resultat pas encore fonctionnel */}
       <ModaleResultTrial result={result} />
-      {/* bouton pour afficher le resulta de l'épreuve */}
+      {/* bouton pour afficher le resultat de l'épreuve */}
       <button
         className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
           result === "" ? "bottom-[100px]" : "bottom-[200px]"
         }`}
-        onClick={checkResulta}
+        onClick={checkResult}
       >
         Démarrer l'épreuve
       </button>
