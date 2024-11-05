@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { CharacterContext } from "../contexts/CharacterContext";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
+import AvatarCarouselWrapper from "../components/CarouselWrapper";
+
 // Fausse donnée en attendant le back end
 const profession = [
   {
@@ -26,6 +28,7 @@ const profession = [
     value: 70,
     description:
       "Wow, c'est un métier incroyable ! Vous êtes un marin incroyablement musclé !",
+
     link: "/img/dalleSailor1.png",
   },
 ];
@@ -56,13 +59,24 @@ const stats = [
   },
   { statName: "Chance", value: 50 },
 ];
+const imageUrls = [
+  { url: "/img/freepik-apollon1.png" },
+  { url: "/img/freepik-artemis1.png" },
+  { url: "/img/freepik-dionysos1.png" },
+  { url: "/img/freepik-gracefully1.png" },
+  { url: "/img/freepik-zeus1.png" },
+  { url: "/img/freepik-apollon1.png" },
+  { url: "/img/freepik-artemis1.png" },
+  { url: "/img/freepik-dionysos1.png" },
+  { url: "/img/freepik-gracefully1.png" },
+  { url: "/img/freepik-zeus1.png" },
+];
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
-
 function CreateCharacterPage() {
   const { character, setCharacter } = useContext(CharacterContext);
 
   return (
-    <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
+    <section className="-mt-20 h-full w-full p-4 pt-8 backdrop-blur md:p-8">
       <div className="flex flex-col items-center py-4">
         <form className="grid w-full grid-cols-2 gap-4 py-4">
           <div className="flex flex-col items-center p-4">
@@ -87,6 +101,7 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
+      <AvatarCarouselWrapper imageUrls={imageUrls} />
       <CarouselProfession profession={profession} />
       <StatsCharacter stats={stats} />
     </section>
