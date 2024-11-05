@@ -18,6 +18,7 @@ const AvatarCarouselWrapper = ({ imageUrls }) => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   const handleDragMove = (diff: number) => {
     const numberPx = isMobile ? 25 : 50;
     if (diff > numberPx) {
