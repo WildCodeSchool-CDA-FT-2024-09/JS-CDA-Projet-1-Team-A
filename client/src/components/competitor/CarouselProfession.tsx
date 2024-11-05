@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { Profession } from "../../generated/graphql-types";
 
-function CarouselProfession({ profession }) {
+type CarouselProfessionProps = {
+  professions: Profession[];
+};
+
+function CarouselProfession({ professions }: CarouselProfessionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNav = (direction) => {
     setCurrentIndex(
       (prevIndex) =>
-        (prevIndex + direction + profession.length) % profession.length
+        (prevIndex + direction + professions.length) % professions.length
     );
   };
 
@@ -23,22 +28,29 @@ function CarouselProfession({ profession }) {
       >
         <figure>
           <img
-            src={profession[currentIndex].link}
-            alt={profession[currentIndex].professionName}
+            src={professions[currentIndex].image.path}
+            alt={professions[currentIndex].name}
             className="mb-4 h-32 w-32 object-cover md:h-48 md:w-48 lg:h-60 lg:w-60"
           />
         </figure>
         <div>
           <h2 className="text-xl font-bold text-gray-700">
-            {profession[currentIndex].professionName}
+            {professions[currentIndex].name}
           </h2>
           <p className="max-w-[300px] break-words text-gray-700">
-            {profession[currentIndex].description}
+            {professions[currentIndex].description}
           </p>
-          <p className="pt-4 text-gray-700">
-            {profession[currentIndex].statsName}{" "}
-            {profession[currentIndex].value}
-          </p>
+          <ul className="pt-4 text-gray-700">
+            {professions[currentIndex].modifierAssignments
+              ? professions[currentIndex].modifierAssignments.map(
+                  (assignment) => (
+                    <li>
+                      {assignment.modifierLabel} : {assignment.value}
+                    </li>
+                  )
+                )
+              : null}
+          </ul>
         </div>
       </article>
       <button
