@@ -21,6 +21,7 @@ const AvatarCarouselWrapper = ({ imageUrls }) => {
 
   const handleDragMove = (diff: number) => {
     const numberPx = isMobile ? 25 : 50;
+
     if (diff > numberPx) {
       handleNav(1);
       resetDrag();
