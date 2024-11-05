@@ -1,4 +1,4 @@
-import { Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { Competitor, TemporaryCompetitor } from "./competitor.entity";
 import { Modifier } from "../modifier/modifier.entity";
 import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
@@ -11,6 +11,15 @@ export default class CompetitorResolver {
     const competitor = await Competitor.find({
       relations: ["profession", "avatarImage", "image", "modifierAssignments"],
       order: { createdAt: "DESC" },
+    });
+    return competitor;
+  }
+
+  @Query(() => Competitor)
+  async competitor(@Arg("id") id: string) {
+    const competitor = await Competitor.findOneOrFail({
+      where: { id },
+      relations: ["profession", "avatarImage", "image", "modifierAssignments"],
     });
     return competitor;
   }
@@ -64,5 +73,20 @@ export default class CompetitorResolver {
     });
 
     return competitorWithModifiers;
+  }
+
+  @Mutation(() => Boolean)
+  async deleteTemporaryCompetitor(@Arg("id") id: string) {
+    // Check competitor exists and is temporary
+    const competitor = await Competitor.findOne({
+      where: { id },
+    });
+    if (!competitor || competitor.status !== "temporary") {
+      return false;
+    }
+
+    await Competitor.delete(id);
+    await ModifierAssignment.delete({ modifiedEntityId: id });
+    return true;
   }
 }
