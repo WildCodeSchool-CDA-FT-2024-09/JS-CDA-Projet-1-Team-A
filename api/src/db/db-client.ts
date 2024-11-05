@@ -1,7 +1,12 @@
 import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
 import { God } from "../god/god.entity";
-import { Competitor } from "../competitor/competitor.entity";
+import { GodWithModifiers } from "../god/godWithModifiersView.entity";
+import {
+  Competitor,
+  CompetitorModifiers,
+  TemporaryCompetitor,
+} from "../competitor/competitor.entity";
 import { Profession } from "../profession/profession.entity";
 import { Image } from "../image/image.entity";
 import { Trial } from "../trial/trial.entity";
@@ -17,7 +22,10 @@ export const appDataSource = new DataSource({
   database: `${DB_PATH}`,
   entities: [
     God,
+    GodWithModifiers,
     Competitor,
+    CompetitorModifiers,
+    TemporaryCompetitor,
     Profession,
     Image,
     Trial,
@@ -27,5 +35,5 @@ export const appDataSource = new DataSource({
     Modifier,
   ],
   synchronize: true,
-  logging: false,
+  logging: true,
 });
