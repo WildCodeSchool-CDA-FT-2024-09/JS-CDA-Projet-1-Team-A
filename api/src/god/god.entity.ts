@@ -11,6 +11,7 @@ import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
 import { Combat } from "../combat/combat.entity";
 import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
+import { Competitor } from "../competitor/competitor.entity";
 
 @ObjectType()
 @Entity()
@@ -41,4 +42,8 @@ export class God extends BaseEntity {
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];
+
+  ///////////////////////////////////////////
+  @OneToMany(() => Competitor, (competitor) => competitor.god)
+  competitors: Competitor[];
 }

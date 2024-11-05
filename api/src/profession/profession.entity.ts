@@ -27,13 +27,23 @@ export class Profession extends BaseEntity {
   @Column()
   description: string;
 
-  @Field(() => Competitor)
-  @OneToMany(() => Competitor, (profession) => profession)
-  profession: Competitor;
+  // @Field(() => Competitor)
+  // @OneToMany(() => Competitor, (profession) => profession)
+  // profession: Competitor;
 
-  @Field(() => [Image])
-  @ManyToOne(() => Image, (image) => image.id)
+  // @Field(() => [Image])
+  // @ManyToOne(() => Image, (image) => image.id)
+  // image: Image;
+
+  /////////////////////////////////////////////////////////////////////
+  @Field(() => [Competitor])
+  @OneToMany(() => Competitor, (competitor) => competitor.profession)
+  competitors: Competitor[];
+
+  @Field(() => Image)
+  @ManyToOne(() => Image, (image) => image.idImageProfession)
   image: Image;
+  /////////////////////////////////////////////////////////////////////
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];

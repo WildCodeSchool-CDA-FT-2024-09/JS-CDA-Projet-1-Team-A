@@ -15,7 +15,16 @@ export class Modifier extends BaseEntity {
   @Column()
   label: string;
 
+  // @Field(() => [ModifierAssignment])
+  // @OneToMany(() => ModifierAssignment, (modifier) => modifier)
+  // modifier: ModifierAssignment[];
+
+  ////////////////////////////////////////////////////////////
   @Field(() => [ModifierAssignment])
-  @OneToMany(() => ModifierAssignment, (modifier) => modifier)
-  modifier: ModifierAssignment[];
+  @OneToMany(
+    () => ModifierAssignment,
+    (modifierAssignment) => modifierAssignment.modifier
+  )
+  modifierAssignments: ModifierAssignment[];
+  ////////////////////////////////////////////////////////////
 }

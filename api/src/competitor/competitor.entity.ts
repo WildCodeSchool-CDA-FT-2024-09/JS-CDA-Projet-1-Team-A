@@ -14,6 +14,7 @@ import { Profession } from "../profession/profession.entity";
 import { Image } from "../image/image.entity";
 import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 import { Combat } from "../combat/combat.entity";
+import { God } from "../god/god.entity";
 
 @ObjectType()
 @Entity()
@@ -41,6 +42,14 @@ export class Competitor extends BaseEntity {
   @Field(() => Image)
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
+
+  // mon cousin me dis d'ajouter ça ici
+  @ManyToOne(() => Image, (image) => image.idBattleImage)
+  battleImage: Image;
+
+  @ManyToOne(() => God, (god) => god.competitors)
+  god: God;
+  ///////////////////////////////////////////////////////
 
   @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.player)
