@@ -12,6 +12,7 @@ import AboutUsPage from "./pages/AboutUsPage.tsx";
 import CreateCharacterPage from "./pages/CreateCharacterPage.tsx";
 import StatisticsPage from "./pages/StatisticsPage.tsx";
 import ChooseGodPage from "./pages/ChooseGodPage.tsx";
+import StartTrialPage from "./pages/StartTrialPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/statistiques",
         element: <StatisticsPage />,
+      },
+      {
+        path: "/epreuve",
+        element: <StartTrialPage />,
       },
     ],
   },

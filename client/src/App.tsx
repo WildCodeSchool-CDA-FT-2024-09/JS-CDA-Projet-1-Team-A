@@ -3,7 +3,7 @@ import TitleBar from "./components/layout/TitleBar";
 
 function App() {
   return (
-    <div className="container mx-auto flex min-h-[100vh] flex-col items-center justify-between bg-[url('/img/gods-bg.jpg')] bg-cover bg-fixed bg-top px-1 pb-2 pt-6">
+    <div className="container relative mx-auto flex min-h-[100vh] flex-col items-center justify-between bg-[url('/img/gods-bg.jpg')] bg-cover bg-fixed bg-top px-1 pb-2 pt-6">
       <TitleBar />
       <Outlet />
       <footer className="text-xs">
