@@ -1,6 +1,6 @@
 const AvatarCarousel = ({
   imageUrls,
-  mytitle,
+  myTitle,
   handleTouchStart,
   handleTouchMove,
   handleTouchEnd,
@@ -28,7 +28,7 @@ const AvatarCarousel = ({
   return (
     <>
       <section aria-labelledby="title-avatar">
-        <p id="title-avatar">{mytitle}</p>
+        <p id="title-avatar">{myTitle}</p>
         <div
           className={`flex w-full items-center justify-center overflow-hidden ${mobile ? "h-44" : "h-96"}`}
           onTouchStart={handleTouchStart}

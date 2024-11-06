@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CharacterContext } from "../contexts/CharacterContext";
-
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
 
 function ChooseGodPage() {
@@ -30,7 +29,7 @@ function ChooseGodPage() {
     { url: "/img/freepik-zeus1.png" },
   ];
 
-  const mytitle = "Choisissez votre Dieu";
+  const myTitle = "Choisissez votre Dieu";
   return (
     <div className="inset-0 flex h-screen w-full flex-col bg-black/50 backdrop-blur-sm">
       <h1 className="mt-5 text-xl font-bold">Champion {character}</h1>
@@ -53,7 +52,7 @@ function ChooseGodPage() {
         </ul>
       </section>
       <section>
-        <AvatarCarouselWrapper imageUrls={imageUrls} mytitle={mytitle} />
+        <AvatarCarouselWrapper imageUrls={imageUrls} myTitle={myTitle} />
       </section>
       <Link
         to="/epreuve"

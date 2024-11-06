@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AvatarCarousel from "./competitor/AvatarCarousel";
 
-const AvatarCarouselWrapper = ({ imageUrls, mytitle }) => {
+const AvatarCarouselWrapper = ({ imageUrls, myTitle }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(3);
   const [startX, setStartX] = useState<number | null>(null);
@@ -68,7 +68,7 @@ const AvatarCarouselWrapper = ({ imageUrls, mytitle }) => {
     <>
       <AvatarCarousel
         imageUrls={imageUrls}
-        mytitle={mytitle}
+        myTitle={myTitle}
         handleTouchStart={handleTouchStart}
         handleTouchMove={handleTouchMove}
         handleTouchEnd={resetDrag}
