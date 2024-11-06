@@ -42,11 +42,9 @@ export class Competitor extends BaseEntity {
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.player)
   playerCombats: Combat[];
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentCombats: Combat[];
 
