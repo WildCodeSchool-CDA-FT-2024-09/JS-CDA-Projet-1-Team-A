@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { Profession } from "../../generated/graphql-types";
 
-// type Profession = {
-//   name: string;
-//   id: string;
-//   description: string;
-//   image: { path: string };
-//   modifierAssignments?: { modifierLabel: string; valueType: string; value: number; }[];
-// };
-
 type CarouselProfessionProps = {
   professions: Profession[];
 };

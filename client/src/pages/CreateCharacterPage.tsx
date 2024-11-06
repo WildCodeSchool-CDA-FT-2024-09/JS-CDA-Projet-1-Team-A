@@ -41,7 +41,6 @@ function CreateCharacterPage() {
   if (error) return <p>Error</p>;
   if (!data) return <p>No data</p>;
 
-  console.info(data);
   const { professions } = data;
 
   return (
