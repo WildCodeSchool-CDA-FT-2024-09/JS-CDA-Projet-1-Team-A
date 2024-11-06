@@ -40,11 +40,13 @@ function CreateCharacterPage() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
   if (!data) return <p>No data</p>;
+
+  console.info(data);
   const { professions } = data;
 
   return (
     <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
-      <div className="flex flex-col items-center py-4">
+      <div className="mt-12 flex flex-col items-center py-4 lg:mt-4">
         <form className="grid w-full grid-cols-2 gap-4 py-4">
           <div className="flex flex-col items-center p-4">
             <label className="p-2">Quel est ton nom ?</label>
@@ -68,7 +70,9 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
-      <CarouselProfession professions={professions} />
+      {professions && professions.length && (
+        <CarouselProfession professions={professions} />
+      )}
       <StatsCharacter stats={stats} />
     </section>
   );

@@ -149,12 +149,12 @@ export type Trial = {
 
 export type GetCombatStatsQueryVariables = Exact<{ [key: string]: never }>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type GetCombatStatsQuery = {
   __typename?: "Query";
   combats: Array<{
     __typename?: "Combat";
     id: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createdAt: any;
     resultLongText: string;
     resultShortText: string;

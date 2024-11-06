@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Profession } from "../../generated/graphql-types";
 
+// type Profession = {
+//   name: string;
+//   id: string;
+//   description: string;
+//   image: { path: string };
+//   modifierAssignments?: { modifierLabel: string; valueType: string; value: number; }[];
+// };
+
 type CarouselProfessionProps = {
   professions: Profession[];
 };
@@ -8,7 +16,7 @@ type CarouselProfessionProps = {
 function CarouselProfession({ professions }: CarouselProfessionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleNav = (direction) => {
+  const handleNav = (direction: number) => {
     setCurrentIndex(
       (prevIndex) =>
         (prevIndex + direction + professions.length) % professions.length
@@ -43,8 +51,8 @@ function CarouselProfession({ professions }: CarouselProfessionProps) {
           <ul className="pt-4 text-gray-700">
             {professions[currentIndex].modifierAssignments
               ? professions[currentIndex].modifierAssignments.map(
-                  (assignment) => (
-                    <li>
+                  (assignment, index) => (
+                    <li key={index}>
                       {assignment.modifierLabel} : {assignment.value}
                     </li>
                   )
