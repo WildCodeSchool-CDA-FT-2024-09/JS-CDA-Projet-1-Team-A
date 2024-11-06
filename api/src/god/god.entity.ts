@@ -31,11 +31,9 @@ export class God extends BaseEntity {
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.player)
   playerGodCombats: Combat[];
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentGodCombats: Combat[];
 

@@ -31,8 +31,8 @@ const stats = [
   },
   { statName: "Chance", value: 50 },
 ];
-const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 
+const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 function CreateCharacterPage() {
   const { character, setCharacter } = useContext(CharacterContext);
 
