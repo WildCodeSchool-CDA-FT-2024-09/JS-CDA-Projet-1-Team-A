@@ -118,11 +118,11 @@ export class TemporaryCompetitor extends Competitor {
   @JoinColumn({ name: "id" })
   modifierAssignments?: CompetitorModifiers[];
 
-  @Field()
+  @Field({ nullable: true })
   @CreateDateColumn()
   createdAt: Date;
 
-  @Field()
+  @Field({ nullable: true })
   @UpdateDateColumn()
   updatedAt: Date;
 }

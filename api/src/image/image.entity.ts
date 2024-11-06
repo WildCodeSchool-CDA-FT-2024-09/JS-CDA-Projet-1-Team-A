@@ -19,7 +19,7 @@ export class Image extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   @Column()
   type: string;
 

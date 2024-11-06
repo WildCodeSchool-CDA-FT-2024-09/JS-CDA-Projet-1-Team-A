@@ -67,10 +67,10 @@ export default class CompetitorResolver {
     );
 
     // Finally we return the saved competitor
-    const competitorWithModifiers = await Competitor.findOne({
+    const competitorWithModifiers = (await Competitor.findOne({
       where: { id: savedCompetitor.id },
       relations: ["modifierAssignments"],
-    });
+    })) as TemporaryCompetitor;
 
     return competitorWithModifiers;
   }
