@@ -8,6 +8,7 @@ import GodResolver from "./god/god.resolver";
 import ProfessionResolver from "./profession/profession.resolver";
 import CompetitorResolver from "./competitor/competitor.resolver";
 import CombatResolver from "./combat/combat.resolver";
+import GodWithModifiersResolver from "./god/godWithModifiers.resolver";
 
 dotenv.config();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
@@ -17,6 +18,7 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
   const schema = await buildSchema({
     resolvers: [
       GodResolver,
+      GodWithModifiersResolver,
       CompetitorResolver,
       ProfessionResolver,
       CombatResolver,
