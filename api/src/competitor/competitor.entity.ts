@@ -77,7 +77,7 @@ export class Competitor extends BaseEntity {
   `,
 })
 export class CompetitorModifiers {
-  @Field()
+  @Field({ nullable: true })
   @ViewColumn()
   @ManyToOne(() => Competitor, (competitor) => competitor.id)
   @JoinColumn({ name: "id" })
