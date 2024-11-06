@@ -27,11 +27,9 @@ export class Profession extends BaseEntity {
   @Column()
   description: string;
 
-  // @Field(() => Competitor)
   // @OneToMany(() => Competitor, (profession) => profession)
   // profession: Competitor;
 
-  // @Field(() => [Image])
   // @ManyToOne(() => Image, (image) => image.id)
   // image: Image;
 

@@ -52,11 +52,9 @@ export class Competitor extends BaseEntity {
   god: God;
   ///////////////////////////////////////////////////////
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.player)
   playerCombats: Combat[];
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentCombats: Combat[];
 
