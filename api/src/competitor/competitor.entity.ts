@@ -47,6 +47,7 @@ export class Competitor extends BaseEntity {
   @ManyToOne(() => Image, (image) => image.idBattleImage)
   battleImage: Image;
 
+  @Field(() => God, { nullable: true }) // Assure-toi d'exposer le champ god de cette manière
   @ManyToOne(() => God, (god) => god.competitors)
   god: God;
   ///////////////////////////////////////////////////////
