@@ -83,14 +83,9 @@ export type God = {
 
 export type Image = {
   __typename?: "Image";
-  god: God;
-  id: Scalars["Float"]["output"];
-  idAvatarImage: Competitor;
-  idBattleImage: Competitor;
-  idImageProfession: Profession;
-  imageTrial: Trial;
+  id?: Maybe<Scalars["Float"]["output"]>;
   path: Scalars["String"]["output"];
-  type: Scalars["String"]["output"];
+  type?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Modifier = {
@@ -118,12 +113,11 @@ export type Profession = {
   image: Image;
   modifierAssignments?: Maybe<Array<ProfessionModifiers>>;
   name: Scalars["String"]["output"];
-  profession: Competitor;
 };
 
 export type ProfessionModifiers = {
   __typename?: "ProfessionModifiers";
-  id: Scalars["String"]["output"];
+  id?: Maybe<Scalars["String"]["output"]>;
   modifierLabel: Scalars["String"]["output"];
   value: Scalars["Float"]["output"];
   valueType: Scalars["String"]["output"];
@@ -149,12 +143,12 @@ export type Trial = {
 
 export type GetCombatStatsQueryVariables = Exact<{ [key: string]: never }>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type GetCombatStatsQuery = {
   __typename?: "Query";
   combats: Array<{
     __typename?: "Combat";
     id: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createdAt: any;
     resultLongText: string;
     resultShortText: string;

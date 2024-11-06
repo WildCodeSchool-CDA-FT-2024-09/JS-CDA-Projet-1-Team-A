@@ -28,7 +28,6 @@ export class Profession extends BaseEntity {
   @Column()
   description: string;
 
-  @Field(() => Competitor)
   @OneToMany(() => Competitor, (profession) => profession)
   profession: Competitor;
 
@@ -55,7 +54,7 @@ export class Profession extends BaseEntity {
   `,
 })
 export class ProfessionModifiers {
-  @Field()
+  @Field({ nullable: true })
   @ViewColumn()
   @ManyToOne(() => Profession, (profession) => profession.id)
   @JoinColumn({ name: "id" })
