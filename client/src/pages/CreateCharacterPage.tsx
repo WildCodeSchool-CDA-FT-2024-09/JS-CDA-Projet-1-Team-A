@@ -1,5 +1,9 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { CharacterContext } from "../contexts/CharacterContext";
+import {
+  useCreateTemporaryCompetitorMutation,
+  useDeleteTemporaryCompetitorMutation,
+} from "../generated/graphql-types";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
@@ -32,33 +36,6 @@ const profession = [
     link: "/img/dalleSailor1.png",
   },
 ];
-const stats = [
-  {
-    statName: "Intelligence",
-    value: 87,
-  },
-  {
-    statName: "Force",
-    value: 72,
-  },
-  {
-    statName: "Agilité",
-    value: 70,
-  },
-  {
-    statName: "Endurance",
-    value: 95,
-  },
-  {
-    statName: "Charisme",
-    value: 45,
-  },
-  {
-    statName: "Sagesse",
-    value: 85,
-  },
-  { statName: "Chance", value: 50 },
-];
 const imageUrls = [
   { url: "/img/freepik-apollon1.png" },
   { url: "/img/freepik-artemis1.png" },
@@ -73,7 +50,63 @@ const imageUrls = [
 ];
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 function CreateCharacterPage() {
-  const { character, setCharacter } = useContext(CharacterContext);
+  const { character, setCharacter, tempCharacter, setTempCharacter } =
+    useContext(CharacterContext);
+  const [createTemporaryCompetitor, { loading, error, data }] =
+    useCreateTemporaryCompetitorMutation();
+  const [deleteTemporaryCompetitor] = useDeleteTemporaryCompetitorMutation();
+
+  // Load temporary character in useEffect
+  // NB The initialized ref workaround is to avoid calling createTemporaryCompetitor twice when we're running in React Strict Mode
+  const initialized = useRef(false);
+  // We need a ref to keep track of whether the beforeunload listener has been added
+  const beforeUnloadAdded = useRef(false);
+  useEffect(() => {
+    if (!initialized.current) {
+      createTemporaryCompetitor();
+      initialized.current = true;
+    }
+
+    const cleanup = () => {
+      if (
+        tempCharacter &&
+        tempCharacter.status === "temporary" &&
+        tempCharacter.id
+      ) {
+        deleteTemporaryCompetitor({
+          variables: {
+            deleteTemporaryCompetitorId: tempCharacter.id as string,
+          },
+        });
+      }
+    };
+
+    // Add the beforeunload listener only once
+    if (!beforeUnloadAdded.current) {
+      window.addEventListener("beforeunload", cleanup);
+      beforeUnloadAdded.current = true;
+    }
+
+    return () => {
+      // Run cleanup on unmount
+      cleanup();
+      if (beforeUnloadAdded.current) {
+        window.removeEventListener("beforeunload", cleanup);
+        beforeUnloadAdded.current = false;
+      }
+    };
+  }, [createTemporaryCompetitor, deleteTemporaryCompetitor, tempCharacter]);
+
+  // useEffect to set tempCharacter in context only after data is available
+  useEffect(() => {
+    if (data && data.createTemporaryCompetitor) {
+      setTempCharacter(data.createTemporaryCompetitor);
+    }
+  }, [data, setTempCharacter]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+  if (!data) return <p>No data</p>;
 
   return (
     <section className="-mt-20 h-full w-full p-4 pt-8 backdrop-blur md:p-8">
@@ -81,13 +114,15 @@ function CreateCharacterPage() {
         <form className="grid w-full grid-cols-2 gap-4 py-4">
           <div className="flex flex-col items-center p-4">
             <label className="p-2">Quel est ton nom ?</label>
-            <input
-              type="text"
-              placeholder="Entrez votre prénom"
-              value={character}
-              onChange={(e) => setCharacter(e.target.value)}
-              className="w-full max-w-[200px] rounded border py-2 text-black sm:max-w-xs"
-            />
+            {tempCharacter && (
+              <input
+                type="text"
+                placeholder={tempCharacter.name}
+                value={character}
+                onChange={(e) => setCharacter(e.target.value)}
+                className="w-full max-w-[200px] rounded border px-2 px-4 text-black sm:max-w-xs"
+              />
+            )}
           </div>
           <div className="flex w-full max-w-xs items-center">
             <select className="select w-full max-w-xs bg-transparent focus:bg-white focus:text-black">
@@ -103,7 +138,11 @@ function CreateCharacterPage() {
       </div>
       <AvatarCarouselWrapper imageUrls={imageUrls} />
       <CarouselProfession profession={profession} />
-      <StatsCharacter stats={stats} />
+      {tempCharacter &&
+        tempCharacter.modifierAssignments &&
+        tempCharacter.modifierAssignments.length > 0 && (
+          <StatsCharacter stats={tempCharacter.modifierAssignments} />
+        )}
     </section>
   );
 }

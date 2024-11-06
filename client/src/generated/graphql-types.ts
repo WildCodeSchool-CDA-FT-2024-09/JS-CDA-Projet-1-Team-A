@@ -97,7 +97,7 @@ export type Image = {
   __typename?: "Image";
   id: Scalars["Float"]["output"];
   path: Scalars["String"]["output"];
-  type: Scalars["String"]["output"];
+  type?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Modifier = {
@@ -130,11 +130,11 @@ export type MutationDeleteTemporaryCompetitorArgs = {
 
 export type Profession = {
   __typename?: "Profession";
-  description: Scalars["String"]["output"];
+  description?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["String"]["output"];
-  image: Array<Image>;
+  image?: Maybe<Array<Image>>;
   modifierAssignments?: Maybe<Array<ModifierAssignment>>;
-  name: Scalars["String"]["output"];
+  name?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Query = {
@@ -154,14 +154,14 @@ export type QueryCompetitorArgs = {
 export type TemporaryCompetitor = {
   __typename?: "TemporaryCompetitor";
   avatarImage?: Maybe<Image>;
-  createdAt: Scalars["DateTimeISO"]["output"];
+  createdAt?: Maybe<Scalars["DateTimeISO"]["output"]>;
   id: Scalars["String"]["output"];
   image?: Maybe<Image>;
   modifierAssignments?: Maybe<Array<CompetitorModifiers>>;
   name: Scalars["String"]["output"];
   profession?: Maybe<Profession>;
   status: Scalars["String"]["output"];
-  updatedAt: Scalars["DateTimeISO"]["output"];
+  updatedAt?: Maybe<Scalars["DateTimeISO"]["output"]>;
 };
 
 export type Trial = {
@@ -190,7 +190,11 @@ export type CreateTemporaryCompetitorMutation = {
       value: number;
       valueType: string;
     }> | null;
-    profession?: { __typename?: "Profession"; id: string; name: string } | null;
+    profession?: {
+      __typename?: "Profession";
+      id: string;
+      name?: string | null;
+    } | null;
     image?: { __typename?: "Image"; id: number; path: string } | null;
   };
 };
