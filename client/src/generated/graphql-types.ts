@@ -57,17 +57,23 @@ export type CombatModifiers = {
 
 export type Competitor = {
   __typename?: "Competitor";
-  avatarImage: Image;
+  avatarImage?: Maybe<Image>;
   createdAt: Scalars["DateTimeISO"]["output"];
   id: Scalars["String"]["output"];
-  image: Image;
-  modifierAssignments?: Maybe<Array<ModifierAssignment>>;
+  image?: Maybe<Image>;
+  modifierAssignments?: Maybe<Array<CompetitorModifiers>>;
   name: Scalars["String"]["output"];
-  opponentCombats: Array<Combat>;
-  playerCombats: Array<Combat>;
-  profession: Profession;
+  profession?: Maybe<Profession>;
   status: Scalars["String"]["output"];
   updatedAt: Scalars["DateTimeISO"]["output"];
+};
+
+export type CompetitorModifiers = {
+  __typename?: "CompetitorModifiers";
+  id?: Maybe<Scalars["String"]["output"]>;
+  modifierLabel: Scalars["String"]["output"];
+  value: Scalars["Float"]["output"];
+  valueType: Scalars["String"]["output"];
 };
 
 export type God = {
@@ -77,8 +83,6 @@ export type God = {
   image: Image;
   modifierAssignments?: Maybe<Array<ModifierAssignment>>;
   name: Scalars["String"]["output"];
-  opponentGodCombats: Array<Combat>;
-  playerGodCombats: Array<Combat>;
 };
 
 export type GodWithModifiers = {
@@ -91,12 +95,7 @@ export type GodWithModifiers = {
 
 export type Image = {
   __typename?: "Image";
-  god: God;
   id: Scalars["Float"]["output"];
-  idAvatarImage: Competitor;
-  idBattleImage: Competitor;
-  idImageProfession: Profession;
-  imageTrial: Trial;
   path: Scalars["String"]["output"];
   type: Scalars["String"]["output"];
 };
@@ -119,6 +118,16 @@ export type ModifierAssignment = {
   valueType: Scalars["String"]["output"];
 };
 
+export type Mutation = {
+  __typename?: "Mutation";
+  createTemporaryCompetitor: TemporaryCompetitor;
+  deleteTemporaryCompetitor: Scalars["Boolean"]["output"];
+};
+
+export type MutationDeleteTemporaryCompetitorArgs = {
+  id: Scalars["String"]["input"];
+};
+
 export type Profession = {
   __typename?: "Profession";
   description: Scalars["String"]["output"];
@@ -126,26 +135,73 @@ export type Profession = {
   image: Array<Image>;
   modifierAssignments?: Maybe<Array<ModifierAssignment>>;
   name: Scalars["String"]["output"];
-  profession: Competitor;
 };
 
 export type Query = {
   __typename?: "Query";
   combats: Array<Combat>;
-  getCompetitor: Array<Competitor>;
+  competitor: Competitor;
+  competitors: Array<Competitor>;
   getGods: Array<God>;
   getGodsWithModifiers: Array<GodWithModifiers>;
   getProfession: Array<Profession>;
 };
 
+export type QueryCompetitorArgs = {
+  id: Scalars["String"]["input"];
+};
+
+export type TemporaryCompetitor = {
+  __typename?: "TemporaryCompetitor";
+  avatarImage?: Maybe<Image>;
+  createdAt: Scalars["DateTimeISO"]["output"];
+  id: Scalars["String"]["output"];
+  image?: Maybe<Image>;
+  modifierAssignments?: Maybe<Array<CompetitorModifiers>>;
+  name: Scalars["String"]["output"];
+  profession?: Maybe<Profession>;
+  status: Scalars["String"]["output"];
+  updatedAt: Scalars["DateTimeISO"]["output"];
+};
+
 export type Trial = {
   __typename?: "Trial";
-  combats: Combat;
   description: Scalars["String"]["output"];
   id: Scalars["String"]["output"];
   image: Array<Image>;
   modifierAssignments?: Maybe<Array<ModifierAssignment>>;
   name: Scalars["String"]["output"];
+};
+
+export type CreateTemporaryCompetitorMutationVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CreateTemporaryCompetitorMutation = {
+  __typename?: "Mutation";
+  createTemporaryCompetitor: {
+    __typename?: "TemporaryCompetitor";
+    id: string;
+    name: string;
+    status: string;
+    modifierAssignments?: Array<{
+      __typename?: "CompetitorModifiers";
+      modifierLabel: string;
+      value: number;
+      valueType: string;
+    }> | null;
+    profession?: { __typename?: "Profession"; id: string; name: string } | null;
+    image?: { __typename?: "Image"; id: number; path: string } | null;
+  };
+};
+
+export type DeleteTemporaryCompetitorMutationVariables = Exact<{
+  deleteTemporaryCompetitorId: Scalars["String"]["input"];
+}>;
+
+export type DeleteTemporaryCompetitorMutation = {
+  __typename?: "Mutation";
+  deleteTemporaryCompetitor: boolean;
 };
 
 export type GetCombatStatsQueryVariables = Exact<{ [key: string]: never }>;
@@ -173,6 +229,120 @@ export type GetCombatStatsQuery = {
   }>;
 };
 
+export const CreateTemporaryCompetitorDocument = gql`
+  mutation CreateTemporaryCompetitor {
+    createTemporaryCompetitor {
+      id
+      name
+      status
+      modifierAssignments {
+        modifierLabel
+        value
+        valueType
+      }
+      profession {
+        id
+        name
+      }
+      image {
+        id
+        path
+      }
+    }
+  }
+`;
+export type CreateTemporaryCompetitorMutationFn = Apollo.MutationFunction<
+  CreateTemporaryCompetitorMutation,
+  CreateTemporaryCompetitorMutationVariables
+>;
+
+/**
+ * __useCreateTemporaryCompetitorMutation__
+ *
+ * To run a mutation, you first call `useCreateTemporaryCompetitorMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTemporaryCompetitorMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTemporaryCompetitorMutation, { data, loading, error }] = useCreateTemporaryCompetitorMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCreateTemporaryCompetitorMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateTemporaryCompetitorMutation,
+    CreateTemporaryCompetitorMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateTemporaryCompetitorMutation,
+    CreateTemporaryCompetitorMutationVariables
+  >(CreateTemporaryCompetitorDocument, options);
+}
+export type CreateTemporaryCompetitorMutationHookResult = ReturnType<
+  typeof useCreateTemporaryCompetitorMutation
+>;
+export type CreateTemporaryCompetitorMutationResult =
+  Apollo.MutationResult<CreateTemporaryCompetitorMutation>;
+export type CreateTemporaryCompetitorMutationOptions =
+  Apollo.BaseMutationOptions<
+    CreateTemporaryCompetitorMutation,
+    CreateTemporaryCompetitorMutationVariables
+  >;
+export const DeleteTemporaryCompetitorDocument = gql`
+  mutation DeleteTemporaryCompetitor($deleteTemporaryCompetitorId: String!) {
+    deleteTemporaryCompetitor(id: $deleteTemporaryCompetitorId)
+  }
+`;
+export type DeleteTemporaryCompetitorMutationFn = Apollo.MutationFunction<
+  DeleteTemporaryCompetitorMutation,
+  DeleteTemporaryCompetitorMutationVariables
+>;
+
+/**
+ * __useDeleteTemporaryCompetitorMutation__
+ *
+ * To run a mutation, you first call `useDeleteTemporaryCompetitorMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTemporaryCompetitorMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTemporaryCompetitorMutation, { data, loading, error }] = useDeleteTemporaryCompetitorMutation({
+ *   variables: {
+ *      deleteTemporaryCompetitorId: // value for 'deleteTemporaryCompetitorId'
+ *   },
+ * });
+ */
+export function useDeleteTemporaryCompetitorMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteTemporaryCompetitorMutation,
+    DeleteTemporaryCompetitorMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    DeleteTemporaryCompetitorMutation,
+    DeleteTemporaryCompetitorMutationVariables
+  >(DeleteTemporaryCompetitorDocument, options);
+}
+export type DeleteTemporaryCompetitorMutationHookResult = ReturnType<
+  typeof useDeleteTemporaryCompetitorMutation
+>;
+export type DeleteTemporaryCompetitorMutationResult =
+  Apollo.MutationResult<DeleteTemporaryCompetitorMutation>;
+export type DeleteTemporaryCompetitorMutationOptions =
+  Apollo.BaseMutationOptions<
+    DeleteTemporaryCompetitorMutation,
+    DeleteTemporaryCompetitorMutationVariables
+  >;
 export const GetCombatStatsDocument = gql`
   query GetCombatStats {
     combats {
