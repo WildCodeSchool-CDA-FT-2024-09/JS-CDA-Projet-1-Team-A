@@ -1,6 +1,5 @@
-const AvatarCarousel = ({
+const GodCarousel = ({
   imageUrls,
-  mytitle,
   handleTouchStart,
   handleTouchMove,
   handleTouchEnd,
@@ -11,13 +10,6 @@ const AvatarCarousel = ({
   currentIndex,
   mobile,
 }) => {
-  const getImageClassDes = (index: number) => {
-    const offset = Math.abs(index - currentIndex);
-    if (offset === 0) return "w-[300px] h-[395px]"; // Image centrale
-    if (offset === 1) return "w-[210px] h-[250px]"; // Images adjacentes
-    if (offset === 2) return "w-[190px] h-[210px]"; // Images adjacentes +1
-    return "hidden"; // Images adjacentes +2
-  };
   const getImageClassMob = (index: number) => {
     const offset = Math.abs(index - currentIndex);
     if (offset === 0) return "w-[125px] h-[130px]"; // Image centrale
@@ -28,7 +20,7 @@ const AvatarCarousel = ({
   return (
     <>
       <section aria-labelledby="title-avatar">
-        <p id="title-avatar">{mytitle}</p>
+        <p id="title-avatar">Choisis ton avatar </p>
         <div
           className={`flex w-full items-center justify-center overflow-hidden ${mobile ? "h-44" : "h-96"}`}
           onTouchStart={handleTouchStart}
@@ -108,4 +100,4 @@ const AvatarCarousel = ({
   );
 };
 
-export default AvatarCarousel;
+export default GodCarousel;

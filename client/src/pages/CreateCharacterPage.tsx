@@ -72,6 +72,7 @@ const imageUrls = [
   { url: "/img/freepik-zeus1.png" },
 ];
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
+const mytitle = "Choisissez votre Avatar";
 function CreateCharacterPage() {
   const { character, setCharacter } = useContext(CharacterContext);
 
@@ -101,7 +102,7 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
-      <AvatarCarouselWrapper imageUrls={imageUrls} />
+      <AvatarCarouselWrapper imageUrls={imageUrls} mytitle={mytitle} />
       <CarouselProfession profession={profession} />
       <StatsCharacter stats={stats} />
     </section>

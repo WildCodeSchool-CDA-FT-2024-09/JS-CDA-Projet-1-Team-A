@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CharacterContext } from "../contexts/CharacterContext";
 
+import AvatarCarouselWrapper from "../components/CarouselWrapper";
+
 function ChooseGodPage() {
   const { character } = useContext(CharacterContext);
   // Statistiques provisoires en attendant le back-end
@@ -15,6 +17,20 @@ function ChooseGodPage() {
     },
   ];
 
+  const imageUrls = [
+    { url: "/img/freepik-apollon1.png" },
+    { url: "/img/freepik-artemis1.png" },
+    { url: "/img/freepik-dionysos1.png" },
+    { url: "/img/freepik-gracefully1.png" },
+    { url: "/img/freepik-zeus1.png" },
+    { url: "/img/freepik-apollon1.png" },
+    { url: "/img/freepik-artemis1.png" },
+    { url: "/img/freepik-dionysos1.png" },
+    { url: "/img/freepik-gracefully1.png" },
+    { url: "/img/freepik-zeus1.png" },
+  ];
+
+  const mytitle = "Choisissez votre Dieu";
   return (
     <div className="inset-0 flex h-screen w-full flex-col bg-black/50 backdrop-blur-sm">
       <h1 className="mt-5 text-xl font-bold">Champion {character}</h1>
@@ -36,10 +52,13 @@ function ChooseGodPage() {
           ))}
         </ul>
       </section>
+      <section>
+        <AvatarCarouselWrapper imageUrls={imageUrls} mytitle={mytitle} />
+      </section>
       <Link
         to="/epreuve"
         aria-label="Commencer le jeu"
-        className="btn-primary mx-40 mt-60 min-w-[220px] md:mr-24"
+        className="btn-primary mx-40 min-w-[220px] md:mr-24"
       >
         Démarre l'épreuve!
       </Link>
