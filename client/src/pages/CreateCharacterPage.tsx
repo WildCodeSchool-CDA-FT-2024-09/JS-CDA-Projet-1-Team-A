@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CharacterContext } from "../contexts/CharacterContext";
 import StatsCharacter from "../components/competitor/StatsCharacter";
-import CarouselProfession from "../components/competitor/CarouselProfession";
+// import CarouselProfession from "../components/competitor/CarouselProfession";
 import { useGetProfessionsQuery } from "../generated/graphql-types";
 
 const stats = [
@@ -42,7 +42,7 @@ function CreateCharacterPage() {
   if (!data) return <p>No data</p>;
 
   console.info(data);
-  const { professions } = data;
+  // const { professions } = data;
 
   return (
     <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
@@ -70,9 +70,9 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
-      {professions && professions.length && (
+      {/* {professions && professions.length && (
         <CarouselProfession professions={professions} />
-      )}
+      )} */}
       <StatsCharacter stats={stats} />
     </section>
   );
