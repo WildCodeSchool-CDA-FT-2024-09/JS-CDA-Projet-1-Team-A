@@ -44,6 +44,7 @@ export class Competitor extends BaseEntity {
   image: Image;
 
   // mon cousin me dis d'ajouter ça ici
+  @Field(() => Image)
   @ManyToOne(() => Image, (image) => image.idBattleImage)
   battleImage: Image;
 

@@ -19,42 +19,25 @@ export default class CombatResolver {
     return combat;
   }
 
-  @Query(() => Combat)
-  async combat(@Arg("id") id: string) {
-    const combat = await Combat.findOneOrFail({
+  @Query(() => Combat, { nullable: true })
+  async combat(@Arg("id") id: string): Promise<Combat | null> {
+    const combat = await Combat.findOne({
       where: { id },
       relations: [
         "player",
+        "player.avatarImage",
+        "player.god",
+        "player.god.image",
         "opponent",
+        "opponent.avatarImage",
+        "opponent.god",
+        "opponent.god.image",
         "trial",
-        "playerGod",
-        "opponentGod",
-        "modifierAssignments",
+        "trial.image",
+        "image",
       ],
     });
+    console.info(JSON.stringify(combat, null, 2));
     return combat;
   }
 }
-
-// de la par de mon cousin
-// Nouvelle requête pour récupérer un combat spécifique avec des relations supplémentaires
-//   @Query(() => Combat, { nullable: true })
-//   async combat(@Arg("id") id: string) {
-//     const combat = await Combat.findOne({
-//       where: { id },
-//       relations: [
-//         "player",
-//         "player.god",
-//         "player.avatarImage", // Image de l'avatar du joueur
-//         "opponent",
-//         "opponent.god",
-//         "opponent.avatarImage", // Image de l'avatar de l'opposant
-//         "playerGod.image", // Image du dieu du joueur
-//         "opponentGod.image", // Image du dieu de l'opposant
-//         "trial",
-//         "trial.image", // Image de l'épreuve
-//         "modifierAssignments",
-//       ],
-//     });
-//     return combat;
-//   }
