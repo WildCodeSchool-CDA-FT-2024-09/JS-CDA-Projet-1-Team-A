@@ -3,6 +3,7 @@ import { CharacterContext } from "../contexts/CharacterContext";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
+//import { useGetImageFiltreQuery } from "../generated/graphql-types";
 
 // Fausse donnée en attendant le back end
 const profession = [
@@ -72,8 +73,17 @@ const imageUrls = [
   { url: "/img/freepik-zeus1.png" },
 ];
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
-const myTitle = "Choisissez votre Avatar";
+
 function CreateCharacterPage() {
+  /* const { data, loading, error } = useGetImageFiltreQuery({
+    variables: { type: "competitor_avatar" },
+  });*/
+
+  // if (loading) return <p>Loading...</p>;
+  //if (error) return <p>Error: {error.message}</p>;
+  // console.log("ma data image", data);
+  // const imageUrls = data;
+
   const { character, setCharacter } = useContext(CharacterContext);
 
   return (
@@ -102,7 +112,10 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
-      <AvatarCarouselWrapper imageUrls={imageUrls} myTitle={myTitle} />
+      <AvatarCarouselWrapper
+        imageUrls={imageUrls}
+        myTitle="Choisissez votre Avatar"
+      />
       <CarouselProfession profession={profession} />
       <StatsCharacter stats={stats} />
     </section>

@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CharacterContext } from "../contexts/CharacterContext";
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
+import { useGetGodimageQuery } from "../generated/graphql-types";
 
 function ChooseGodPage() {
   const { character } = useContext(CharacterContext);
+  const { data, loading, error } = useGetGodimageQuery();
   // Statistiques provisoires en attendant le back-end
   const trial = [
     {
@@ -16,20 +18,14 @@ function ChooseGodPage() {
     },
   ];
 
-  const imageUrls = [
-    { url: "/img/freepik-apollon1.png" },
-    { url: "/img/freepik-artemis1.png" },
-    { url: "/img/freepik-dionysos1.png" },
-    { url: "/img/freepik-gracefully1.png" },
-    { url: "/img/freepik-zeus1.png" },
-    { url: "/img/freepik-apollon1.png" },
-    { url: "/img/freepik-artemis1.png" },
-    { url: "/img/freepik-dionysos1.png" },
-    { url: "/img/freepik-gracefully1.png" },
-    { url: "/img/freepik-zeus1.png" },
-  ];
+  if (loading) return <p>Chargement des images...</p>;
+  if (error) return <p>Erreur lors du chargement des images</p>;
 
-  const myTitle = "Choisissez votre Dieu";
+  const imageUrls =
+    data?.getGod.map((god) => ({
+      url: god.image.path,
+    })) || [];
+
   return (
     <div className="inset-0 flex h-screen w-full flex-col bg-black/50 backdrop-blur-sm">
       <h1 className="mt-5 text-xl font-bold">Champion {character}</h1>
@@ -52,7 +48,10 @@ function ChooseGodPage() {
         </ul>
       </section>
       <section>
-        <AvatarCarouselWrapper imageUrls={imageUrls} myTitle={myTitle} />
+        <AvatarCarouselWrapper
+          imageUrls={imageUrls}
+          myTitle="Choisissez votre Dieu"
+        />
       </section>
       <Link
         to="/epreuve"

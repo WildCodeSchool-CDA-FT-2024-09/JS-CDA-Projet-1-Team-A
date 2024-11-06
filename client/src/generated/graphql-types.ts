@@ -28,8 +28,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  DateTimeISO: { input: any; output: any };
+  DateTimeISO: { input: string; output: string };
 };
 
 export type Combat = {
@@ -81,14 +80,6 @@ export type God = {
   playerGodCombats: Array<Combat>;
 };
 
-export type GodWithModifiers = {
-  __typename?: "GodWithModifiers";
-  modifierLabel?: Maybe<Scalars["String"]["output"]>;
-  name: Scalars["String"]["output"];
-  value?: Maybe<Scalars["Float"]["output"]>;
-  valueType?: Maybe<Scalars["String"]["output"]>;
-};
-
 export type Image = {
   __typename?: "Image";
   god: God;
@@ -133,9 +124,13 @@ export type Query = {
   __typename?: "Query";
   combats: Array<Combat>;
   getCompetitor: Array<Competitor>;
-  getGods: Array<God>;
-  getGodsWithModifiers: Array<GodWithModifiers>;
+  getGod: Array<God>;
+  getImage: Array<Image>;
   getProfession: Array<Profession>;
+};
+
+export type QueryGetImageArgs = {
+  type?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type Trial = {
@@ -155,8 +150,7 @@ export type GetCombatStatsQuery = {
   combats: Array<{
     __typename?: "Combat";
     id: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    createdAt: any;
+    createdAt: Scalars["DateTimeISO"]["output"];
     resultLongText: string;
     resultShortText: string;
     trial: { __typename?: "Trial"; name: string };
@@ -171,6 +165,25 @@ export type GetCombatStatsQuery = {
       valueType: string;
     }> | null;
   }>;
+};
+
+export type GetGodimageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetGodimageQuery = {
+  __typename?: "Query";
+  getGod: Array<{
+    __typename?: "God";
+    image: { __typename?: "Image"; path: string };
+  }>;
+};
+
+export type GetImageFiltreQueryVariables = Exact<{
+  type: Scalars["String"]["input"];
+}>;
+
+export type GetImageFiltreQuery = {
+  __typename?: "Query";
+  getImage: Array<{ __typename?: "Image"; path: string; type: string }>;
 };
 
 export const GetCombatStatsDocument = gql`
@@ -272,4 +285,164 @@ export type GetCombatStatsSuspenseQueryHookResult = ReturnType<
 export type GetCombatStatsQueryResult = Apollo.QueryResult<
   GetCombatStatsQuery,
   GetCombatStatsQueryVariables
+>;
+export const GetGodimageDocument = gql`
+  query GetGodimage {
+    getGod {
+      image {
+        path
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetGodimageQuery__
+ *
+ * To run a query within a React component, call `useGetGodimageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetGodimageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetGodimageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetGodimageQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetGodimageQuery,
+    GetGodimageQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetGodimageQuery, GetGodimageQueryVariables>(
+    GetGodimageDocument,
+    options
+  );
+}
+export function useGetGodimageLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetGodimageQuery,
+    GetGodimageQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetGodimageQuery, GetGodimageQueryVariables>(
+    GetGodimageDocument,
+    options
+  );
+}
+export function useGetGodimageSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        GetGodimageQuery,
+        GetGodimageQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetGodimageQuery, GetGodimageQueryVariables>(
+    GetGodimageDocument,
+    options
+  );
+}
+export type GetGodimageQueryHookResult = ReturnType<typeof useGetGodimageQuery>;
+export type GetGodimageLazyQueryHookResult = ReturnType<
+  typeof useGetGodimageLazyQuery
+>;
+export type GetGodimageSuspenseQueryHookResult = ReturnType<
+  typeof useGetGodimageSuspenseQuery
+>;
+export type GetGodimageQueryResult = Apollo.QueryResult<
+  GetGodimageQuery,
+  GetGodimageQueryVariables
+>;
+export const GetImageFiltreDocument = gql`
+  query GetImageFiltre($type: String!) {
+    getImage(type: $type) {
+      path
+      type
+    }
+  }
+`;
+
+/**
+ * __useGetImageFiltreQuery__
+ *
+ * To run a query within a React component, call `useGetImageFiltreQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetImageFiltreQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetImageFiltreQuery({
+ *   variables: {
+ *      type: // value for 'type'
+ *   },
+ * });
+ */
+export function useGetImageFiltreQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    GetImageFiltreQuery,
+    GetImageFiltreQueryVariables
+  > &
+    (
+      | { variables: GetImageFiltreQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetImageFiltreQuery, GetImageFiltreQueryVariables>(
+    GetImageFiltreDocument,
+    options
+  );
+}
+export function useGetImageFiltreLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetImageFiltreQuery,
+    GetImageFiltreQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetImageFiltreQuery, GetImageFiltreQueryVariables>(
+    GetImageFiltreDocument,
+    options
+  );
+}
+export function useGetImageFiltreSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        GetImageFiltreQuery,
+        GetImageFiltreQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    GetImageFiltreQuery,
+    GetImageFiltreQueryVariables
+  >(GetImageFiltreDocument, options);
+}
+export type GetImageFiltreQueryHookResult = ReturnType<
+  typeof useGetImageFiltreQuery
+>;
+export type GetImageFiltreLazyQueryHookResult = ReturnType<
+  typeof useGetImageFiltreLazyQuery
+>;
+export type GetImageFiltreSuspenseQueryHookResult = ReturnType<
+  typeof useGetImageFiltreSuspenseQuery
+>;
+export type GetImageFiltreQueryResult = Apollo.QueryResult<
+  GetImageFiltreQuery,
+  GetImageFiltreQueryVariables
 >;
