@@ -25,9 +25,11 @@ function StatisticsPage() {
           <ul>
             {combats.map((combat) => (
               <li key={combat.id} className="mb-4 text-blue-v">
-                <h3 className="mb-1 font-bold text-stone-50">
-                  {`${combat.player?.name} (${combat.playerGod.name})  vs. ${combat.opponent?.name} (${combat.opponentGod.name})`}
-                </h3>
+                <Link to={`/statistiques/${combat.id}`}>
+                  <h3 className="mb-1 font-bold text-stone-50 hover:underline">
+                    {`${combat.player?.name} (${combat.playerGod.name})  vs. ${combat.opponent?.name} (${combat.opponentGod.name})`}
+                  </h3>
+                </Link>
                 <p>Le {formatCombatDate(combat.createdAt)}</p>
                 <p>Épreuve de {combat.trial.name}</p>
               </li>
