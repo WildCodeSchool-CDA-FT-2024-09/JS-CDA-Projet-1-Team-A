@@ -13,7 +13,7 @@ function StartTrialPage() {
   const resultTrial = ["DEFAITE", "VICTOIRE"];
 
   // en attente de reçevoir "id" de l'épreuve en cours pour l'afficher dynamiquement
-  const id: string = "3d7801bb-1d3e-4d41-bf18-b74d848f92b5";
+  const id: string = "f7968616-a1f0-4154-a1f6-0065ea5377d7";
 
   const { data, loading, error } = useCombatQuery({
     variables: { combatId: id },
