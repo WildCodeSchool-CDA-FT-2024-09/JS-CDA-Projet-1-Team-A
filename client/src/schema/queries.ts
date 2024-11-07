@@ -83,3 +83,14 @@ export const GET_ALL_PROFESSION = gql`
     }
   }
 `;
+
+export const GET_COMBAT_RESULT = gql`
+  query CombatResult($combatResultId: String!) {
+    combatResult(id: $combatResultId) {
+      id
+      resultLongText
+      resultShortText
+      combatDetail
+    }
+  }
+`;
