@@ -1,13 +1,9 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
-// import { useQuery } from "@apollo/client";
 import { useCombatQuery } from "../generated/graphql-types";
 
-// en attente de récupérer les données du joueur / opposant
+// en attente de récupérer les bonus du joueur / opposant
 const trial = {
-  name: "la course de char",
-  playerName: "Julius",
-  opponentName: "Tomastrius",
   playerBonus: 8,
   opponentBonus: 9,
 };
@@ -16,8 +12,11 @@ function StartTrialPage() {
   const [result, setResult] = useState("");
   const resultTrial = ["DEFAITE", "VICTOIRE"];
 
+  // en attente de reçevoir "id" de l'épreuve en cours pour l'afficher dynamiquement
+  const id: string = "e3c322ba-bd74-4733-a288-d4d987d34300";
+
   const { data, loading, error } = useCombatQuery({
-    variables: { combatId: "e3c322ba-bd74-4733-a288-d4d987d34300" },
+    variables: { combatId: id },
   });
 
   if (loading) {
@@ -29,8 +28,8 @@ function StartTrialPage() {
     return <p>Error: {error.message}</p>;
   }
 
+  // en attente du récupérer les informations du résulta d'épreuve
   const checkResult = () => {
-    // en attente du récupérer les informations du résulta d'épreuve
     setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
   };
 
@@ -80,7 +79,6 @@ function StartTrialPage() {
           className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result !== "VICTOIRE" ? "" : "saturate-0"}`}
         />
       </div>
-      {/* modale qui change en fonctions du resultat pas encore fonctionnel */}
       <ModaleResultTrial result={result} />
       {/* bouton pour afficher le resultat de l'épreuve */}
       <button
