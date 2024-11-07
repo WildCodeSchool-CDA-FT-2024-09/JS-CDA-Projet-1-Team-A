@@ -61,7 +61,17 @@ const stats = [
   { statName: "Chance", value: 50 },
 ];
 
-const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
+const cities = [
+  "Athènes",
+  "Sparte",
+  "Thessalonique",
+  "Corinthe",
+  "Rhodes",
+  "Delphes",
+  "Olympie",
+  "Argos",
+  "Mycènes",
+];
 
 function CreateCharacterPage() {
   const { data, loading, error } = useGetImageFiltreQuery({
