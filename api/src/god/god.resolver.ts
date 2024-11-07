@@ -5,7 +5,9 @@ import { God } from "./god.entity";
 export default class GodResolver {
   @Query(() => [God])
   async getGod() {
-    const god = await God.find();
+    const god = await God.find({
+      relations: ["image", "playerGodCombats"],
+    });
     return god;
   }
 }

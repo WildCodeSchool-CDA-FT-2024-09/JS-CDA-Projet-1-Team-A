@@ -28,7 +28,7 @@ export class Trial extends BaseEntity {
   description: string;
 
   @Field(() => Image)
-  @ManyToOne(() => Image, (image) => image.imageTrial)
+  @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 
   @OneToMany(() => Combat, (combat) => combat.trial)
