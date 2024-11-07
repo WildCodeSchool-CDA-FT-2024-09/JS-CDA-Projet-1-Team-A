@@ -8,6 +8,8 @@ import GodResolver from "./god/god.resolver";
 import ProfessionResolver from "./profession/profession.resolver";
 import CompetitorResolver from "./competitor/competitor.resolver";
 import CombatResolver from "./combat/combat.resolver";
+import ImageResolver from "./image/image.resolver";
+import TrialResolver from "./trial/trial.resolver";
 
 dotenv.config();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
@@ -20,6 +22,8 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
       CompetitorResolver,
       ProfessionResolver,
       CombatResolver,
+      ImageResolver,
+      TrialResolver,
     ],
   });
 

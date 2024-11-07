@@ -8,21 +8,20 @@ import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
 import { useGetProfessionsQuery } from "../generated/graphql-types";
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
+import { useGetImageFiltreQuery } from "../generated/graphql-types";
 
-const imageUrls = [
-  { url: "/img/freepik-apollon1.png" },
-  { url: "/img/freepik-artemis1.png" },
-  { url: "/img/freepik-dionysos1.png" },
-  { url: "/img/freepik-gracefully1.png" },
-  { url: "/img/freepik-zeus1.png" },
-  { url: "/img/freepik-apollon1.png" },
-  { url: "/img/freepik-artemis1.png" },
-  { url: "/img/freepik-dionysos1.png" },
-  { url: "/img/freepik-gracefully1.png" },
-  { url: "/img/freepik-zeus1.png" },
+const cities = [
+  "Athènes",
+  "Sparte",
+  "Thessalonique",
+  "Corinthe",
+  "Rhodes",
+  "Delphes",
+  "Olympie",
+  "Argos",
+  "Mycènes",
 ];
 
-const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 function CreateCharacterPage() {
   const { character, setCharacter, tempCharacter, setTempCharacter } =
     useContext(CharacterContext);
@@ -85,16 +84,30 @@ function CreateCharacterPage() {
   }, [competitorData, setTempCharacter]);
 
   const {
+    data: imageData,
+    loading: imageLoading,
+    error: imageError,
+  } = useGetImageFiltreQuery({
+    variables: { type: "competitor_avatar" },
+  });
+
+  const {
     loading: professionsLoading,
     error: professionsError,
     data: professionsData,
   } = useGetProfessionsQuery();
 
-  if (professionsLoading || competitorLoading) return <p>Loading...</p>;
-  if (professionsError || competitorError) return <p>Error</p>;
-  if (!professionsData || !competitorData) return <p>No data</p>;
+  if (professionsLoading || competitorLoading || imageLoading)
+    return <p>Loading...</p>;
+  if (professionsError || competitorError || imageError) return <p>Error</p>;
+  if (!professionsData || !competitorData || !imageData) return <p>No data</p>;
 
   const { professions } = professionsData;
+
+  const imageUrls =
+    imageData?.getImage.map((image) => ({
+      url: image.path,
+    })) || [];
 
   return (
     <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
@@ -124,7 +137,10 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
-      <AvatarCarouselWrapper imageUrls={imageUrls} />
+      <AvatarCarouselWrapper
+        imageUrls={imageUrls}
+        myTitle="Choisissez votre Avatar"
+      />
       {professions && professions.length && (
         <CarouselProfession professions={professions} />
       )}
