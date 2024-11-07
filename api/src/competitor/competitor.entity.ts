@@ -16,7 +16,6 @@ import { Field, ObjectType } from "type-graphql";
 import { Profession } from "../profession/profession.entity";
 import { Image } from "../image/image.entity";
 import { Combat } from "../combat/combat.entity";
-import { God } from "../god/god.entity";
 
 @ObjectType()
 @Entity()
@@ -44,14 +43,6 @@ export class Competitor extends BaseEntity {
   @Field(() => Image, { nullable: true })
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
-
-  @Field(() => Image)
-  @ManyToOne(() => Image, (image) => image.idBattleImage)
-  battleImage: Image;
-
-  @Field(() => God, { nullable: true })
-  @ManyToOne(() => God, (god) => god.competitors)
-  god: God;
 
   @OneToMany(() => Combat, (combat) => combat.player)
   playerCombats: Combat[];

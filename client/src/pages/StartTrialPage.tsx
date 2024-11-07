@@ -73,9 +73,9 @@ function StartTrialPage() {
         <div className="flex h-[35%] w-[50%] flex-col items-center justify-around gap-y-3 rounded-xl bg-blue-fd bg-opacity-85 p-6 md:w-[30%]">
           <p>{combatData?.combat?.trial.name}</p>
           <img
-            src={combatData?.combat?.trial.image.path}
+            src={combatData?.combat?.trial?.image?.path || ""}
             className="w-80 object-contain md:w-48"
-            alt={combatData?.combat?.trial.name}
+            alt={combatData?.combat?.trial?.name || "Image non disponible"}
           />
           <p className="text-yellow-p">
             Chance {trial.playerBonus} vs {trial.opponentBonus}
@@ -99,13 +99,13 @@ function StartTrialPage() {
       <div className="relative flex h-full items-center justify-between md:items-end">
         {/* Avatar 1 - à gauche */}
         <img
-          src={combatData?.combat?.player.image.path}
+          src={combatData?.combat?.player?.image?.path || ""}
           alt="Avatar de votre champion"
           className={`absolute left-0 h-[45vh] w-auto -translate-x-28 translate-y-[-3rem] object-contain sm:translate-y-0 md:h-[70vh] md:-translate-x-0 ${result !== "DEFAITE" ? "" : "saturate-0"}`}
         />
         {/* Avatar 2 - à droite */}
         <img
-          src={combatData?.combat?.opponent.image.path}
+          src={combatData?.combat?.opponent?.image?.path || ""}
           alt="Avatar de l'adversaire"
           className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result !== "VICTOIRE" ? "" : "saturate-0"}`}
         />

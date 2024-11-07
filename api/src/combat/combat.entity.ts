@@ -15,7 +15,6 @@ import {
 } from "typeorm";
 import { Competitor } from "../competitor/competitor.entity";
 import { Trial } from "../trial/trial.entity";
-import { Image } from "../image/image.entity";
 
 @ObjectType()
 @Entity()
@@ -51,10 +50,6 @@ export class Combat extends BaseEntity {
   @Field(() => Trial)
   @ManyToOne(() => Trial, (trial) => trial.id)
   trial: Trial;
-
-  @Field(() => Image, { nullable: true })
-  @ManyToOne(() => Image)
-  image?: Image;
 
   @Field(() => [CombatModifiers], { nullable: true })
   @OneToMany(() => CombatModifiers, (combatModifier) => combatModifier.id)
@@ -97,4 +92,19 @@ export class CombatModifiers {
   @Field()
   @ViewColumn()
   modifierLabel: string;
+}
+
+@ObjectType()
+export class CombatResult {
+  @Field()
+  id: string;
+
+  @Field()
+  resultShortText: string;
+
+  @Field()
+  resultLongText: string;
+
+  @Field()
+  combatDetail: string;
 }
