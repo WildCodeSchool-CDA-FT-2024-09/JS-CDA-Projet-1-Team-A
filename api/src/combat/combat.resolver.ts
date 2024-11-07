@@ -31,15 +31,6 @@ export default class CombatResolver {
         "opponentGod.image",
         "modifierAssignments",
       ],
-
-      // relations: {
-      //   player: { image: true },
-      //   opponent: { image: true },
-      //   trial: { image: true },
-      //   playerGod: { image: true },
-      //   opponentGod: { image: true },
-      //   modifierAssignments: true,
-      // },
     });
     return combat;
   }
