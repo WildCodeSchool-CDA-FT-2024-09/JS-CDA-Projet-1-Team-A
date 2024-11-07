@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
+// import { useQuery } from "@apollo/client";
+import { useCombatQuery } from "../generated/graphql-types";
 
 // en attente de récupérer les données du joueur / opposant
 const trial = {
@@ -14,6 +16,19 @@ function StartTrialPage() {
   const [result, setResult] = useState("");
   const resultTrial = ["DEFAITE", "VICTOIRE"];
 
+  const { data, loading, error } = useCombatQuery({
+    variables: { combatId: "e3c322ba-bd74-4733-a288-d4d987d34300" },
+  });
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    console.error("Error fetching combat data:", error);
+    return <p>Error: {error.message}</p>;
+  }
+
   const checkResult = () => {
     // en attente du récupérer les informations du résulta d'épreuve
     setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
@@ -22,15 +37,15 @@ function StartTrialPage() {
   return (
     <section className="fixed inset-0 h-screen w-full items-center justify-center bg-blue-v/80 backdrop-blur-sm">
       <p className="center absolute mt-32 w-full text-center text-xl font-medium">
-        {trial.playerName} vs {trial.opponentName}
+        {data?.combat?.player.name} vs {data?.combat?.opponent.name}
       </p>
       <article className="h-82 z-1 absolute z-10 mt-80 flex w-full flex-col items-center justify-center">
         <div className="flex h-[35%] w-[50%] flex-col items-center justify-around gap-y-3 rounded-xl bg-blue-fd bg-opacity-85 p-6 md:w-[30%]">
-          <p>{trial.name}</p>
+          <p>{data?.combat?.trial.name}</p>
           <img
-            src="/img/competitors/trial/char.png"
+            src={data?.combat?.trial.image.path}
             className="w-80 object-contain md:w-48"
-            alt={trial.name}
+            alt={data?.combat?.trial.name}
           />
           <p className="text-yellow-p">
             Chance {trial.playerBonus} vs {trial.opponentBonus}
@@ -40,12 +55,12 @@ function StartTrialPage() {
       {/* Div contenant les dieux en tant qu'images d'arrière-plan et visible uniquement à partir de md  */}
       <div className="absolute inset-0 mt-24 hidden h-[50vh] justify-between md:flex">
         <img
-          src="/img/gods/freepik__adorable-cargerge.png"
+          src={data?.combat?.opponentGod.image?.path}
           alt="Dieu de votre champion"
           className="h-auto max-w-full"
         />
         <img
-          src="/img/gods/fq.png"
+          src={data?.combat?.playerGod.image?.path}
           alt="Dieu de votre opposant"
           className="h-auto max-w-full"
         />
@@ -54,13 +69,13 @@ function StartTrialPage() {
       <div className="relative flex h-full items-center justify-between md:items-end">
         {/* Avatar 1 - à gauche */}
         <img
-          src="/img/competitors/battle/1.png"
+          src={data?.combat?.player.image.path}
           alt="Avatar de votre champion"
           className={`absolute left-0 h-[45vh] w-auto -translate-x-28 translate-y-[-3rem] object-contain sm:translate-y-0 md:h-[70vh] md:-translate-x-0 ${result !== "DEFAITE" ? "" : "saturate-0"}`}
         />
         {/* Avatar 2 - à droite */}
         <img
-          src="/img/competitors/battle/2.png"
+          src={data?.combat?.opponent.image.path}
           alt="Avatar de l'adversaire"
           className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result !== "VICTOIRE" ? "" : "saturate-0"}`}
         />
