@@ -3,7 +3,7 @@ import { CharacterContext } from "../contexts/CharacterContext";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
-//import { useGetImageFiltreQuery } from "../generated/graphql-types";
+import { useGetImageFiltreQuery } from "../generated/graphql-types";
 
 // Fausse donnée en attendant le back end
 const profession = [
@@ -60,31 +60,22 @@ const stats = [
   },
   { statName: "Chance", value: 50 },
 ];
-const imageUrls = [
-  { url: "/img/freepik-apollon1.png" },
-  { url: "/img/freepik-artemis1.png" },
-  { url: "/img/freepik-dionysos1.png" },
-  { url: "/img/freepik-gracefully1.png" },
-  { url: "/img/freepik-zeus1.png" },
-  { url: "/img/freepik-apollon1.png" },
-  { url: "/img/freepik-artemis1.png" },
-  { url: "/img/freepik-dionysos1.png" },
-  { url: "/img/freepik-gracefully1.png" },
-  { url: "/img/freepik-zeus1.png" },
-];
+
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 
 function CreateCharacterPage() {
-  /* const { data, loading, error } = useGetImageFiltreQuery({
+  const { data, loading, error } = useGetImageFiltreQuery({
     variables: { type: "competitor_avatar" },
-  });*/
-
-  // if (loading) return <p>Loading...</p>;
-  //if (error) return <p>Error: {error.message}</p>;
-  // console.log("ma data image", data);
-  // const imageUrls = data;
-
+  });
   const { character, setCharacter } = useContext(CharacterContext);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const imageUrls =
+    data?.getImage.map((image) => ({
+      url: image.path,
+    })) || [];
 
   return (
     <section className="-mt-20 h-full w-full p-4 pt-8 backdrop-blur md:p-8">

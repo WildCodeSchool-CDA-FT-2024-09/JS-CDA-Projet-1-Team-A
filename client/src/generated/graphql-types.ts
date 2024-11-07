@@ -28,7 +28,8 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
-  DateTimeISO: { input: string; output: string };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  DateTimeISO: { input: any; output: any };
 };
 
 export type Combat = {
@@ -127,6 +128,7 @@ export type Query = {
   getGod: Array<God>;
   getImage: Array<Image>;
   getProfession: Array<Profession>;
+  getTrial: Array<Trial>;
 };
 
 export type QueryGetImageArgs = {
@@ -138,7 +140,7 @@ export type Trial = {
   combats: Combat;
   description: Scalars["String"]["output"];
   id: Scalars["String"]["output"];
-  image: Array<Image>;
+  image: Image;
   modifierAssignments?: Maybe<Array<ModifierAssignment>>;
   name: Scalars["String"]["output"];
 };
@@ -150,7 +152,8 @@ export type GetCombatStatsQuery = {
   combats: Array<{
     __typename?: "Combat";
     id: string;
-    createdAt: Scalars["DateTimeISO"]["output"];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    createdAt: any;
     resultLongText: string;
     resultShortText: string;
     trial: { __typename?: "Trial"; name: string };
@@ -184,6 +187,18 @@ export type GetImageFiltreQueryVariables = Exact<{
 export type GetImageFiltreQuery = {
   __typename?: "Query";
   getImage: Array<{ __typename?: "Image"; path: string; type: string }>;
+};
+
+export type GetTrialQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetTrialQuery = {
+  __typename?: "Query";
+  getTrial: Array<{
+    __typename?: "Trial";
+    description: string;
+    name: string;
+    image: { __typename?: "Image"; path: string };
+  }>;
 };
 
 export const GetCombatStatsDocument = gql`
@@ -445,4 +460,77 @@ export type GetImageFiltreSuspenseQueryHookResult = ReturnType<
 export type GetImageFiltreQueryResult = Apollo.QueryResult<
   GetImageFiltreQuery,
   GetImageFiltreQueryVariables
+>;
+export const GetTrialDocument = gql`
+  query GetTrial {
+    getTrial {
+      description
+      name
+      image {
+        path
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetTrialQuery__
+ *
+ * To run a query within a React component, call `useGetTrialQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTrialQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTrialQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTrialQuery(
+  baseOptions?: Apollo.QueryHookOptions<GetTrialQuery, GetTrialQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetTrialQuery, GetTrialQueryVariables>(
+    GetTrialDocument,
+    options
+  );
+}
+export function useGetTrialLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetTrialQuery,
+    GetTrialQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetTrialQuery, GetTrialQueryVariables>(
+    GetTrialDocument,
+    options
+  );
+}
+export function useGetTrialSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<GetTrialQuery, GetTrialQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetTrialQuery, GetTrialQueryVariables>(
+    GetTrialDocument,
+    options
+  );
+}
+export type GetTrialQueryHookResult = ReturnType<typeof useGetTrialQuery>;
+export type GetTrialLazyQueryHookResult = ReturnType<
+  typeof useGetTrialLazyQuery
+>;
+export type GetTrialSuspenseQueryHookResult = ReturnType<
+  typeof useGetTrialSuspenseQuery
+>;
+export type GetTrialQueryResult = Apollo.QueryResult<
+  GetTrialQuery,
+  GetTrialQueryVariables
 >;

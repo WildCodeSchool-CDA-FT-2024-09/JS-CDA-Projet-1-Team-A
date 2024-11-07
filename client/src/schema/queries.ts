@@ -53,3 +53,15 @@ export const ImageFiltre = gql`
     }
   }
 `;
+
+export const getTrial = gql`
+  query GetTrial {
+    getTrial {
+      description
+      name
+      image {
+        path
+      }
+    }
+  }
+`;
