@@ -126,8 +126,11 @@ function CreateCharacterPage() {
             )}
           </div>
           <div className="flex w-full max-w-xs items-center">
-            <select className="select w-full max-w-xs bg-transparent focus:bg-white focus:text-black">
-              <option disabled selected className="text-gray-500">
+            <select
+              className="select w-full max-w-xs bg-transparent focus:bg-white focus:text-black"
+              defaultValue="Quelle est ta ville ?"
+            >
+              <option disabled className="text-gray-500">
                 Quelle est ta ville ?
               </option>
               {cities.map((city) => (
