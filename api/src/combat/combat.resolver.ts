@@ -143,7 +143,7 @@ export default class CombatResolver {
 
     // Write long text for player win or lose
     if (result.finalScores.player > result.finalScores.opponent) {
-      combatResult.resultLongText = `Avec le soutien du puissant ${playerGod.name}, notre joueur ${player.name} le ${player.profession.name} est le champion victorieux avec un score de ${result.finalScores.player} !!! Leur adversaire, ${opponent.name} le ${opponent.profession.name}, n'a pu obtenir qu'un score de ${result.finalScores.opponent}, à la honte éternelle de leur dieu humilié, ${opponentGod.name}.`;
+      combatResult.resultLongText = `Avec le soutien du puissant(e) ${playerGod.name}, notre joueur ${player.name} le ${player.profession.name} est le champion victorieux avec un score de ${result.finalScores.player} !!! Leur adversaire, ${opponent.name} le ${opponent.profession.name}, n'a pu obtenir qu'un score de ${result.finalScores.opponent}, à la honte éternelle de leur dieu humilié(e), ${opponentGod.name}.`;
       combatResult.resultShortText = `Joueur : ${result.finalScores.player} vs Adversaire : ${result.finalScores.opponent} - ${player.name} gagne !`;
     } else if (result.finalScores.player < result.finalScores.opponent) {
       combatResult.resultLongText = `Malgré les efforts vaillants de ${player.name} le ${player.profession.name} et le soutien de ${playerGod.name}, notre joueur n'a pu obtenir qu'un score de ${result.finalScores.player} contre leur adversaire, ${opponent.name} le ${opponent.profession.name}, qui a obtenu un score de ${result.finalScores.opponent} et a été déclaré vainqueur, à la grande joie de leur dieu, ${opponentGod.name}.`;
