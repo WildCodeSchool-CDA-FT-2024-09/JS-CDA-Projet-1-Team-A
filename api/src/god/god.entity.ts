@@ -11,6 +11,7 @@ import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
 import { Combat } from "../combat/combat.entity";
 import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
+import { Competitor } from "../competitor/competitor.entity";
 
 @ObjectType()
 @Entity()
@@ -27,18 +28,19 @@ export class God extends BaseEntity {
   @Column()
   description: string;
 
-  @Field(() => Image)
+  @Field(() => Image, { nullable: true })
   @ManyToOne(() => Image, (image) => image.id)
-  image: Image;
+  image?: Image;
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.player)
   playerGodCombats: Combat[];
 
-  @Field(() => [Combat])
   @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentGodCombats: Combat[];
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];
+
+  @OneToMany(() => Competitor, (competitor) => competitor.god)
+  competitors: Competitor[];
 }

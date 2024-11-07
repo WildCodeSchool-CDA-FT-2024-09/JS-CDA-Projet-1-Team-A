@@ -1,8 +1,15 @@
 import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
 import { God } from "../god/god.entity";
-import { Competitor } from "../competitor/competitor.entity";
-import { Profession } from "../profession/profession.entity";
+import {
+  Competitor,
+  CompetitorModifiers,
+  TemporaryCompetitor,
+} from "../competitor/competitor.entity";
+import {
+  Profession,
+  ProfessionModifiers,
+} from "../profession/profession.entity";
 import { Image } from "../image/image.entity";
 import { Trial } from "../trial/trial.entity";
 import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
@@ -18,6 +25,8 @@ export const appDataSource = new DataSource({
   entities: [
     God,
     Competitor,
+    CompetitorModifiers,
+    TemporaryCompetitor,
     Profession,
     Image,
     Trial,
@@ -25,7 +34,8 @@ export const appDataSource = new DataSource({
     Combat,
     CombatModifiers,
     Modifier,
+    ProfessionModifiers,
   ],
   synchronize: true,
-  logging: false,
+  logging: true,
 });

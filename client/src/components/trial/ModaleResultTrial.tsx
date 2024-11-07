@@ -8,7 +8,7 @@ export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
       {result && (
         <section className="relative flex h-[62vh] max-h-[62vh] w-[65vw] min-w-[280px] max-w-[700px] flex-col items-center justify-between rounded-xl bg-blue-fd bg-opacity-85 py-10">
           <img
-            src="./img/competitors/avatars/avatar.png"
+            src="/img/competitors/avatars/avatar.png"
             alt="avatar du joueur"
             className={`w-44 rounded-xl ${result === "VICTOIRE" ? "" : "saturate-0"}`}
           />
