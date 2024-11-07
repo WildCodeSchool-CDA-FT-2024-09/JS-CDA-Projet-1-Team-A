@@ -65,3 +65,21 @@ export const getTrial = gql`
     }
   }
 `;
+
+export const GET_ALL_PROFESSION = gql`
+  query GetProfessions {
+    professions {
+      name
+      id
+      description
+      image {
+        path
+      }
+      modifierAssignments {
+        modifierLabel
+        valueType
+        value
+      }
+    }
+  }
+`;
