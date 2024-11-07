@@ -13,7 +13,6 @@ import {
 import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
 import { Combat } from "../combat/combat.entity";
-// import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 
 @ObjectType()
 @Entity()
@@ -32,16 +31,13 @@ export class God extends BaseEntity {
 
   @Field(() => Image, { nullable: true })
   @ManyToOne(() => Image, (image) => image.id)
-  image: Image;
+  image?: Image;
 
   @OneToMany(() => Combat, (combat) => combat.player)
   playerGodCombats: Combat[];
 
   @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentGodCombats: Combat[];
-
-  // @Field(() => [ModifierAssignment], { nullable: true })
-  // modifierAssignments?: ModifierAssignment[];
 
   @Field(() => [GodModifiers], { nullable: true })
   @OneToMany(() => GodModifiers, (godModifier) => godModifier.id)

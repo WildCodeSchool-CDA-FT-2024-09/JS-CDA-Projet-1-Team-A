@@ -137,7 +137,7 @@ export type ProfessionModifiers = {
 
 export type Query = {
   __typename?: "Query";
-  combat: Combat;
+  combat?: Maybe<Combat>;
   combatResult: CombatResult;
   combats: Array<Combat>;
   competitor: Competitor;
@@ -252,6 +252,42 @@ export type GetCombatStatsQuery = {
       valueType: string;
     }> | null;
   }>;
+};
+
+export type CombatQueryVariables = Exact<{
+  combatId: Scalars["String"]["input"];
+}>;
+
+export type CombatQuery = {
+  __typename?: "Query";
+  combat?: {
+    __typename?: "Combat";
+    id: string;
+    player: {
+      __typename?: "Competitor";
+      name: string;
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    playerGod: {
+      __typename?: "God";
+      name: string;
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    opponent: {
+      __typename?: "Competitor";
+      name: string;
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    opponentGod: {
+      __typename?: "God";
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    trial: {
+      __typename?: "Trial";
+      name: string;
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+  } | null;
 };
 
 export type GetGodimageQueryVariables = Exact<{ [key: string]: never }>;
@@ -532,6 +568,101 @@ export type GetCombatStatsSuspenseQueryHookResult = ReturnType<
 export type GetCombatStatsQueryResult = Apollo.QueryResult<
   GetCombatStatsQuery,
   GetCombatStatsQueryVariables
+>;
+export const CombatDocument = gql`
+  query Combat($combatId: String!) {
+    combat(id: $combatId) {
+      id
+      player {
+        name
+        image {
+          path
+        }
+      }
+      playerGod {
+        image {
+          path
+        }
+        name
+      }
+      opponent {
+        name
+        image {
+          path
+        }
+      }
+      opponentGod {
+        image {
+          path
+        }
+      }
+      trial {
+        name
+        image {
+          path
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useCombatQuery__
+ *
+ * To run a query within a React component, call `useCombatQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCombatQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCombatQuery({
+ *   variables: {
+ *      combatId: // value for 'combatId'
+ *   },
+ * });
+ */
+export function useCombatQuery(
+  baseOptions: Apollo.QueryHookOptions<CombatQuery, CombatQueryVariables> &
+    ({ variables: CombatQueryVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CombatQuery, CombatQueryVariables>(
+    CombatDocument,
+    options
+  );
+}
+export function useCombatLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<CombatQuery, CombatQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CombatQuery, CombatQueryVariables>(
+    CombatDocument,
+    options
+  );
+}
+export function useCombatSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<CombatQuery, CombatQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<CombatQuery, CombatQueryVariables>(
+    CombatDocument,
+    options
+  );
+}
+export type CombatQueryHookResult = ReturnType<typeof useCombatQuery>;
+export type CombatLazyQueryHookResult = ReturnType<typeof useCombatLazyQuery>;
+export type CombatSuspenseQueryHookResult = ReturnType<
+  typeof useCombatSuspenseQuery
+>;
+export type CombatQueryResult = Apollo.QueryResult<
+  CombatQuery,
+  CombatQueryVariables
 >;
 export const GetGodimageDocument = gql`
   query GetGodimage {

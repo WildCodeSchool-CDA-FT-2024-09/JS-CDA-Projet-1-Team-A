@@ -19,24 +19,6 @@ export default class CombatResolver {
     return combat;
   }
 
-  @Query(() => Combat)
-  async combat(@Arg("id") id: string) {
-    const competitor = await Combat.findOneOrFail({
-      where: { id },
-      relations: [
-        "player.modifierAssignments",
-        "player.profession.modifierAssignments",
-        "opponent.modifierAssignments",
-        "opponent.profession.modifierAssignments",
-        "trial.modifierAssignments",
-        "playerGod.modifierAssignments",
-        "opponentGod.modifierAssignments",
-        "modifierAssignments",
-      ],
-    });
-    return competitor;
-  }
-
   @Query(() => CombatResult)
   async combatResult(@Arg("id") id: string) {
     const combat = await Combat.findOneOrFail({
@@ -154,5 +136,21 @@ export default class CombatResolver {
     }
 
     return combatResult;
+  }
+
+  @Query(() => Combat, { nullable: true })
+  async combat(@Arg("id") id: string): Promise<Combat | null> {
+    const combat = await Combat.findOne({
+      where: { id },
+      relations: [
+        "player.image",
+        "opponent.image",
+        "trial.image",
+        "playerGod.image",
+        "opponentGod.image",
+        "modifierAssignments",
+      ],
+    });
+    return combat;
   }
 }
