@@ -85,17 +85,9 @@ export type God = {
   name: Scalars["String"]["output"];
 };
 
-export type GodWithModifiers = {
-  __typename?: "GodWithModifiers";
-  modifierLabel?: Maybe<Scalars["String"]["output"]>;
-  name: Scalars["String"]["output"];
-  value?: Maybe<Scalars["Float"]["output"]>;
-  valueType?: Maybe<Scalars["String"]["output"]>;
-};
-
 export type Image = {
   __typename?: "Image";
-  id: Scalars["Float"]["output"];
+  id?: Maybe<Scalars["Float"]["output"]>;
   path: Scalars["String"]["output"];
   type?: Maybe<Scalars["String"]["output"]>;
 };
@@ -133,8 +125,16 @@ export type Profession = {
   description?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["String"]["output"];
   image?: Maybe<Array<Image>>;
-  modifierAssignments?: Maybe<Array<ModifierAssignment>>;
+  modifierAssignments?: Maybe<Array<ProfessionModifiers>>;
   name?: Maybe<Scalars["String"]["output"]>;
+};
+
+export type ProfessionModifiers = {
+  __typename?: "ProfessionModifiers";
+  id?: Maybe<Scalars["String"]["output"]>;
+  modifierLabel: Scalars["String"]["output"];
+  value: Scalars["Float"]["output"];
+  valueType: Scalars["String"]["output"];
 };
 
 export type Query = {
@@ -142,9 +142,8 @@ export type Query = {
   combats: Array<Combat>;
   competitor: Competitor;
   competitors: Array<Competitor>;
-  getGods: Array<God>;
-  getGodsWithModifiers: Array<GodWithModifiers>;
-  getProfession: Array<Profession>;
+  getGod: Array<God>;
+  professions: Array<Profession>;
 };
 
 export type QueryCompetitorArgs = {
@@ -195,7 +194,7 @@ export type CreateTemporaryCompetitorMutation = {
       id: string;
       name?: string | null;
     } | null;
-    image?: { __typename?: "Image"; id: number; path: string } | null;
+    image?: { __typename?: "Image"; id?: number | null; path: string } | null;
   };
 };
 
@@ -229,6 +228,25 @@ export type GetCombatStatsQuery = {
       modifierLabel: string;
       value: number;
       valueType: string;
+    }> | null;
+  }>;
+};
+
+export type GetProfessionsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetProfessionsQuery = {
+  __typename?: "Query";
+  professions: Array<{
+    __typename?: "Profession";
+    name?: string | null;
+    id: string;
+    description?: string | null;
+    image?: Array<{ __typename?: "Image"; path: string }> | null;
+    modifierAssignments?: Array<{
+      __typename?: "ProfessionModifiers";
+      modifierLabel: string;
+      valueType: string;
+      value: number;
     }> | null;
   }>;
 };
@@ -446,4 +464,91 @@ export type GetCombatStatsSuspenseQueryHookResult = ReturnType<
 export type GetCombatStatsQueryResult = Apollo.QueryResult<
   GetCombatStatsQuery,
   GetCombatStatsQueryVariables
+>;
+export const GetProfessionsDocument = gql`
+  query GetProfessions {
+    professions {
+      name
+      id
+      description
+      image {
+        path
+      }
+      modifierAssignments {
+        modifierLabel
+        valueType
+        value
+      }
+    }
+  }
+`;
+
+/**
+ * __useGetProfessionsQuery__
+ *
+ * To run a query within a React component, call `useGetProfessionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProfessionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProfessionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetProfessionsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetProfessionsQuery,
+    GetProfessionsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetProfessionsQuery, GetProfessionsQueryVariables>(
+    GetProfessionsDocument,
+    options
+  );
+}
+export function useGetProfessionsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetProfessionsQuery,
+    GetProfessionsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetProfessionsQuery, GetProfessionsQueryVariables>(
+    GetProfessionsDocument,
+    options
+  );
+}
+export function useGetProfessionsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        GetProfessionsQuery,
+        GetProfessionsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    GetProfessionsQuery,
+    GetProfessionsQueryVariables
+  >(GetProfessionsDocument, options);
+}
+export type GetProfessionsQueryHookResult = ReturnType<
+  typeof useGetProfessionsQuery
+>;
+export type GetProfessionsLazyQueryHookResult = ReturnType<
+  typeof useGetProfessionsLazyQuery
+>;
+export type GetProfessionsSuspenseQueryHookResult = ReturnType<
+  typeof useGetProfessionsSuspenseQuery
+>;
+export type GetProfessionsQueryResult = Apollo.QueryResult<
+  GetProfessionsQuery,
+  GetProfessionsQueryVariables
 >;

@@ -4,8 +4,10 @@ import { Profession } from "./profession.entity";
 @Resolver(Profession)
 export default class ProfessionResolver {
   @Query(() => [Profession])
-  async getProfession() {
-    const profession = await Profession.find();
+  async professions() {
+    const profession = await Profession.find({
+      relations: ["modifierAssignments", "image"],
+    });
     return profession;
   }
 }
