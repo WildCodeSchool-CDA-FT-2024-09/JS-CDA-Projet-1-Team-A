@@ -93,3 +93,18 @@ export class CombatModifiers {
   @ViewColumn()
   modifierLabel: string;
 }
+
+@ObjectType()
+export class CombatResult {
+  @Field()
+  id: string;
+
+  @Field()
+  resultShortText: string;
+
+  @Field()
+  resultLongText: string;
+
+  @Field()
+  combatDetail: string;
+}

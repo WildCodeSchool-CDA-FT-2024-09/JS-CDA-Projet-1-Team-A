@@ -6,11 +6,13 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  ViewEntity,
+  ViewColumn,
+  JoinColumn,
 } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
 import { Image } from "../image/image.entity";
 import { Combat } from "../combat/combat.entity";
-import { ModifierAssignment } from "../modifier_assignment/modifierAssignment.entity";
 
 @ObjectType()
 @Entity()
@@ -27,13 +29,44 @@ export class Trial extends BaseEntity {
   @Column()
   description: string;
 
-  @Field(() => Image)
+  @Field(() => Image, { nullable: true })
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 
   @OneToMany(() => Combat, (combat) => combat.id)
   combats: Combat[];
 
-  @Field(() => [ModifierAssignment], { nullable: true })
-  modifierAssignments?: ModifierAssignment[];
+  @Field(() => [TrialModifiers], { nullable: true })
+  @OneToMany(() => TrialModifiers, (trialModifier) => trialModifier.id)
+  @JoinColumn({ name: "id" })
+  modifierAssignments?: TrialModifiers[];
+}
+
+@ObjectType()
+@ViewEntity({
+  expression: `
+    SELECT "t"."id", "m"."label" AS "modifierLabel","ma"."valueType", "ma"."value", "ma"."modifiedEntityId"
+    FROM "trial" "t"
+    LEFT JOIN "modifier_assignment" "ma" ON "ma"."modifiedEntityId" = "t"."id"
+    LEFT JOIN "modifier" "m" ON "m"."id" = "ma"."modifierId"
+  `,
+})
+export class TrialModifiers {
+  @Field({ nullable: true })
+  @ViewColumn()
+  @ManyToOne(() => Trial, (trial) => trial.id)
+  @JoinColumn({ name: "id" })
+  id: string;
+
+  @Field()
+  @ViewColumn()
+  value: number;
+
+  @Field()
+  @ViewColumn()
+  valueType: string;
+
+  @Field()
+  @ViewColumn()
+  modifierLabel: string;
 }
