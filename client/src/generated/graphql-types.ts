@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
@@ -36,6 +37,7 @@ export type Combat = {
   __typename?: "Combat";
   createdAt: Scalars["DateTimeISO"]["output"];
   id: Scalars["String"]["output"];
+  image?: Maybe<Image>;
   modifierAssignments?: Maybe<Array<CombatModifiers>>;
   opponent: Competitor;
   opponentGod: God;
@@ -58,7 +60,9 @@ export type CombatModifiers = {
 export type Competitor = {
   __typename?: "Competitor";
   avatarImage?: Maybe<Image>;
+  battleImage: Image;
   createdAt: Scalars["DateTimeISO"]["output"];
+  god?: Maybe<God>;
   id: Scalars["String"]["output"];
   image?: Maybe<Image>;
   modifierAssignments?: Maybe<Array<CompetitorModifiers>>;
@@ -80,7 +84,7 @@ export type God = {
   __typename?: "God";
   description: Scalars["String"]["output"];
   id: Scalars["String"]["output"];
-  image: Image;
+  image?: Maybe<Image>;
   modifierAssignments?: Maybe<Array<ModifierAssignment>>;
   name: Scalars["String"]["output"];
 };
@@ -96,7 +100,7 @@ export type Modifier = {
   __typename?: "Modifier";
   id: Scalars["Float"]["output"];
   label: Scalars["String"]["output"];
-  modifier: Array<ModifierAssignment>;
+  modifierAssignments: Array<ModifierAssignment>;
 };
 
 export type ModifierAssignment = {
@@ -122,6 +126,7 @@ export type MutationDeleteTemporaryCompetitorArgs = {
 
 export type Profession = {
   __typename?: "Profession";
+  competitors: Array<Competitor>;
   description?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["String"]["output"];
   image?: Maybe<Image>;
@@ -139,6 +144,7 @@ export type ProfessionModifiers = {
 
 export type Query = {
   __typename?: "Query";
+  combat?: Maybe<Combat>;
   combats: Array<Combat>;
   competitor: Competitor;
   competitors: Array<Competitor>;
@@ -146,6 +152,10 @@ export type Query = {
   getImage: Array<Image>;
   getTrial: Array<Trial>;
   professions: Array<Profession>;
+};
+
+export type QueryCombatArgs = {
+  id: Scalars["String"]["input"];
 };
 
 export type QueryCompetitorArgs = {
@@ -159,7 +169,9 @@ export type QueryGetImageArgs = {
 export type TemporaryCompetitor = {
   __typename?: "TemporaryCompetitor";
   avatarImage?: Maybe<Image>;
+  battleImage: Image;
   createdAt?: Maybe<Scalars["DateTimeISO"]["output"]>;
+  god?: Maybe<God>;
   id: Scalars["String"]["output"];
   image?: Maybe<Image>;
   modifierAssignments?: Maybe<Array<CompetitorModifiers>>;
@@ -215,12 +227,12 @@ export type DeleteTemporaryCompetitorMutation = {
 
 export type GetCombatStatsQueryVariables = Exact<{ [key: string]: never }>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type GetCombatStatsQuery = {
   __typename?: "Query";
   combats: Array<{
     __typename?: "Combat";
     id: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createdAt: any;
     resultLongText: string;
     resultShortText: string;
@@ -238,13 +250,49 @@ export type GetCombatStatsQuery = {
   }>;
 };
 
+export type CombatQueryVariables = Exact<{
+  combatId: Scalars["String"]["input"];
+}>;
+
+export type CombatQuery = {
+  __typename?: "Query";
+  combat?: {
+    __typename?: "Combat";
+    id: string;
+    player: {
+      __typename?: "Competitor";
+      name: string;
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    playerGod: {
+      __typename?: "God";
+      name: string;
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    opponent: {
+      __typename?: "Competitor";
+      name: string;
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    opponentGod: {
+      __typename?: "God";
+      image?: { __typename?: "Image"; path: string } | null;
+    };
+    trial: {
+      __typename?: "Trial";
+      name: string;
+      image: { __typename?: "Image"; path: string };
+    };
+  } | null;
+};
+
 export type GetGodimageQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetGodimageQuery = {
   __typename?: "Query";
   getGod: Array<{
     __typename?: "God";
-    image: { __typename?: "Image"; path: string };
+    image?: { __typename?: "Image"; path: string } | null;
   }>;
 };
 
@@ -501,6 +549,101 @@ export type GetCombatStatsSuspenseQueryHookResult = ReturnType<
 export type GetCombatStatsQueryResult = Apollo.QueryResult<
   GetCombatStatsQuery,
   GetCombatStatsQueryVariables
+>;
+export const CombatDocument = gql`
+  query Combat($combatId: String!) {
+    combat(id: $combatId) {
+      id
+      player {
+        name
+        image {
+          path
+        }
+      }
+      playerGod {
+        image {
+          path
+        }
+        name
+      }
+      opponent {
+        name
+        image {
+          path
+        }
+      }
+      opponentGod {
+        image {
+          path
+        }
+      }
+      trial {
+        name
+        image {
+          path
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useCombatQuery__
+ *
+ * To run a query within a React component, call `useCombatQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCombatQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCombatQuery({
+ *   variables: {
+ *      combatId: // value for 'combatId'
+ *   },
+ * });
+ */
+export function useCombatQuery(
+  baseOptions: Apollo.QueryHookOptions<CombatQuery, CombatQueryVariables> &
+    ({ variables: CombatQueryVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<CombatQuery, CombatQueryVariables>(
+    CombatDocument,
+    options
+  );
+}
+export function useCombatLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<CombatQuery, CombatQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<CombatQuery, CombatQueryVariables>(
+    CombatDocument,
+    options
+  );
+}
+export function useCombatSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<CombatQuery, CombatQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<CombatQuery, CombatQueryVariables>(
+    CombatDocument,
+    options
+  );
+}
+export type CombatQueryHookResult = ReturnType<typeof useCombatQuery>;
+export type CombatLazyQueryHookResult = ReturnType<typeof useCombatLazyQuery>;
+export type CombatSuspenseQueryHookResult = ReturnType<
+  typeof useCombatSuspenseQuery
+>;
+export type CombatQueryResult = Apollo.QueryResult<
+  CombatQuery,
+  CombatQueryVariables
 >;
 export const GetGodimageDocument = gql`
   query GetGodimage {
