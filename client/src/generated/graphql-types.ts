@@ -83,14 +83,9 @@ export type God = {
 
 export type Image = {
   __typename?: "Image";
-  god: God;
-  id: Scalars["Float"]["output"];
-  idAvatarImage: Competitor;
-  idBattleImage: Competitor;
-  idImageProfession: Profession;
-  imageTrial: Trial;
+  id?: Maybe<Scalars["Float"]["output"]>;
   path: Scalars["String"]["output"];
-  type: Scalars["String"]["output"];
+  type?: Maybe<Scalars["String"]["output"]>;
 };
 
 export type Modifier = {
@@ -115,10 +110,17 @@ export type Profession = {
   __typename?: "Profession";
   description: Scalars["String"]["output"];
   id: Scalars["String"]["output"];
-  image: Array<Image>;
-  modifierAssignments?: Maybe<Array<ModifierAssignment>>;
+  image: Image;
+  modifierAssignments?: Maybe<Array<ProfessionModifiers>>;
   name: Scalars["String"]["output"];
-  profession: Competitor;
+};
+
+export type ProfessionModifiers = {
+  __typename?: "ProfessionModifiers";
+  id?: Maybe<Scalars["String"]["output"]>;
+  modifierLabel: Scalars["String"]["output"];
+  value: Scalars["Float"]["output"];
+  valueType: Scalars["String"]["output"];
 };
 
 export type Query = {
@@ -147,6 +149,7 @@ export type Trial = {
 
 export type GetCombatStatsQueryVariables = Exact<{ [key: string]: never }>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type GetCombatStatsQuery = {
   __typename?: "Query";
   combats: Array<{
@@ -301,6 +304,7 @@ export type GetCombatStatsQueryResult = Apollo.QueryResult<
   GetCombatStatsQuery,
   GetCombatStatsQueryVariables
 >;
+
 export const GetGodimageDocument = gql`
   query GetGodimage {
     getGod {
@@ -316,16 +320,19 @@ export const GetGodimageDocument = gql`
  *
  * To run a query within a React component, call `useGetGodimageQuery` and pass it any options that fit your needs.
  * When your component renders, `useGetGodimageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
+
  * const { data, loading, error } = useGetGodimageQuery({
  *   variables: {
  *   },
  * });
  */
+
 export function useGetGodimageQuery(
   baseOptions?: Apollo.QueryHookOptions<
     GetGodimageQuery,
@@ -437,6 +444,7 @@ export function useGetImageFiltreSuspenseQuery(
     | Apollo.SuspenseQueryHookOptions<
         GetImageFiltreQuery,
         GetImageFiltreQueryVariables
+
       >
 ) {
   const options =
