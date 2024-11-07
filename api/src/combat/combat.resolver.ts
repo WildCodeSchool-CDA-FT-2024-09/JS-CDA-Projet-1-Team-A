@@ -41,7 +41,6 @@ export default class CombatResolver {
       //   modifierAssignments: true,
       // },
     });
-    console.info(JSON.stringify(combat, null, 2));
     return combat;
   }
 }

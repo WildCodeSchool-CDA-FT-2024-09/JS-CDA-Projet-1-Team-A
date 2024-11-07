@@ -27,13 +27,6 @@ export class Profession extends BaseEntity {
   @Column()
   description: string;
 
-  // @OneToMany(() => Competitor, (profession) => profession)
-  // profession: Competitor;
-
-  // @ManyToOne(() => Image, (image) => image.id)
-  // image: Image;
-
-  /////////////////////////////////////////////////////////////////////
   @Field(() => [Competitor])
   @OneToMany(() => Competitor, (competitor) => competitor.profession)
   competitors: Competitor[];
@@ -41,7 +34,6 @@ export class Profession extends BaseEntity {
   @Field(() => Image)
   @ManyToOne(() => Image, (image) => image.idImageProfession)
   image: Image;
-  /////////////////////////////////////////////////////////////////////
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];

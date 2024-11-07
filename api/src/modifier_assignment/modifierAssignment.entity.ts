@@ -32,15 +32,9 @@ export class ModifierAssignment extends BaseEntity {
   @Column()
   modifiedEntityType: string;
 
-  // @Field(() => Modifier)
-  // @ManyToOne(() => Modifier, (modifier) => modifier)
-  // modifier: Modifier;
-
-  //////////////////////////////////////////////////////////////////////
   @Field(() => Modifier)
   @ManyToOne(() => Modifier, (modifier) => modifier.modifierAssignments)
   modifier: Modifier;
-  //////////////////////////////////////////////////////////////////////
 
   @Field(() => ID)
   modifiedEntity: string;

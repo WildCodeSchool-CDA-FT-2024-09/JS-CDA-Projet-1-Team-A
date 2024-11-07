@@ -32,32 +32,26 @@ export class Combat extends BaseEntity {
   @Column()
   resultLongText: string;
 
-  // Relation avec le Dieu du joueur
-  @Field(() => God) // Rendre nullable si le dieu peut ne pas exister
+  @Field(() => God)
   @ManyToOne(() => God, (player) => player.id)
   playerGod: God;
 
-  // Relation avec le Dieu de l’adversaire
-  @Field(() => God) // Rendre nullable si le dieu peut ne pas exister
+  @Field(() => God)
   @ManyToOne(() => God, (opponent) => opponent.id)
   opponentGod: God;
 
-  // Relation avec le joueur
   @Field(() => Competitor)
   @ManyToOne(() => Competitor, (player) => player.id)
   player: Competitor;
 
-  // Relation avec l’adversaire
   @Field(() => Competitor)
   @ManyToOne(() => Competitor, (opponent) => opponent)
   opponent: Competitor;
 
-  // Relation avec le Trial
   @Field(() => Trial)
   @ManyToOne(() => Trial, (trial) => trial.id)
   trial: Trial;
 
-  // Image du combat
   @Field(() => Image, { nullable: true })
   @ManyToOne(() => Image)
   image?: Image;

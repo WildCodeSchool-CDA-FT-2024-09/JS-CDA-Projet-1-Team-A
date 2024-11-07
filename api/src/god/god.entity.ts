@@ -35,13 +35,12 @@ export class God extends BaseEntity {
   @OneToMany(() => Combat, (combat) => combat.player)
   playerGodCombats: Combat[];
 
-  @OneToMany(() => Combat, (combat) => combat.opponent) // Le champ doit être opponentGod
+  @OneToMany(() => Combat, (combat) => combat.opponent)
   opponentGodCombats: Combat[];
 
   @Field(() => [ModifierAssignment], { nullable: true })
   modifierAssignments?: ModifierAssignment[];
 
-  ///////////////////////////////////////////
   @OneToMany(() => Competitor, (competitor) => competitor.god)
   competitors: Competitor[];
 }

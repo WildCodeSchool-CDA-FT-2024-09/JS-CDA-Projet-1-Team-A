@@ -36,19 +36,9 @@ export class Image extends BaseEntity {
   @OneToMany(() => Competitor, (battleImage) => battleImage.id)
   idBattleImage: Competitor[];
 
-  ///////////////////////////////////////////////////////////////////
-  // @OneToMany(() => Competitor, (competitor) => competitor.avatarImage)
-  // avatarCompetitors: Competitor[];
-
-  // @Field(() => [Competitor])
-  // @OneToMany(() => Competitor, (competitor) => competitor.battleImage)
-  // battleCompetitors: Competitor[];
-  ////////////////////////////////////////////////////////////////////
-
   @OneToMany(() => Profession, (profession) => profession.id)
   idImageProfession: Profession[];
 
   @OneToMany(() => Trial, (trial) => trial.id)
   imageTrial: Trial;
-  // idBattleImage: Image;
 }
