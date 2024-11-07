@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { CharacterContext } from "../contexts/CharacterContext";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
-import { useGetProfessionsQuery } from "../generated/graphql-types";
+import AvatarCarouselWrapper from "../components/CarouselWrapper";
+import { useGetImageFiltreQuery } from "../generated/graphql-types";
 
 const stats = [
   {
@@ -32,16 +33,31 @@ const stats = [
   { statName: "Chance", value: 50 },
 ];
 
-const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
+const cities = [
+  "Athènes",
+  "Sparte",
+  "Thessalonique",
+  "Corinthe",
+  "Rhodes",
+  "Delphes",
+  "Olympie",
+  "Argos",
+  "Mycènes",
+];
+
 function CreateCharacterPage() {
+  const { data, loading, error } = useGetImageFiltreQuery({
+    variables: { type: "competitor_avatar" },
+  });
   const { character, setCharacter } = useContext(CharacterContext);
 
-  const { loading, error, data } = useGetProfessionsQuery();
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
-  if (!data) return <p>No data</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
-  const { professions } = data;
+  const imageUrls =
+    data?.getImage.map((image) => ({
+      url: image.path,
+    })) || [];
 
   return (
     <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
@@ -69,9 +85,11 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
-      {professions && professions.length && (
-        <CarouselProfession professions={professions} />
-      )}
+      <AvatarCarouselWrapper
+        imageUrls={imageUrls}
+        myTitle="Choisissez votre Avatar"
+      />
+      <CarouselProfession profession={profession} />
       <StatsCharacter stats={stats} />
     </section>
   );

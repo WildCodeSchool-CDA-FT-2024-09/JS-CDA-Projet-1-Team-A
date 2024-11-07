@@ -1,7 +1,7 @@
 /**
  * This file provides queries which will be used in GraphQL codegen
  */
-
+import { DocumentNode } from "@apollo/client";
 import { gql } from "@apollo/client";
 
 export const GET_ALL_COMBAT_STATS = gql`
@@ -35,19 +35,32 @@ export const GET_ALL_COMBAT_STATS = gql`
   }
 `;
 
-export const GET_ALL_PROFESSION = gql`
-  query GetProfessions {
-    professions {
-      name
-      id
-      description
+export const GetGodimageDocument: DocumentNode = gql`
+  query GetGodimage {
+    getGod {
       image {
         path
       }
-      modifierAssignments {
-        modifierLabel
-        valueType
-        value
+    }
+  }
+`;
+
+export const ImageFiltre = gql`
+  query GetImageFiltre($type: String!) {
+    getImage(type: $type) {
+      path
+      type
+    }
+  }
+`;
+
+export const getTrial = gql`
+  query GetTrial {
+    getTrial {
+      description
+      name
+      image {
+        path
       }
     }
   }

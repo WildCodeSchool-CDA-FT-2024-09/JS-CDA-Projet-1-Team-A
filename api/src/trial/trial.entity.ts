@@ -27,7 +27,7 @@ export class Trial extends BaseEntity {
   @Column()
   description: string;
 
-  @Field(() => [Image])
+  @Field(() => Image)
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 

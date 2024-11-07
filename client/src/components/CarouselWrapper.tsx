@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AvatarCarousel from "./competitor/AvatarCarousel";
 
-const AvatarCarouselWrapper = ({ imageUrls }) => {
+const AvatarCarouselWrapper = ({ imageUrls, myTitle }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(3);
   const [startX, setStartX] = useState<number | null>(null);
@@ -65,18 +65,21 @@ const AvatarCarouselWrapper = ({ imageUrls }) => {
   };
 
   return (
-    <AvatarCarousel
-      imageUrls={imageUrls}
-      handleTouchStart={handleTouchStart}
-      handleTouchMove={handleTouchMove}
-      handleTouchEnd={resetDrag}
-      handleMouseDown={handleMouseDown}
-      isDragging={isDragging}
-      handleMouseMove={handleMouseMove}
-      handleMouseUp={resetDrag}
-      currentIndex={currentIndex}
-      mobile={isMobile}
-    />
+    <>
+      <AvatarCarousel
+        imageUrls={imageUrls}
+        myTitle={myTitle}
+        handleTouchStart={handleTouchStart}
+        handleTouchMove={handleTouchMove}
+        handleTouchEnd={resetDrag}
+        handleMouseDown={handleMouseDown}
+        isDragging={isDragging}
+        handleMouseMove={handleMouseMove}
+        handleMouseUp={resetDrag}
+        currentIndex={currentIndex}
+        mobile={isMobile}
+      />
+    </>
   );
 };
 
