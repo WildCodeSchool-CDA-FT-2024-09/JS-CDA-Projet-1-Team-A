@@ -29,13 +29,13 @@ export class God extends BaseEntity {
   description: string;
 
   @Field(() => Image, { nullable: true })
-  @ManyToOne(() => Image, { nullable: true })
+  @ManyToOne(() => Image, (image) => image.id)
   image?: Image;
 
-  @OneToMany(() => Combat, (combat) => combat.playerGod)
+  @OneToMany(() => Combat, (combat) => combat.player)
   playerGodCombats: Combat[];
 
-  @OneToMany(() => Combat, (combat) => combat.opponentGod) // Le champ doit être opponentGod
+  @OneToMany(() => Combat, (combat) => combat.opponent) // Le champ doit être opponentGod
   opponentGodCombats: Combat[];
 
   @Field(() => [ModifierAssignment], { nullable: true })

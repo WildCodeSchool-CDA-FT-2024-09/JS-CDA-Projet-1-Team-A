@@ -34,3 +34,40 @@ export const GET_ALL_COMBAT_STATS = gql`
     }
   }
 `;
+
+export const GET_COMBAT_ID = gql`
+  query Combat($combatId: String!) {
+    combat(id: $combatId) {
+      id
+      player {
+        name
+        image {
+          path
+        }
+      }
+      playerGod {
+        image {
+          path
+        }
+        name
+      }
+      opponent {
+        name
+        image {
+          path
+        }
+      }
+      opponentGod {
+        image {
+          path
+        }
+      }
+      trial {
+        name
+        image {
+          path
+        }
+      }
+    }
+  }
+`;

@@ -30,19 +30,19 @@ export class Image extends BaseEntity {
   @OneToMany(() => God, (god) => god.image)
   god: God[];
 
-  // @OneToMany(() => Competitor, (avatarImage) => avatarImage.id)
-  // idAvatarImage: Competitor[];
+  @OneToMany(() => Competitor, (avatarImage) => avatarImage.id)
+  idAvatarImage: Competitor[];
 
-  // @OneToMany(() => Competitor, (battleImage) => battleImage.id)
-  // idBattleImage: Competitor[];
+  @OneToMany(() => Competitor, (battleImage) => battleImage.id)
+  idBattleImage: Competitor[];
 
   ///////////////////////////////////////////////////////////////////
-  @OneToMany(() => Competitor, (competitor) => competitor.avatarImage)
-  avatarCompetitors: Competitor[];
+  // @OneToMany(() => Competitor, (competitor) => competitor.avatarImage)
+  // avatarCompetitors: Competitor[];
 
-  @Field(() => [Competitor])
-  @OneToMany(() => Competitor, (competitor) => competitor.battleImage)
-  battleCompetitors: Competitor[];
+  // @Field(() => [Competitor])
+  // @OneToMany(() => Competitor, (competitor) => competitor.battleImage)
+  // battleCompetitors: Competitor[];
   ////////////////////////////////////////////////////////////////////
 
   @OneToMany(() => Profession, (profession) => profession.id)
@@ -50,5 +50,5 @@ export class Image extends BaseEntity {
 
   @OneToMany(() => Trial, (trial) => trial.id)
   imageTrial: Trial;
-  idBattleImage: Image;
+  // idBattleImage: Image;
 }

@@ -24,18 +24,22 @@ export default class CombatResolver {
     const combat = await Combat.findOne({
       where: { id },
       relations: [
-        "player",
-        "player.avatarImage",
-        "player.god",
-        "player.god.image",
-        "opponent",
-        "opponent.avatarImage",
-        "opponent.god",
-        "opponent.god.image",
-        "trial",
+        "player.image",
+        "opponent.image",
         "trial.image",
-        "image",
+        "playerGod.image",
+        "opponentGod.image",
+        "modifierAssignments",
       ],
+
+      // relations: {
+      //   player: { image: true },
+      //   opponent: { image: true },
+      //   trial: { image: true },
+      //   playerGod: { image: true },
+      //   opponentGod: { image: true },
+      //   modifierAssignments: true,
+      // },
     });
     console.info(JSON.stringify(combat, null, 2));
     return combat;
