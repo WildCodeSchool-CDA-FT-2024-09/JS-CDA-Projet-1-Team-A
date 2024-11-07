@@ -2,36 +2,8 @@ import { useContext } from "react";
 import { CharacterContext } from "../contexts/CharacterContext";
 import StatsCharacter from "../components/competitor/StatsCharacter";
 import CarouselProfession from "../components/competitor/CarouselProfession";
-import AvatarCarouselWrapper from "../components/CarouselWrapper";
+import { useGetProfessionsQuery } from "../generated/graphql-types";
 
-// Fausse donnée en attendant le back end
-const profession = [
-  {
-    professionName: "Philosophe",
-    statsName: "Intelligence",
-    value: 87,
-    description:
-      "Wow, c'est un métier incroyable ! Vous êtes un philosophe incroyablement musclé !",
-    link: "/img/dallePhilosopher1.png",
-  },
-  {
-    professionName: "Forgeron",
-    statsName: "Force",
-    value: 72,
-    description:
-      "Wow, c'est un métier incroyable ! Vous êtes un forgeron incroyablement musclé !",
-    link: "/img/dalleForge1.png",
-  },
-  {
-    professionName: "Marin",
-    statsName: "Agilité",
-    value: 70,
-    description:
-      "Wow, c'est un métier incroyable ! Vous êtes un marin incroyablement musclé !",
-
-    link: "/img/dalleSailor1.png",
-  },
-];
 const stats = [
   {
     statName: "Intelligence",
@@ -59,25 +31,21 @@ const stats = [
   },
   { statName: "Chance", value: 50 },
 ];
-const imageUrls = [
-  { url: "/img/freepik-apollon1.png" },
-  { url: "/img/freepik-artemis1.png" },
-  { url: "/img/freepik-dionysos1.png" },
-  { url: "/img/freepik-gracefully1.png" },
-  { url: "/img/freepik-zeus1.png" },
-  { url: "/img/freepik-apollon1.png" },
-  { url: "/img/freepik-artemis1.png" },
-  { url: "/img/freepik-dionysos1.png" },
-  { url: "/img/freepik-gracefully1.png" },
-  { url: "/img/freepik-zeus1.png" },
-];
+
 const cities = ["Paris", "Lyon", "Marseille", "Toulouse"];
 function CreateCharacterPage() {
   const { character, setCharacter } = useContext(CharacterContext);
 
+  const { loading, error, data } = useGetProfessionsQuery();
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+  if (!data) return <p>No data</p>;
+
+  const { professions } = data;
+
   return (
-    <section className="-mt-20 h-full w-full p-4 pt-8 backdrop-blur md:p-8">
-      <div className="flex flex-col items-center py-4">
+    <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
+      <div className="mt-12 flex flex-col items-center py-4 lg:mt-4">
         <form className="grid w-full grid-cols-2 gap-4 py-4">
           <div className="flex flex-col items-center p-4">
             <label className="p-2">Quel est ton nom ?</label>
@@ -101,8 +69,9 @@ function CreateCharacterPage() {
           </div>
         </form>
       </div>
-      <AvatarCarouselWrapper imageUrls={imageUrls} />
-      <CarouselProfession profession={profession} />
+      {professions && professions.length && (
+        <CarouselProfession professions={professions} />
+      )}
       <StatsCharacter stats={stats} />
     </section>
   );
