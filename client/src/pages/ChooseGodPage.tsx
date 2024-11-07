@@ -4,7 +4,6 @@ import { CharacterContext } from "../contexts/CharacterContext";
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
 import { useGetGodimageQuery } from "../generated/graphql-types";
 import { useGetTrialQuery } from "../generated/graphql-types";
-
 interface Trial {
   name: string;
   description: string;
