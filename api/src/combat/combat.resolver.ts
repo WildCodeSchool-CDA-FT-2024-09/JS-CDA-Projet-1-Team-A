@@ -1,5 +1,6 @@
 import { Arg, Query, Resolver } from "type-graphql";
 import { Combat, CombatResult } from "./combat.entity";
+import { findModifierValue, generateCombatText } from "./combat.utils";
 
 @Resolver(Combat)
 export default class CombatResolver {
@@ -77,32 +78,36 @@ export default class CombatResolver {
 
     // Calculate the trial-relevant stats + bonuses for each player
     trial.modifierAssignments?.forEach((tMa) => {
-      const playerBaseStat = player.modifierAssignments?.find(
-        (pMa) => pMa.modifierLabel === tMa.modifierLabel
-      )?.value;
-      const opponentBaseStat = opponent.modifierAssignments?.find(
-        (oMa) => oMa.modifierLabel === tMa.modifierLabel
-      )?.value;
-      const playerGodBonus =
-        playerGod.modifierAssignments?.find(
-          (pGMa) => pGMa.modifierLabel === tMa.modifierLabel
-        )?.value || 0;
-      const opponentGodBonus =
-        opponentGod.modifierAssignments?.find(
-          (oGMa) => oGMa.modifierLabel === tMa.modifierLabel
-        )?.value || 0;
-      const playerProfessionBonus =
-        player.profession.modifierAssignments?.find(
-          (pPMa) => pPMa.modifierLabel === tMa.modifierLabel
-        )?.value || 0;
-      const opponentProfessionBonus =
-        opponent.profession.modifierAssignments?.find(
-          (oPMa) => oPMa.modifierLabel === tMa.modifierLabel
-        )?.value || 0;
+      const playerBaseStat = findModifierValue(
+        player.modifierAssignments || [],
+        tMa.modifierLabel
+      );
+      const opponentBaseStat = findModifierValue(
+        opponent.modifierAssignments || [],
+        tMa.modifierLabel
+      );
+      const playerGodBonus = findModifierValue(
+        playerGod.modifierAssignments || [],
+        tMa.modifierLabel
+      );
+      const opponentGodBonus = findModifierValue(
+        opponentGod.modifierAssignments || [],
+        tMa.modifierLabel
+      );
+      const playerProfessionBonus = findModifierValue(
+        player.profession.modifierAssignments || [],
+        tMa.modifierLabel
+      );
+      const opponentProfessionBonus = findModifierValue(
+        opponent.profession.modifierAssignments || [],
+        tMa.modifierLabel
+      );
+
       result.modifiedRelevantPlayer[tMa.modifierLabel] =
-        (playerBaseStat || 0) + playerGodBonus + playerProfessionBonus;
+        playerBaseStat + playerGodBonus + playerProfessionBonus;
+
       result.modifiedRelevantOpponent[tMa.modifierLabel] =
-        (opponentBaseStat || 0) + opponentGodBonus + opponentProfessionBonus;
+        opponentBaseStat + opponentGodBonus + opponentProfessionBonus;
     });
 
     // Calculate the per-stat score for each player
@@ -123,17 +128,17 @@ export default class CombatResolver {
 
     combatResult.combatDetail = JSON.stringify(result);
 
-    // Write long text for player win or lose
-    if (result.finalScores.player > result.finalScores.opponent) {
-      combatResult.resultLongText = `Avec le soutien du puissant(e) ${playerGod.name}, notre joueur ${player.name} le ${player.profession.name} est le champion victorieux avec un score de ${result.finalScores.player} !!! Leur adversaire, ${opponent.name} le ${opponent.profession.name}, n'a pu obtenir qu'un score de ${result.finalScores.opponent}, à la honte éternelle de leur dieu humilié(e), ${opponentGod.name}.`;
-      combatResult.resultShortText = `Joueur : ${result.finalScores.player} vs Adversaire : ${result.finalScores.opponent} - ${player.name} gagne !`;
-    } else if (result.finalScores.player < result.finalScores.opponent) {
-      combatResult.resultLongText = `Malgré les efforts vaillants de ${player.name} le ${player.profession.name} et le soutien de ${playerGod.name}, notre joueur n'a pu obtenir qu'un score de ${result.finalScores.player} contre leur adversaire, ${opponent.name} le ${opponent.profession.name}, qui a obtenu un score de ${result.finalScores.opponent} et a été déclaré vainqueur, à la grande joie de leur dieu, ${opponentGod.name}.`;
-      combatResult.resultShortText = `Joueur : ${result.finalScores.player} vs Adversaire : ${result.finalScores.opponent} - ${player.name} perd !`;
-    } else {
-      combatResult.resultLongText = `Incroyablement, c'est une égalité avec un score de ${result.finalScores.player} pour les deux courageux compétiteurs !`;
-      combatResult.resultShortText = `Joueur : ${result.finalScores.player} vs Adversaire : ${result.finalScores.opponent} - ${player.name} et ${opponent.name} sont à égalité !`;
-    }
+    // Write text for player win or lose
+    const { longText, shortText } = generateCombatText(
+      player,
+      playerGod,
+      opponent,
+      opponentGod,
+      result
+    );
+
+    combatResult.resultLongText = longText;
+    combatResult.resultShortText = shortText;
 
     return combatResult;
   }
