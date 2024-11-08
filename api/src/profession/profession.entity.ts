@@ -20,18 +20,19 @@ export class Profession extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column()
   description: string;
 
-  @OneToMany(() => Competitor, (profession) => profession)
-  profession: Competitor;
+  @Field(() => [Competitor])
+  @OneToMany(() => Competitor, (competitor) => competitor.profession)
+  competitors: Competitor[];
 
-  @Field(() => Image)
+  @Field(() => Image, { nullable: true })
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 

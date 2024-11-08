@@ -35,6 +35,43 @@ export const GET_ALL_COMBAT_STATS = gql`
   }
 `;
 
+export const GET_COMBAT_ID = gql`
+  query Combat($combatId: String!) {
+    combat(id: $combatId) {
+      id
+      player {
+        name
+        image {
+          path
+        }
+      }
+      playerGod {
+        image {
+          path
+        }
+        name
+      }
+      opponent {
+        name
+        image {
+          path
+        }
+      }
+      opponentGod {
+        image {
+          path
+        }
+      }
+      trial {
+        name
+        image {
+          path
+        }
+      }
+    }
+  }
+`;
+
 export const GetGodimageDocument: DocumentNode = gql`
   query GetGodimage {
     getGod {
@@ -61,6 +98,24 @@ export const getTrial = gql`
       name
       image {
         path
+      }
+    }
+  }
+`;
+
+export const GET_ALL_PROFESSION = gql`
+  query GetProfessions {
+    professions {
+      name
+      id
+      description
+      image {
+        path
+      }
+      modifierAssignments {
+        modifierLabel
+        valueType
+        value
       }
     }
   }

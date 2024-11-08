@@ -31,7 +31,7 @@ export class Trial extends BaseEntity {
   @ManyToOne(() => Image, (image) => image.id)
   image: Image;
 
-  @OneToMany(() => Combat, (combat) => combat.id)
+  @OneToMany(() => Combat, (combat) => combat.trial)
   combats: Combat[];
 
   @Field(() => [ModifierAssignment], { nullable: true })

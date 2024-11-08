@@ -1,7 +1,11 @@
 import * as dotenv from "dotenv";
 import { DataSource } from "typeorm";
 import { God } from "../god/god.entity";
-import { Competitor } from "../competitor/competitor.entity";
+import {
+  Competitor,
+  CompetitorModifiers,
+  TemporaryCompetitor,
+} from "../competitor/competitor.entity";
 import {
   Profession,
   ProfessionModifiers,
@@ -21,6 +25,8 @@ export const appDataSource = new DataSource({
   entities: [
     God,
     Competitor,
+    CompetitorModifiers,
+    TemporaryCompetitor,
     Profession,
     Image,
     Trial,
@@ -31,5 +37,5 @@ export const appDataSource = new DataSource({
     ProfessionModifiers,
   ],
   synchronize: true,
-  logging: false,
+  logging: true,
 });

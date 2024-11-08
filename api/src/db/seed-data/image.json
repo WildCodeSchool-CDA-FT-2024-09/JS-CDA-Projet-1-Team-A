@@ -110,6 +110,46 @@
     "path": "/img/competitors/battle/3.png"
   },
   {
+    "type": "competitor_avatar",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/avatars/4.png"
+  },
+  {
+    "type": "competitor_battle",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/battle/4.png"
+  },
+  {
+    "type": "competitor_avatar",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/avatars/5.png"
+  },
+  {
+    "type": "competitor_battle",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/battle/5.png"
+  },
+  {
+    "type": "competitor_avatar",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/avatars/6.png"
+  },
+  {
+    "type": "competitor_battle",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/battle/6.png"
+  },
+  {
+    "type": "competitor_avatar",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/avatars/7.png"
+  },
+  {
+    "type": "competitor_battle",
+    "target_entity": "MULTIPLE",
+    "path": "/img/competitors/battle/7.png"
+  },
+  {
     "type": "profession",
     "target_entity": "Forgeron",
     "path": "/img/professions/forgeron.png"
