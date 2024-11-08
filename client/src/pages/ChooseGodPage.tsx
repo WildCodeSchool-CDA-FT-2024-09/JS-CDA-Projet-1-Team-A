@@ -31,7 +31,9 @@ function ChooseGodPage() {
     dataTrial?.getTrial.map((trial) => ({
       name: trial.name,
       description: trial.description,
+
       imagePath: trial.image?.path,
+
     })) || [];
 
   const selectedTrial = trial.length > 0 ? trialRandom(trial) : null;
@@ -40,9 +42,11 @@ function ChooseGodPage() {
   if (error || errorTrial) return <p>Erreur lors du chargement des images</p>;
 
   return (
+
     <div className="fixed inset-0 flex h-screen w-full flex-col overflow-y-auto bg-black/50 pt-24 backdrop-blur-sm">
       <h1 className="my-5 text-xl font-bold">Champion {character}</h1>
       <section className="mx-20 rounded-lg bg-blue-fd bg-opacity-85 p-9 shadow-md">
+
         <ul>
           <h2 className="mb-4 text-xl font-bold">Voici ton épreuve</h2>
           {selectedTrial ? (
@@ -66,7 +70,9 @@ function ChooseGodPage() {
         <AvatarCarouselWrapper
           imageUrls={
             data?.getGod.map((god) => ({
+
               url: god.image?.path,
+
             })) || []
           }
           myTitle="Choisissez votre Dieu"
