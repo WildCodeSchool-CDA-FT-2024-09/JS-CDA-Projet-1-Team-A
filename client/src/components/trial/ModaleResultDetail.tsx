@@ -3,10 +3,10 @@ type ResultType = {
   status: string | null;
   valueBtn: string;
 };
-interface ModaleResultDetailProps {
+type ModaleResultDetailProps = {
   result: ResultType;
   textTrial: string;
-}
+};
 
 const ModaleResultDetail: React.FC<ModaleResultDetailProps> = ({
   result,

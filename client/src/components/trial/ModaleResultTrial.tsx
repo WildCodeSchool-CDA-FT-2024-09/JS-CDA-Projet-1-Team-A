@@ -1,7 +1,7 @@
-interface ModaleResultTrialProps {
+type ModaleResultTrialProps = {
   result: ResultType;
   playerImagePath: string;
-}
+};
 
 type ResultType = {
   status: string | null;
