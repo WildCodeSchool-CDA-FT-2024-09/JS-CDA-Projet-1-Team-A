@@ -2,8 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CharacterContext } from "../contexts/CharacterContext";
 import AvatarCarouselWrapper from "../components/CarouselWrapper";
-import { useGetGodimageQuery } from "../generated/graphql-types";
-import { useGetTrialQuery } from "../generated/graphql-types";
+import {
+  useGetGodimageQuery,
+  useGetTrialQuery,
+} from "../generated/graphql-types";
+
 interface Trial {
   name: string;
   description: string;
@@ -28,7 +31,7 @@ function ChooseGodPage() {
     dataTrial?.getTrial.map((trial) => ({
       name: trial.name,
       description: trial.description,
-      imagePath: trial.image.path,
+      imagePath: trial.image?.path,
     })) || [];
 
   const selectedTrial = trial.length > 0 ? trialRandom(trial) : null;
@@ -37,9 +40,9 @@ function ChooseGodPage() {
   if (error || errorTrial) return <p>Erreur lors du chargement des images</p>;
 
   return (
-    <div className="inset-0 flex h-screen w-full flex-col bg-black/50 backdrop-blur-sm">
-      <h1 className="mt-5 text-xl font-bold">Champion {character}</h1>
-      <section className="m-6 rounded-lg bg-blue-fd bg-opacity-85 p-2 shadow-md">
+    <div className="fixed inset-0 flex h-screen w-full flex-col overflow-y-auto bg-black/50 pt-24 backdrop-blur-sm">
+      <h1 className="my-5 text-xl font-bold">Champion {character}</h1>
+      <section className="mx-20 rounded-lg bg-blue-fd bg-opacity-85 p-9 shadow-md">
         <ul>
           <h2 className="mb-4 text-xl font-bold">Voici ton épreuve</h2>
           {selectedTrial ? (
@@ -63,7 +66,7 @@ function ChooseGodPage() {
         <AvatarCarouselWrapper
           imageUrls={
             data?.getGod.map((god) => ({
-              url: god.image.path,
+              url: god.image?.path,
             })) || []
           }
           myTitle="Choisissez votre Dieu"
