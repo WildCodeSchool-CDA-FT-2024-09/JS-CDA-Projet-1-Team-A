@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
@@ -28,7 +29,6 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   DateTimeISO: { input: any; output: any };
 };
 
@@ -236,7 +236,6 @@ export type GetCombatStatsQuery = {
   combats: Array<{
     __typename?: "Combat";
     id: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createdAt: any;
     resultLongText: string;
     resultShortText: string;
@@ -263,6 +262,7 @@ export type CombatQuery = {
   combat?: {
     __typename?: "Combat";
     id: string;
+    resultLongText: string;
     player: {
       __typename?: "Competitor";
       name: string;
@@ -602,6 +602,7 @@ export const CombatDocument = gql`
           path
         }
       }
+      resultLongText
     }
   }
 `;

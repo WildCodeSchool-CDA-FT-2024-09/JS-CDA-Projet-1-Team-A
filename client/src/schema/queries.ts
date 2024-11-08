@@ -68,6 +68,7 @@ export const GET_COMBAT_ID = gql`
           path
         }
       }
+      resultLongText
     }
   }
 `;

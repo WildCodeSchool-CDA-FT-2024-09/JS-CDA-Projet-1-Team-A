@@ -1,19 +1,28 @@
 interface ModaleResultTrialProps {
-  result: string;
+  result: ResultType;
+  playerImagePath: string;
 }
 
-export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
+type ResultType = {
+  status: string | null;
+  valueBtn: string;
+};
+
+export default function ModaleResultTrial({
+  result,
+  playerImagePath,
+}: ModaleResultTrialProps) {
   return (
     <div className="fixed inset-0 top-[170px] z-10 flex w-full flex-col items-center">
       {result && (
         <section className="relative flex h-[62vh] max-h-[62vh] w-[65vw] min-w-[280px] max-w-[700px] flex-col items-center justify-between rounded-xl bg-blue-fd bg-opacity-85 py-10">
           <img
-            src="/img/competitors/avatars/avatar.png"
+            src={playerImagePath}
             alt="avatar du joueur"
-            className={`w-44 rounded-xl ${result === "VICTOIRE" ? "" : "saturate-0"}`}
+            className={`w-44 rounded-xl ${result.status === "VICTOIRE" ? "" : "saturate-0"}`}
           />
           {/*affiche la modale quand le state result passe a true*/}
-          {result === "VICTOIRE" && (
+          {result.status === "VICTOIRE" && (
             <section className="absolute flex h-[100%] justify-center align-baseline">
               <img
                 src="/img/item/confetti.png"
@@ -27,7 +36,7 @@ export default function ModaleResultTrial({ result }: ModaleResultTrialProps) {
               />
             </section>
           )}
-          <h2 className="mb-20 text-3xl font-bold">{result}</h2>
+          <h2 className="mb-20 text-3xl font-bold">{result.status}</h2>
         </section>
       )}
     </div>
