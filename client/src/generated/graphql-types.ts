@@ -262,7 +262,6 @@ export type CombatQuery = {
   combat?: {
     __typename?: "Combat";
     id: string;
-    resultLongText: string;
     player: {
       __typename?: "Competitor";
       name: string;
@@ -602,7 +601,6 @@ export const CombatDocument = gql`
           path
         }
       }
-      resultLongText
     }
   }
 `;
