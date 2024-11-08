@@ -1,23 +1,95 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
+import ModaleResultDetail from "../components/trial/ModaleResultDetail";
 import { useCombatQuery } from "../generated/graphql-types";
 
-// en attente de récupérer les bonus du joueur / opposant
 const trial = {
   playerBonus: 8,
   opponentBonus: 9,
 };
 
+type ResultType = {
+  status: string | null;
+  valueBtn: string;
+};
+
+type DataKey = "ModaleResultTrial" | "ModaleResultDetail";
+type DataType =
+  | {
+      component: React.FC<{
+        result: ResultType;
+        playerImagePath: string;
+        textTrial: string;
+      }>;
+      result: ResultType;
+      playerImagePath: string;
+      textTrial: string;
+    }
+  | {
+      component: React.FC<{ result: ResultType; playerImagePath: string }>;
+      result: ResultType;
+      playerImagePath: string;
+      textTrial: string;
+    };
+
 function StartTrialPage() {
-  const [result, setResult] = useState("");
-  const resultTrial = ["DEFAITE", "VICTOIRE"];
+  const [result, setResult] = useState<ResultType>({
+    status: null,
+    valueBtn: "Démarrer l'épreuve",
+  });
+  const status: string[] = ["DEFAITE", "VICTOIRE"];
+  const id: string = "3a6d483d-337f-4589-976e-7c5d36a6e627";
 
-  // en attente de reçevoir "id" de l'épreuve en cours pour l'afficher dynamiquement
-  const id: string = "3d7801bb-1d3e-4d41-bf18-b74d848f92b5";
-
-  const { data, loading, error } = useCombatQuery({
+  const {
+    data: combatData,
+    loading,
+    error,
+  } = useCombatQuery({
     variables: { combatId: id },
   });
+
+  const modalData: Record<DataKey, DataType> = {
+    ModaleResultTrial: {
+      component: ModaleResultTrial,
+      result: result,
+      playerImagePath: combatData?.combat?.player?.image?.path || "",
+      textTrial: combatData?.combat?.trial?.name || "",
+    },
+    ModaleResultDetail: {
+      component: ModaleResultDetail,
+      result: result,
+      playerImagePath: combatData?.combat?.player?.image?.path || "",
+      textTrial: "",
+    },
+  };
+
+  const [component, setComponent] = useState<DataKey | null>(null);
+  const ComponentToRender = component ? modalData[component].component : null;
+
+  const checkResult = () => {
+    const randomIndex = Math.floor(Math.random() * status.length);
+    const newResult = status[randomIndex];
+
+    if (component === null) {
+      setResult({
+        status: newResult,
+        valueBtn: "Voir le détail de l'épreuve",
+      });
+      setComponent("ModaleResultTrial");
+    } else if (component === "ModaleResultTrial") {
+      setComponent("ModaleResultDetail");
+      setResult({
+        status: result.status,
+        valueBtn: "Recommencer l'épreuve",
+      });
+    } else {
+      setResult({
+        status: null,
+        valueBtn: "Démarrer l'épreuve",
+      });
+      setComponent(null);
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -28,66 +100,61 @@ function StartTrialPage() {
     return <p>Error: {error.message}</p>;
   }
 
-  // en attente du récupérer les informations du résulta d'épreuve
-  const checkResult = () => {
-    setResult(resultTrial[Math.floor(Math.random() * resultTrial.length)]);
-  };
-
   return (
     <section className="fixed inset-0 h-screen w-full items-center justify-center bg-blue-v/80 backdrop-blur-sm">
       <p className="center absolute mt-32 w-full text-center text-xl font-medium">
-        {data?.combat?.player.name} vs {data?.combat?.opponent.name}
+        {combatData?.combat?.player.name} vs {combatData?.combat?.opponent.name}
       </p>
       <article className="h-82 z-1 absolute z-10 mt-80 flex w-full flex-col items-center justify-center">
         <div className="flex h-[35%] w-[50%] flex-col items-center justify-around gap-y-3 rounded-xl bg-blue-fd bg-opacity-85 p-6 md:w-[30%]">
-          <p>{data?.combat?.trial.name}</p>
+          <p>{combatData?.combat?.trial.name}</p>
           <img
-            src={data?.combat?.trial?.image?.path || ""}
+            src={combatData?.combat?.trial?.image?.path || ""}
             className="w-80 object-contain md:w-48"
-            alt={data?.combat?.trial.name}
+            alt={combatData?.combat?.trial?.name || "Image non disponible"}
           />
           <p className="text-yellow-p">
             Chance {trial.playerBonus} vs {trial.opponentBonus}
           </p>
         </div>
       </article>
-      {/* Div contenant les dieux en tant qu'images d'arrière-plan et visible uniquement à partir de md  */}
       <div className="absolute inset-0 mt-24 hidden h-[50vh] justify-between md:flex">
         <img
-          src={data?.combat?.opponentGod.image?.path}
+          src={combatData?.combat?.opponentGod.image?.path}
           alt="Dieu de votre champion"
           className="h-auto max-w-full"
         />
         <img
-          src={data?.combat?.playerGod.image?.path}
+          src={combatData?.combat?.playerGod.image?.path}
           alt="Dieu de votre opposant"
           className="h-auto max-w-full"
         />
       </div>
-      {/* Div contenant les avatars */}
       <div className="relative flex h-full items-center justify-between md:items-end">
-        {/* Avatar 1 - à gauche */}
         <img
-          src={data?.combat?.player?.image?.path || ""}
+          src={combatData?.combat?.player?.image?.path || ""}
           alt="Avatar de votre champion"
-          className={`absolute left-0 h-[45vh] w-auto -translate-x-28 translate-y-[-3rem] object-contain sm:translate-y-0 md:h-[70vh] md:-translate-x-0 ${result !== "DEFAITE" ? "" : "saturate-0"}`}
+          className={`absolute left-0 h-[45vh] w-auto -translate-x-28 translate-y-[-3rem] object-contain sm:translate-y-0 md:h-[70vh] md:-translate-x-0 ${result.status !== "DEFAITE" ? "" : "saturate-0"}`}
         />
-        {/* Avatar 2 - à droite */}
         <img
-          src={data?.combat?.opponent?.image?.path || ""}
+          src={combatData?.combat?.opponent?.image?.path || ""}
           alt="Avatar de l'adversaire"
-          className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result !== "VICTOIRE" ? "" : "saturate-0"}`}
+          className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result.status !== "VICTOIRE" ? "" : "saturate-0"}`}
         />
       </div>
-      <ModaleResultTrial result={result} />
-      {/* bouton pour afficher le resultat de l'épreuve */}
+      {ComponentToRender && (
+        <ComponentToRender
+          result={modalData[component!].result}
+          playerImagePath={modalData[component!].playerImagePath}
+          textTrial={modalData[component!].textTrial} // transmis seulement si défini
+        />
+      )}
       <button
-        className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
-          result === "" ? "bottom-[100px]" : "bottom-[200px]"
-        }`}
+        className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${result.status === null ? "bottom-[100px]" : "bottom-[200px]"}`}
+        type="button"
         onClick={checkResult}
       >
-        Démarrer l'épreuve
+        {result.valueBtn}
       </button>
     </section>
   );

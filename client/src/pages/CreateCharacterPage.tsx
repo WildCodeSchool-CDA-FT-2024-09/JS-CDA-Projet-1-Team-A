@@ -125,7 +125,7 @@ function CreateCharacterPage() {
                 placeholder={tempCharacter.name}
                 value={character.name}
                 onChange={(e) => handleNameInput(e)}
-                className="w-full max-w-[200px] rounded border px-2 px-4 text-black sm:max-w-xs"
+                className="w-full max-w-[200px] rounded border px-4 text-black sm:max-w-xs"
               />
             )}
           </div>

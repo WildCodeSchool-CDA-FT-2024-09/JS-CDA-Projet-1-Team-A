@@ -34,8 +34,8 @@ function CarouselProfession({ professions }: CarouselProfessionProps) {
       >
         <figure>
           <img
-            src={professions[currentIndex]?.image?.path}
-            alt={professions[currentIndex]?.name || ""}
+            src={professions[currentIndex]?.image?.path || ""}
+            alt={professions[currentIndex]?.name || "Image non disponible"}
             className="mb-4 h-32 w-32 object-cover md:h-48 md:w-48 lg:h-60 lg:w-60"
           />
         </figure>
