@@ -7,11 +7,6 @@ import {
 } from "../generated/graphql-types";
 import { NavLink } from "react-router-dom";
 
-const trial = {
-  playerBonus: 8,
-  opponentBonus: 9,
-};
-
 type ResultType = {
   status: string | null;
   valueBtn: string;
@@ -53,7 +48,7 @@ function StartTrialPage() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  if (!combatResultData) return <p>No data</p>;
+  if (!combatResultData) return <p>chargement de l'épreuve...</p>;
 
   const modalData: Record<DataKey, DataType> = {
     ModaleResultTrial: {
@@ -108,23 +103,22 @@ function StartTrialPage() {
 
   return (
     <section className="fixed inset-0 h-screen w-full items-center justify-center bg-blue-v/80 backdrop-blur-sm">
-      <p className="center absolute mt-32 w-full text-center text-xl font-medium">
+      <p className="center absolute mt-32 w-full text-center font-bold md:text-3xl">
         {combatData?.combat?.player.name} vs {combatData?.combat?.opponent.name}
       </p>
       <article className="h-82 z-1 absolute z-10 mt-80 flex w-full flex-col items-center justify-center">
         <div className="flex h-[35%] w-[50%] flex-col items-center justify-around gap-y-3 rounded-xl bg-blue-fd bg-opacity-85 p-6 md:w-[30%]">
-          <p>{combatData?.combat?.trial.name}</p>
+          <p className="font-bold md:text-2xl">
+            {combatData?.combat?.trial.name}
+          </p>
           <img
             src={combatData?.combat?.trial?.image?.path || ""}
-            className="w-80 object-contain md:w-48"
+            className="w-80 object-contain md:w-10/12"
             alt={combatData?.combat?.trial?.name || "Image non disponible"}
           />
-          <p className="text-yellow-p">
-            Chance {trial.playerBonus} vs {trial.opponentBonus}
-          </p>
         </div>
       </article>
-      <div className="absolute inset-0 mt-24 hidden h-[50vh] justify-between md:flex">
+      <div className="absolute inset-0 mt-24 hidden h-[35vh] justify-between md:flex">
         <img
           src={combatData?.combat?.opponentGod.image?.path}
           alt="Dieu de votre champion"

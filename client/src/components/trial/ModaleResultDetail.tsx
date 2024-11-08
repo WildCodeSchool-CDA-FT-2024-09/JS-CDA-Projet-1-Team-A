@@ -22,10 +22,10 @@ const ModaleResultDetail: React.FC<ModaleResultDetailProps> = ({ id }) => {
   return (
     <div className="fixed inset-0 top-[170px] z-10 flex w-full flex-col items-center">
       <section className="bg-opacity-8 relative flex h-[62vh] max-h-[62vh] w-[65vw] min-w-[280px] max-w-[700px] flex-col items-center gap-6 rounded-xl bg-blue-fd p-8 md:p-16">
-        <p className="text-center text-sm font-bold text-yellow-p md:text-2xl">
+        <p className="text-center text-sm font-bold leading-10 text-yellow-p md:text-2xl">
           {data.combatResult.resultShortText}
         </p>
-        <p className="mt-4 text-justify text-sm md:mt-16 md:text-2xl">
+        <p className="mt-4 text-justify text-sm tracking-wide md:mt-16 md:text-2xl md:leading-relaxed">
           {data.combatResult.resultLongText}
         </p>
       </section>
