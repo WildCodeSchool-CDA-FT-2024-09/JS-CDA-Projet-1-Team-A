@@ -33,7 +33,7 @@ export class ModifierAssignment extends BaseEntity {
   modifiedEntityType: string;
 
   @Field(() => Modifier)
-  @ManyToOne(() => Modifier, (modifier) => modifier.modifierAssignments)
+  @ManyToOne(() => Modifier, (modifier) => modifier)
   modifier: Modifier;
 
   @Field(() => ID)
