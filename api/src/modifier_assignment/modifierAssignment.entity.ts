@@ -37,5 +37,13 @@ export class ModifierAssignment extends BaseEntity {
   modifier: Modifier;
 
   @Field(() => ID)
-  modifiedEntity: string;
+  get modifierId(): number | null {
+    return this.modifier.id ? this.modifier.id : null;
+  }
+
+  // Getter pour renvoyer l'ID de l'entité modifiée dans l'API GraphQL
+  @Field(() => ID)
+  get modifiedEntity(): string {
+    return this.modifiedEntityId;
+  }
 }

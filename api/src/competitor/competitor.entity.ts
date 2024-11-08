@@ -49,6 +49,15 @@ export class Competitor extends BaseEntity {
   opponentCombats: Combat[];
 
   @Field(() => [ModifierAssignment], { nullable: true })
+  // modifierAssignments?: ModifierAssignment[];
+  @OneToMany(
+    () => ModifierAssignment,
+    (modifierAssignment) => modifierAssignment.modifiedEntityId,
+    {
+      cascade: true,
+      eager: true,
+    }
+  )
   modifierAssignments?: ModifierAssignment[];
 
   @Field()
