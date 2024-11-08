@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import AvatarCarousel from "./competitor/AvatarCarousel";
 
-const AvatarCarouselWrapper = ({ imageUrls, myTitle }) => {
+interface AvatarCarouselWrapperProps {
+  imageUrls: string[];
+  myTitle: string;
+}
+
+const AvatarCarouselWrapper = ({
+  imageUrls,
+  myTitle,
+}: AvatarCarouselWrapperProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(3);
   const [startX, setStartX] = useState<number | null>(null);
