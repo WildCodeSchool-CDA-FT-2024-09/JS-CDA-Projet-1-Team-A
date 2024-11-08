@@ -31,7 +31,7 @@ function ChooseGodPage() {
     dataTrial?.getTrial.map((trial) => ({
       name: trial.name,
       description: trial.description,
-      imagePath: trial.image?.path,
+      imagePath: trial.image?.path || "",
     })) || [];
 
   const selectedTrial = trial.length > 0 ? trialRandom(trial) : null;
@@ -41,7 +41,7 @@ function ChooseGodPage() {
 
   return (
     <div className="fixed inset-0 flex h-screen w-full flex-col overflow-y-auto bg-black/50 pt-24 backdrop-blur-sm">
-      <h1 className="my-5 text-xl font-bold">Champion {character}</h1>
+      <h1 className="my-5 text-xl font-bold">Champion {character.name}</h1>
       <section className="mx-20 rounded-lg bg-blue-fd bg-opacity-85 p-9 shadow-md">
         <ul>
           <h2 className="mb-4 text-xl font-bold">Voici ton épreuve</h2>
