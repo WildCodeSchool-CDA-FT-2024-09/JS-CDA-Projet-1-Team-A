@@ -14,23 +14,18 @@ type ResultType = {
 };
 
 type DataKey = "ModaleResultTrial" | "ModaleResultDetail";
-type DataType =
-  | {
-      component: React.FC<{
-        result: ResultType;
-        playerImagePath: string;
-        textTrial: string;
-      }>;
-      result: ResultType;
-      playerImagePath: string;
-      textTrial: string;
-    }
-  | {
-      component: React.FC<{ result: ResultType; playerImagePath: string }>;
-      result: ResultType;
-      playerImagePath: string;
-      textTrial: string;
-    };
+type DataType = {
+  component: React.FC<{
+    result: ResultType;
+    playerImagePath: string;
+    textTrial: string;
+    id: string;
+  }>;
+  result: ResultType;
+  playerImagePath: string;
+  textTrial: string;
+  id: string;
+};
 
 function StartTrialPage() {
   const [result, setResult] = useState<ResultType>({
@@ -54,12 +49,14 @@ function StartTrialPage() {
       result: result,
       playerImagePath: combatData?.combat?.player?.image?.path || "",
       textTrial: combatData?.combat?.trial?.name || "",
+      id: id, // ID ajouté ici
     },
     ModaleResultDetail: {
       component: ModaleResultDetail,
       result: result,
       playerImagePath: combatData?.combat?.player?.image?.path || "",
       textTrial: "",
+      id: id, // ID ajouté ici
     },
   };
 
@@ -146,7 +143,8 @@ function StartTrialPage() {
         <ComponentToRender
           result={modalData[component!].result}
           playerImagePath={modalData[component!].playerImagePath}
-          textTrial={modalData[component!].textTrial} // transmis seulement si défini
+          textTrial={modalData[component!].textTrial}
+          id={modalData[component!].id} // ID transmis ici
         />
       )}
       <button
