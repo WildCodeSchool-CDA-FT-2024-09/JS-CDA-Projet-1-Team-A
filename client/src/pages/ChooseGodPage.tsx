@@ -75,7 +75,7 @@ function ChooseGodPage() {
       <Link
         to="/epreuve"
         aria-label="Commencer le jeu"
-        className="btn-primary mx-40 min-w-[220px] md:mr-24"
+        className="btn-primary fixed bottom-20 left-1/2 min-w-[220px] -translate-x-1/2 transform"
       >
         Démarre l'épreuve!
       </Link>

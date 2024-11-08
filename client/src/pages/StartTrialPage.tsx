@@ -1,7 +1,11 @@
 import { useState } from "react";
 import ModaleResultTrial from "../components/trial/ModaleResultTrial";
 import ModaleResultDetail from "../components/trial/ModaleResultDetail";
-import { useCombatQuery } from "../generated/graphql-types";
+import {
+  useCombatQuery,
+  useCombatResultQuery,
+} from "../generated/graphql-types";
+import { NavLink } from "react-router-dom";
 
 const trial = {
   playerBonus: 8,
@@ -32,8 +36,8 @@ function StartTrialPage() {
     status: null,
     valueBtn: "Démarrer l'épreuve",
   });
-  const status: string[] = ["DEFAITE", "VICTOIRE"];
-  const id: string = "3a6d483d-337f-4589-976e-7c5d36a6e627";
+  const [component, setComponent] = useState<DataKey | null>(null);
+  const id = "c4f20523-f2aa-4d28-a2db-fed5271e45e2";
 
   const {
     data: combatData,
@@ -43,33 +47,47 @@ function StartTrialPage() {
     variables: { combatId: id },
   });
 
+  const { data: combatResultData } = useCombatResultQuery({
+    variables: { combatResultId: id },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  if (!combatResultData) return <p>No data</p>;
+
   const modalData: Record<DataKey, DataType> = {
     ModaleResultTrial: {
       component: ModaleResultTrial,
       result: result,
       playerImagePath: combatData?.combat?.player?.image?.path || "",
       textTrial: combatData?.combat?.trial?.name || "",
-      id: id, // ID ajouté ici
+      id,
     },
     ModaleResultDetail: {
       component: ModaleResultDetail,
       result: result,
       playerImagePath: combatData?.combat?.player?.image?.path || "",
       textTrial: "",
-      id: id, // ID ajouté ici
+      id,
     },
   };
 
-  const [component, setComponent] = useState<DataKey | null>(null);
   const ComponentToRender = component ? modalData[component].component : null;
 
   const checkResult = () => {
-    const randomIndex = Math.floor(Math.random() * status.length);
-    const newResult = status[randomIndex];
+    const newResult =
+      combatResultData?.combatResult?.resultShortText.includes("gagne");
+    let valueResult = "";
+
+    if (newResult) {
+      valueResult = "VICTOIRE";
+    } else {
+      valueResult = "DEFAITE";
+    }
 
     if (component === null) {
       setResult({
-        status: newResult,
+        status: valueResult,
         valueBtn: "Voir le détail de l'épreuve",
       });
       setComponent("ModaleResultTrial");
@@ -77,7 +95,7 @@ function StartTrialPage() {
       setComponent("ModaleResultDetail");
       setResult({
         status: result.status,
-        valueBtn: "Recommencer l'épreuve",
+        valueBtn: "Retour au menu principal",
       });
     } else {
       setResult({
@@ -87,15 +105,6 @@ function StartTrialPage() {
       setComponent(null);
     }
   };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    console.error("Error fetching combat data:", error);
-    return <p>Error: {error.message}</p>;
-  }
 
   return (
     <section className="fixed inset-0 h-screen w-full items-center justify-center bg-blue-v/80 backdrop-blur-sm">
@@ -131,12 +140,22 @@ function StartTrialPage() {
         <img
           src={combatData?.combat?.player?.image?.path || ""}
           alt="Avatar de votre champion"
-          className={`absolute left-0 h-[45vh] w-auto -translate-x-28 translate-y-[-3rem] object-contain sm:translate-y-0 md:h-[70vh] md:-translate-x-0 ${result.status !== "DEFAITE" ? "" : "saturate-0"}`}
+          className={`absolute left-0 h-[45vh] w-auto -translate-x-28 translate-y-[-3rem] object-contain sm:translate-y-0 md:h-[70vh] md:-translate-x-0 ${
+            result.status === "DEFAITE" &&
+            result.valueBtn === "Voir le détail de l'épreuve"
+              ? "saturate-0"
+              : ""
+          }`}
         />
         <img
           src={combatData?.combat?.opponent?.image?.path || ""}
           alt="Avatar de l'adversaire"
-          className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${result.status !== "VICTOIRE" ? "" : "saturate-0"}`}
+          className={`absolute right-0 h-[45vh] w-auto translate-x-28 translate-y-[-3rem] scale-x-[-1] object-contain sm:translate-y-0 md:h-[70vh] md:translate-x-0 ${
+            result.status === "VICTOIRE" &&
+            result.valueBtn === "Voir le détail de l'épreuve"
+              ? "saturate-0"
+              : ""
+          }`}
         />
       </div>
       {ComponentToRender && (
@@ -144,16 +163,27 @@ function StartTrialPage() {
           result={modalData[component!].result}
           playerImagePath={modalData[component!].playerImagePath}
           textTrial={modalData[component!].textTrial}
-          id={modalData[component!].id} // ID transmis ici
+          id={modalData[component!].id}
         />
       )}
-      <button
-        className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${result.status === null ? "bottom-[100px]" : "bottom-[200px]"}`}
-        type="button"
-        onClick={checkResult}
-      >
-        {result.valueBtn}
-      </button>
+      {result.valueBtn === "Retour au menu principal" ? (
+        <NavLink
+          to="/"
+          className="btn-primary fixed bottom-[200px] left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium"
+        >
+          Retour au menu principal
+        </NavLink>
+      ) : (
+        <button
+          className={`btn-primary fixed left-1/2 z-10 mx-0 min-w-[220px] max-w-[230px] -translate-x-1/2 transform font-medium ${
+            result.status === null ? "bottom-[100px]" : "bottom-[200px]"
+          }`}
+          type="button"
+          onClick={checkResult}
+        >
+          {result.valueBtn}
+        </button>
+      )}
     </section>
   );
 }

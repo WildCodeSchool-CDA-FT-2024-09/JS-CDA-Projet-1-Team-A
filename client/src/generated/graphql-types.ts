@@ -236,7 +236,6 @@ export type GetCombatStatsQuery = {
   combats: Array<{
     __typename?: "Combat";
     id: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     createdAt: any;
     resultLongText: string;
     resultShortText: string;
