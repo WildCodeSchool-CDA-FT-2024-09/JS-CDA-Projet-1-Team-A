@@ -16,9 +16,6 @@ export class Modifier extends BaseEntity {
   label: string;
 
   @Field(() => [ModifierAssignment])
-  @OneToMany(
-    () => ModifierAssignment,
-    (modifierAssignment) => modifierAssignment.modifier
-  )
-  modifierAssignments: ModifierAssignment[];
+  @OneToMany(() => ModifierAssignment, (modifier) => modifier)
+  modifier: ModifierAssignment[];
 }
