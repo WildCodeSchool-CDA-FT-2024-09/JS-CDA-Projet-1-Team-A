@@ -2,14 +2,6 @@ import { Link } from "react-router-dom";
 import { useCombatResultQuery } from "../generated/graphql-types";
 import { useParams } from "react-router-dom";
 
-// function formatCombatDate(date: string) {
-//   return new Date(date).toLocaleDateString("fr-FR", {
-//     year: "numeric",
-//     month: "long",
-//     day: "numeric",
-//   });
-// }
-
 function StatisticsDetailPage() {
   const id = useParams<{ id: string }>().id;
   const { data, loading, error } = useCombatResultQuery({
