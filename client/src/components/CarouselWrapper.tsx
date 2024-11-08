@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import AvatarCarousel from "./competitor/AvatarCarousel";
 
 interface AvatarCarouselWrapperProps {
-  imageUrls: string[];
+  imageUrls: { url: string | undefined }[];
   myTitle: string;
 }
 
