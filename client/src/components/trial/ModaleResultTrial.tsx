@@ -1,6 +1,10 @@
+import { useState, useEffect } from "react";
+import { useCombatResultQuery } from "../../generated/graphql-types";
+
 type ModaleResultTrialProps = {
   result: ResultType;
   playerImagePath: string;
+  id: string;
 };
 
 type ResultType = {
@@ -9,9 +13,27 @@ type ResultType = {
 };
 
 export default function ModaleResultTrial({
-  result,
   playerImagePath,
+  id,
 }: ModaleResultTrialProps) {
+  const { data, loading, error } = useCombatResultQuery({
+    variables: { combatResultId: id || "" },
+  });
+
+  const [result, setResult] = useState<string>("");
+
+  useEffect(() => {
+    if (data?.combatResult?.resultShortText.includes("perd")) {
+      setResult("PERDU");
+    } else {
+      setResult("VICTOIRE");
+    }
+  }, [data]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+  if (!data) return <p>No data</p>;
+
   return (
     <div className="fixed inset-0 top-[170px] z-10 flex w-full flex-col items-center">
       {result && (
@@ -19,10 +41,9 @@ export default function ModaleResultTrial({
           <img
             src={playerImagePath}
             alt="avatar du joueur"
-            className={`w-44 rounded-xl ${result.status === "VICTOIRE" ? "" : "saturate-0"}`}
+            className={`w-44 rounded-xl ${result === "VICTOIRE" ? "" : "saturate-0"}`}
           />
-          {/*affiche la modale quand le state result passe a true*/}
-          {result.status === "VICTOIRE" && (
+          {result === "VICTOIRE" && (
             <section className="absolute flex h-[100%] justify-center align-baseline">
               <img
                 src="/img/item/confetti.png"
@@ -36,7 +57,7 @@ export default function ModaleResultTrial({
               />
             </section>
           )}
-          <h2 className="mb-20 text-3xl font-bold">{result.status}</h2>
+          <h2 className="mb-20 text-3xl font-bold">{result}</h2>
         </section>
       )}
     </div>

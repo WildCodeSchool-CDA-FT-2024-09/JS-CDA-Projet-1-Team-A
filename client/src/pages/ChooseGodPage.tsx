@@ -40,21 +40,21 @@ function ChooseGodPage() {
   if (error || errorTrial) return <p>Erreur lors du chargement des images</p>;
 
   return (
-    <div className="fixed inset-0 flex h-screen w-full flex-col overflow-y-auto bg-black/50 pt-24 backdrop-blur-sm">
+    <div className="fixed inset-0 flex h-screen w-full flex-col items-center overflow-y-auto bg-black/50 pt-24 backdrop-blur-sm">
       <h1 className="my-5 text-xl font-bold">Champion {character.name}</h1>
-      <section className="mx-20 rounded-lg bg-blue-fd bg-opacity-85 p-9 shadow-md">
+      <section className="mx-20 rounded-lg bg-blue-fd bg-opacity-85 p-9 shadow-md md:w-4/12">
         <ul>
           <h2 className="mb-4 text-xl font-bold">Voici ton épreuve</h2>
           {selectedTrial ? (
             <li>
               <h3 className="m-2 text-lg font-bold">{selectedTrial.name}</h3>
-              <section className="row flex">
+              <section className="flex flex-col items-center">
                 <img
                   className="w-2/5"
                   src={selectedTrial.imagePath}
                   alt={selectedTrial.name}
                 />
-                <p>{selectedTrial.description}</p>
+                <p className="text-justify">{selectedTrial.description}</p>
               </section>
             </li>
           ) : (
@@ -75,7 +75,7 @@ function ChooseGodPage() {
       <Link
         to="/epreuve"
         aria-label="Commencer le jeu"
-        className="btn-primary mx-40 min-w-[220px] md:mr-24"
+        className="btn-primary fixed bottom-20 left-1/2 min-w-[220px] -translate-x-1/2 transform"
       >
         Démarre l'épreuve!
       </Link>

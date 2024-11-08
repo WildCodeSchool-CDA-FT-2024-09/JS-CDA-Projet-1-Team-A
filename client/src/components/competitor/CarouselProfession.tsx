@@ -12,7 +12,7 @@ function CarouselProfession({ professions }: CarouselProfessionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     setCharacter({ ...character, profession: professions[currentIndex] });
-  }, [currentIndex]);
+  }, [character, currentIndex, professions, setCharacter]);
 
   const handleNav = (direction: number) => {
     setCurrentIndex(
@@ -22,7 +22,7 @@ function CarouselProfession({ professions }: CarouselProfessionProps) {
   };
 
   return (
-    <section className="mt-4 flex items-center justify-center space-x-4">
+    <section className="mt-4 flex items-center justify-center space-x-4 md:mt-10">
       <button
         onClick={() => handleNav(-1)}
         className="h-8 w-8 rounded bg-[url('/img/arrowL.png')] bg-cover bg-center transition hover:opacity-80 md:h-12 md:w-12"
@@ -40,13 +40,13 @@ function CarouselProfession({ professions }: CarouselProfessionProps) {
           />
         </figure>
         <div>
-          <h2 className="text-xl font-bold text-gray-700">
+          <h2 className="text-xl font-bold">
             {professions[currentIndex].name}
           </h2>
-          <p className="max-w-[300px] break-words text-gray-700">
+          <p className="max-w-[300px] break-words">
             {professions[currentIndex].description}
           </p>
-          <ul className="pt-4 text-gray-700">
+          <ul className="pt-4">
             {professions[currentIndex].modifierAssignments
               ? professions[currentIndex].modifierAssignments.map(
                   (assignment, index) => (

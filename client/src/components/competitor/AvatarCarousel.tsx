@@ -32,7 +32,7 @@ const AvatarCarousel = ({
           {myTitle}
         </p>
         <div
-          className={`flex w-full items-center justify-center overflow-hidden ${mobile ? "h-44" : "h-96"}`}
+          className={`flex w-full items-center justify-center ${mobile ? "h-44" : "h-96"}`}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -41,7 +41,7 @@ const AvatarCarousel = ({
           onMouseUp={!mobile ? handleMouseUp : undefined}
         >
           <div
-            className={`relative flex w-full items-center justify-center overflow-hidden ${mobile ? "h-full" : "h-[700px]"}`}
+            className={`relative flex w-full items-center justify-center ${mobile ? "h-full" : "h-[700px]"}`}
           >
             {imageUrls.map((url, index) => {
               const offset = Math.abs(index - currentIndex);
