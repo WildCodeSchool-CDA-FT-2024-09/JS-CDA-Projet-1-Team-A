@@ -109,6 +109,10 @@ function CreateCharacterPage() {
       url: image.path,
     })) || [];
 
+  const handleNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCharacter({ ...character, name: e.target.value });
+  };
+
   return (
     <section className="-mt-40 h-full w-full p-8 backdrop-blur md:-mt-40 lg:-mt-20">
       <div className="mt-12 flex flex-col items-center py-4 lg:mt-4">
@@ -119,8 +123,8 @@ function CreateCharacterPage() {
               <input
                 type="text"
                 placeholder={tempCharacter.name}
-                value={character}
-                onChange={(e) => setCharacter(e.target.value)}
+                value={character.name}
+                onChange={(e) => handleNameInput(e)}
                 className="w-full max-w-[200px] rounded border px-4 text-black sm:max-w-xs"
               />
             )}
