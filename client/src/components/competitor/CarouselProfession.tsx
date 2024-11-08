@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Profession } from "../../generated/graphql-types";
+import { CharacterContext } from "../../contexts/CharacterContext";
 
 type CarouselProfessionProps = {
   professions: Profession[];
 };
 
 function CarouselProfession({ professions }: CarouselProfessionProps) {
+  const { character, setCharacter } = useContext(CharacterContext);
+
   const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    setCharacter({ ...character, profession: professions[currentIndex] });
+  }, [currentIndex]);
 
   const handleNav = (direction: number) => {
     setCurrentIndex(
@@ -28,8 +34,8 @@ function CarouselProfession({ professions }: CarouselProfessionProps) {
       >
         <figure>
           <img
-            src={professions[currentIndex].image.path}
-            alt={professions[currentIndex].name}
+            src={professions[currentIndex]?.image?.path}
+            alt={professions[currentIndex]?.name || ""}
             className="mb-4 h-32 w-32 object-cover md:h-48 md:w-48 lg:h-60 lg:w-60"
           />
         </figure>

@@ -1,22 +1,38 @@
 import { createContext, useState, PropsWithChildren } from "react";
-import { TemporaryCompetitor } from "../generated/graphql-types";
+import { Profession, TemporaryCompetitor } from "../generated/graphql-types";
 
 interface CharacterContextType {
-  character: string;
-  setCharacter: (character: string) => void;
+  character: InputCharacter;
+  setCharacter: (character: InputCharacter) => void;
   tempCharacter: TemporaryCompetitor | null;
   setTempCharacter: (tempCharacter: TemporaryCompetitor | null) => void;
 }
 
+type InputCharacter = {
+  name: string;
+  profession: Profession | "";
+  avatar: string;
+};
+
 export const CharacterContext = createContext<CharacterContextType>({
-  character: "",
+  character: {
+    name: "",
+    profession: "",
+    avatar: "",
+  },
   setCharacter: () => {},
   tempCharacter: null,
   setTempCharacter: () => {},
 });
 
+const initialCharacter: InputCharacter = {
+  name: "",
+  profession: "",
+  avatar: "",
+};
+
 export const CharacterProvider = ({ children }: PropsWithChildren) => {
-  const [character, setCharacter] = useState<string>("");
+  const [character, setCharacter] = useState<InputCharacter>(initialCharacter);
   const [tempCharacter, setTempCharacter] =
     useState<TemporaryCompetitor | null>(null);
 
